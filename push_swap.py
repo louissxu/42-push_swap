@@ -120,19 +120,25 @@ def push_forward_val(l, r, moves, val):
     distance += 1
   pb(l, r, moves)
 
-def sort_5_elements(stack, moves):
+def sort_4_elements(l, r):
+  m = []
+  push_forward_val(l, r, m, 1)
+  sort_3_elements(l, r, m, l)
+  pa(l, r, m)
+  return m
+
+def sort_5_elements(l, r):
   # pick across the highest two values
   # sort left
   # sort right
   # push back
-  push_forward_val(l, r, moves, 1)
-  push_forward_val(l, r, moves, 2)
-  sort_3_elements(l, r, moves, l)
-  pa(l, r, moves)
-  pa(l, r, moves)
-
-
-
+  m = []
+  push_forward_val(l, r, m, 1)
+  push_forward_val(l, r, m, 2)
+  sort_3_elements(l, r, m, l)
+  pa(l, r, m)
+  pa(l, r, m)
+  return m
 
 def radix_sort(l, r):
   # Basic radix sort
@@ -484,6 +490,14 @@ m = []
 
 if len(l) == 0:
   pass
+elif len(l) == 3:
+  sort_3_elements(l, r, m, l)
+elif len(l) == 4:
+  m.extend(sort_4_elements(l, r))
+elif len(l) == 5:
+  m.extend(sort_5_elements(l, r,))
+elif len(l) < 50:
+  m.extend(double_radix_sort(l, r))
 elif len(l) < 150:
   # Solution to 100
   m.extend(split_into_buckets_double(l, r, 8))
