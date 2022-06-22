@@ -54,17 +54,17 @@ def sa(left, right, moves):
     left.appendleft(tmp)
     moves.append("sa")
 
-def sort_3_elements(l, r, moves, stack):
+def sort_3_elements(l, r):
   # Does the mathematical optimal sort of 3 elements
-  if len(stack) != 3:
+  if len(l) != 3:
     raise ValueError
   new_stack = [None] * 3
-  sorted_stack = sorted(stack)
+  sorted_stack = sorted(l)
   lut = {}
   for i, val in enumerate(sorted_stack):
     lut[val] = i
   for i in range(len(new_stack)):
-    new_stack[i] = lut[stack[i]]
+    new_stack[i] = lut[l[i]]
   solutions_a = {
     (0, 1, 2): [],
     (1, 0, 2): ["sa"],
@@ -73,18 +73,9 @@ def sort_3_elements(l, r, moves, stack):
     (0, 2, 1): ["sa", "ra"],
     (1, 2, 0): ["rra"],
   }
-  solutions_b = {
-    (0, 1, 2): [],
-    (1, 0, 2): ["sb"],
-    (2, 1, 0): ["sb", "rrb"],
-    (2, 0, 1): ["rb"],
-    (0, 2, 1): ["sb", "rb"],
-    (1, 2, 0): ["rrb"],
-  }
-  if stack == l:
-    moves.extend(solutions_a[tuple(new_stack)])
-  if stack == r:
-    moves.extend(solutions_b[tuple(new_stack)])
+  m = []
+  m.extend(solutions_a[tuple(new_stack)])
+  return m
 
 def sort_2_elements_descending(l, r, moves, stack):
   # Sorts 2 elements descending (high to low)
@@ -135,7 +126,7 @@ def sort_5_elements(l, r):
   m = []
   push_forward_val(l, r, m, 0)
   push_forward_val(l, r, m, 1)
-  sort_3_elements(l, r, m, l)
+  m.extend(sort_3_elements(l, r))
   pa(l, r, m)
   pa(l, r, m)
   return m
@@ -519,5 +510,3 @@ else:
 
 for action in m:
   print(action)
-
-print(len(m))
