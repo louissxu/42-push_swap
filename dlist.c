@@ -144,7 +144,7 @@ void	ft_dlist_insert_end(t_dlist **head, t_dlist *new_node)
 		*head = new_node;
 		return ;
 	}
-	last = ft_dlist_get_last(*head)
+	last = ft_dlist_get_last(*head);
 	last->next = new_node;
 	new_node->next = NULL;
 	new_node->prev = last;
