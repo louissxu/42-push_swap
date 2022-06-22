@@ -480,10 +480,22 @@ l = deque()
 for num in nums:
     l.append(number_lookup[num])
 r = deque()
-m = pre_split_into_buckets(l, r, 8, 32)
-m.extend(push_back_all(l, r))
-m.extend(split_into_buckets_double_with_reverse_rotate(l, r, 32))
-m.extend(selection_sort_back_2(l, r))
+m = []
+
+if len(l) == 0:
+  pass
+elif len(l) < 150:
+  # Solution to 100
+  m.extend(split_into_buckets_double(l, r, 8))
+  m.extend(selection_sort_back_2(l, r))
+elif len(l) < 600:
+  # Solution to 500
+  m.extend(pre_split_into_buckets(l, r, 4, 32))
+  m.extend(push_back_all(l, r))
+  m.extend(split_into_buckets_double_with_reverse_rotate(l, r, 32))
+  m.extend(selection_sort_back_2(l, r))
+else:
+  m.extend(double_radix_sort(l, r))
 
 # m = double_radix_sort(l, r)
 
