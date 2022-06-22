@@ -26,6 +26,11 @@ def ra(left, right, moves):
     left.append(tmp)
     moves.append("ra")
 
+def rra(left, right, moves):
+  tmp = left.pop()
+  left.appendleft(tmp)
+  moves.append("rra")
+
 def pa(left, right, moves):
     tmp = right.popleft()
     left.appendleft(tmp)
@@ -37,94 +42,94 @@ def rb(left, right, moves):
   moves.append("rb")
 
 def rrb(left, right, moves):
-	tmp = right.pop()
-	right.appendleft(tmp)
-	moves.append("rrb")
+  tmp = right.pop()
+  right.appendleft(tmp)
+  moves.append("rrb")
 
 def sa(left, right, moves):
-	if len(left) <= 1:
-		pass
-	else:
-		tmp = left.popleft(1)
-		left.appendleft(tmp)
-		moves.append("sa")
+  if len(left) <= 1:
+    pass
+  else:
+    tmp = left.popleft()
+    left.appendleft(tmp)
+    moves.append("sa")
 
 def sort_3_elements(l, r, moves, stack):
-	# Does the mathematical optimal sort of 3 elements
-	if len(stack) != 3:
-		raise ValueError
-	new_stack = [None] * 3
-	sorted_stack = sorted(stack)
-	lut = {}
-	for i, val in enumerate(sorted_stack):
-		lut[val] = i
-	for i in range(len(new_stack)):
-		new_stack[i] = lut[stack[i]]
-	solutions_a = {
-		(1, 2, 3): [],
-		(2, 1, 3): ["sa"],
-		(3, 2, 1): ["sa", "rra"],
-		(3, 1, 2): ["ra"],
-		(1, 3, 2): ["sa", "ra"],
-		(2, 3, 1): ["rra"],
-	}
-	solutions_b = {
-		(1, 2, 3): [],
-		(2, 1, 3): ["sb"],
-		(3, 2, 1): ["sb", "rrb"],
-		(3, 1, 2): ["rb"],
-		(1, 3, 2): ["sb", "rb"],
-		(2, 3, 1): ["rrb"],
-	}
-	if stack == l:
-		moves.extend(solutions_a[tuple(new_stack)])
-	if stack == r:
-		moves.extend(solutions_b[tuple(new_stack)])
+  # Does the mathematical optimal sort of 3 elements
+  if len(stack) != 3:
+    raise ValueError
+  new_stack = [None] * 3
+  sorted_stack = sorted(stack)
+  lut = {}
+  for i, val in enumerate(sorted_stack):
+    lut[val] = i
+  for i in range(len(new_stack)):
+    new_stack[i] = lut[stack[i]]
+  solutions_a = {
+    (1, 2, 3): [],
+    (2, 1, 3): ["sa"],
+    (3, 2, 1): ["sa", "rra"],
+    (3, 1, 2): ["ra"],
+    (1, 3, 2): ["sa", "ra"],
+    (2, 3, 1): ["rra"],
+  }
+  solutions_b = {
+    (1, 2, 3): [],
+    (2, 1, 3): ["sb"],
+    (3, 2, 1): ["sb", "rrb"],
+    (3, 1, 2): ["rb"],
+    (1, 3, 2): ["sb", "rb"],
+    (2, 3, 1): ["rrb"],
+  }
+  if stack == l:
+    moves.extend(solutions_a[tuple(new_stack)])
+  if stack == r:
+    moves.extend(solutions_b[tuple(new_stack)])
 
 def sort_2_elements_descending(l, r, moves, stack):
-	# Sorts 2 elements descending (high to low)
-	if len(stack) != 2:
-		raise ValueError
-	new_stack = [None] * 2
-	sorted_stack = sorted(stack)
-	lut = {}
-	for i, val in enumerate(sorted_stack):
-		lut[val] = i
-	for i in range(len(new_stack)):
-		new_stack[i] = lut[stack[i]]
-	solutions_a = {
-		(2, 1): [],
-		(1, 2): ["sa"],
-	}
-	solutions_b = {
-		(2, 1): [],
-		(1, 2): ["sb"],
-	}
-	if stack == l:
-		moves.extend(solutions_a[tuple(new_stack)])
-	if stack == r:
-		moves.extend(solutions_b[tuple(new_stack)])
+  # Sorts 2 elements descending (high to low)
+  if len(stack) != 2:
+    raise ValueError
+  new_stack = [None] * 2
+  sorted_stack = sorted(stack)
+  lut = {}
+  for i, val in enumerate(sorted_stack):
+    lut[val] = i
+  for i in range(len(new_stack)):
+    new_stack[i] = lut[stack[i]]
+  solutions_a = {
+    (2, 1): [],
+    (1, 2): ["sa"],
+  }
+  solutions_b = {
+    (2, 1): [],
+    (1, 2): ["sb"],
+  }
+  if stack == l:
+    moves.extend(solutions_a[tuple(new_stack)])
+  if stack == r:
+    moves.extend(solutions_b[tuple(new_stack)])
 
 def push_forward_val(l, r, moves, val):
-	distance = find_distance_from(l, val)
-	while distance > 0:
-		ra(l, r, moves)
-		distance -= 1
-	while distance < 0:
-		rra(l, r, moves)
-		distance += 1
-	pb(l, r, moves)
+  distance = find_distance_from(l, val)
+  while distance > 0:
+    ra(l, r, moves)
+    distance -= 1
+  while distance < 0:
+    rra(l, r, moves)
+    distance += 1
+  pb(l, r, moves)
 
 def sort_5_elements(stack, moves):
-	# pick across the highest two values
-	# sort left
-	# sort right
-	# push back
-	push_forward_val(l, r, moves, 1)
-	push_forward_val(l, r, moves, 2)
-	sort_3_elements(l, r, moves, l)
-	pa(l, r, moves)
-	pa(l, r, moves)
+  # pick across the highest two values
+  # sort left
+  # sort right
+  # push back
+  push_forward_val(l, r, moves, 1)
+  push_forward_val(l, r, moves, 2)
+  sort_3_elements(l, r, moves, l)
+  pa(l, r, moves)
+  pa(l, r, moves)
 
 
 
@@ -179,165 +184,167 @@ def double_radix_sort(l, r):
   return m
 
 def split_into_buckets(l, r, num_groups):
-	# Splits left to right side in buckets. Splits it into blocks descending
-	# Does so on single pass
+  # Splits left to right side in buckets. Splits it into blocks descending
+  # Does so on single pass
 
-	num_elements = len(l)
-	group_size = num_elements / num_groups
+  num_elements = len(l)
+  group_size = num_elements / num_groups
 
-	moves = []
-	lower_bound = 0
-	bound = lower_bound + group_size
-	while l:
-		for _ in range(len(l)):
-			if lower_bound <= l[0] < upper_bound:
-				pb(l, r, moves)
-			else:
-				ra(l, r, moves)
-		lower_bound = upper_bound
-		upper_bound = lower_bound + group_size
-	return moves
+  moves = []
+  lower_bound = 0
+  upper_bound = lower_bound + group_size
+  while l:
+    for _ in range(len(l)):
+      if lower_bound <= l[0] < upper_bound:
+        pb(l, r, moves)
+      else:
+        ra(l, r, moves)
+    lower_bound = upper_bound
+    upper_bound = lower_bound + group_size
+  return moves
 
 def split_into_buckets_double(l, r, num_groups):
-	# Splits left side to right side separated into buckets. Splits it into blocks descending
-	# Splits off pairs of groups at a time and expands out
-	# For odd number of groups does middle pairs, expands out, and does the highest group last
+  # Splits left side to right side separated into buckets. Splits it into blocks descending
+  # Splits off pairs of groups at a time and expands out
+  # For odd number of groups does middle pairs, expands out, and does the highest group last
 
-	num_elements = len(l)
-	group_size = num_elements / num_groups
+  num_elements = len(l)
+  group_size = num_elements / num_groups
 
-	moves = []
+  moves = []
 
-	# - high_high
-	# - high_low
-	# ...
-	# - low_high
-	# - low_low
-	low_high = num_groups / 2
-	high_low = low_high
-	low_low = low_high - group_size
-	high_high = high_low + group_size
+  # - high_high
+  # - high_low
+  # ...
+  # - low_high
+  # - low_low
+  low_high = num_groups // 2 * group_size
+  high_low = low_high
+  low_low = low_high - group_size
+  high_high = high_low + group_size
 
-	while l:
-		for _ in range(len(l)):
-			if high_low <= l[0] < high_high:
-				pb(l, r, moves)
-			elif low_low <= l[0] < low_high:
-				pb(l, r, moves)
-				rrb(l, r, moves)
-			else:
-				ra(l, r, moves)
-			low_high = low_low
-			low_low -= group_size
-			high_low = high_high
-			high_hig += group_size
-			
-	return moves
+  while l:
+    # print(f"brackets: {low_low}, {low_high}, {high_low}, {high_high}")
+    for _ in range(len(l)):
+      if high_low <= l[0] < high_high:
+        pb(l, r, moves)
+      elif low_low <= l[0] < low_high:
+        pb(l, r, moves)
+        rb(l, r, moves)
+      else:
+        ra(l, r, moves)
+    low_high = low_low
+    low_low -= group_size
+    high_low = high_high
+    high_high += group_size
+      
+  return moves
 
 def split_into_buckets_double_2(l, r, num_groups):
-	# Same as above
-	# Except in the case of odd number of cases it does the middle group alone
-	# Then does the expanding pairs going up
-	# Probably less efficient? But should test it
-	
-	num_elements = len(l)
-	group_size = num_elements / num_groups
+  # Same as above
+  # Except in the case of odd number of cases it does the middle group alone
+  # Then does the expanding pairs going up
+  # Probably less efficient? But should test it
+  
+  num_elements = len(l)
+  group_size = num_elements / num_groups
 
-	moves = []
+  moves = []
 
-	high_low = num_groups / 2
-	high_high = high_low += group_size
-	if num_groups % 2 == 1:
-		low_high = high_high
-		low_low = high_low
-	else:
-		low_high = high_low
-		low_low = low_high -= group_size
-	
-	while l:
-		for _ in range(len(l)):
-			if high_low <= l[0] < high_high:
-				pb(l, r, moves)
-			elif low_low <= l[0] < low_high:
-				pb(l, r, moves)
-				rrb(l, r, moves)
-			else:
-				ra(l, r, moves)
-			low_high = low_low
-			low_low -= group_size
-			high_low = high_high
-			high_hig += group_size
-	
-	return moves
+  high_low = num_groups // 2 * group_size
+  high_high = high_low + group_size
+  if num_groups % 2 == 1:
+    low_high = high_high
+    low_low = high_low
+  else:
+    low_high = high_low
+    low_low = low_high - group_size
+  
+  while l:
+    for _ in range(len(l)):
+      if high_low <= l[0] < high_high:
+        pb(l, r, moves)
+      elif low_low <= l[0] < low_high:
+        pb(l, r, moves)
+        rb(l, r, moves)
+      else:
+        ra(l, r, moves)
+    low_high = low_low
+    low_low -= group_size
+    high_low = high_high
+    high_high += group_size
+  
+  return moves
 
 def find_distance_from(stack, val):
-	# Searches for the closest way to get to a searched for number
-	
-	distance = 0
-	while stack[distance] != val:
-		distance += 1
+  # Searches for the closest way to get to a searched for number
+  
+  distance = 0
+  while stack[distance] != val:
+    distance += 1
 
-	if len(stack) - distance < distance:
-		# distance = (len(stack) - distance) * - 1
-		distance = distance - len(stack)
+  if len(stack) - distance < distance:
+    # distance = (len(stack) - distance) * - 1
+    distance = distance - len(stack)
 
-	return distance
-		
+  return distance
+    
 
 def selection_sort_back(l, r):
-	# Does an selection sort to pull back from r to l
+  # Does an selection sort to pull back from r to l
 
-	moves = []
+  moves = []
 
-	current_target = len(r) - 1
-	while r:
-		distance = find_distance_from(r, current_target)
-		while distance > 0:
-			rb(l, r, moves)
-			distance -= 1
-		while distance < 0:
-			rrb(l, r, moves)
-			distance += 1
-		pa(l, r, moves)
-		current_target -= 1
+  current_target = len(r) - 1
+  while r:
+    distance = find_distance_from(r, current_target)
+    while distance > 0:
+      rb(l, r, moves)
+      distance -= 1
+    while distance < 0:
+      rrb(l, r, moves)
+      distance += 1
+    pa(l, r, moves)
+    current_target -= 1
 
-	return moves
+  return moves
 
 def push_back_val(l, r, val):
 
-	moves = []
-	distance = find_distance_from(r, val)
-	while distance > 0:
-		rb(l, r, moves)
-		distance -= 1
-	while distance < 0:
-		rrb(l, r, moves)
-		distance += 1
-	pa(l, r, moves)
-	return moves
+  moves = []
+  distance = find_distance_from(r, val)
+  while distance > 0:
+    rb(l, r, moves)
+    distance -= 1
+  while distance < 0:
+    rrb(l, r, moves)
+    distance += 1
+  pa(l, r, moves)
+  return moves
 
 def selection_sort_back_2(l, r):
-	# Does the same as regular selection sort but it is willing to pull out the second lowest and do a swap op instead
+  # Does the same as regular selection sort but it is willing to pull out the second lowest and do a swap op instead
 
-	moves = []
-	
-	current_target = len(r) - 1
-	while r:
-		next_target = current_target - 1
-		if next_target < 0:
-			next_target = 0
-		distance_target = find_distance_from(r, current_target)
-		distance_next_target = find_distance_from(r, next_target)
+  moves = []
+  
+  current_target = len(r) - 1
+  while r:
+    next_target = current_target - 1
+    if next_target < 0:
+      next_target = 0
+    distance_target = find_distance_from(r, current_target)
+    distance_next_target = find_distance_from(r, next_target)
 
-		if abs(distance_target) < abs(distance_next_target) or current_target == next_target:
-			moves.append(push_back_val(l, r, current_target))
-			current_target -= 1
-		else:
-			moves.append(push_back_val(l, r, next_target))
-			moves.append(push_back_val(l, r, current_target))
-			sa(l, r, moves)
-			current_target -= 2
+    if abs(distance_target) < abs(distance_next_target) or current_target == next_target:
+      moves.extend(push_back_val(l, r, current_target))
+      current_target -= 1
+    else:
+      moves.extend(push_back_val(l, r, next_target))
+      moves.extend(push_back_val(l, r, current_target))
+      sa(l, r, moves)
+      current_target -= 2
 
+  return moves
 
 # max = len(l)
 # div = 2
@@ -393,7 +400,12 @@ l = deque()
 for num in nums:
     l.append(number_lookup[num])
 r = deque()
-m = double_radix_sort(l, r)
+m = split_into_buckets_double(l, r, 22)
+m.extend(selection_sort_back_2(l, r))
+
+# m = double_radix_sort(l, r)
+
+#TOWER OF HANOI SORT
 
 for action in m:
   print(action)
