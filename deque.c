@@ -58,13 +58,16 @@ void	*ft_deque_pop(t_deque *d)
 {
 	t_dlist	*node;
 	void	*content;
+	t_dlist *prev_node;
 
+	prev_node = d->tail->prev;
 	node = ft_dlist_pop_last(&d->tail);
 	if (!node)
 	{
 		return (NULL);
 	}
 	content = node->content;
+	d->tail = prev_node;
 	free(node);
 	if (d->tail == NULL)
 	{
@@ -77,13 +80,16 @@ void	*ft_deque_popleft(t_deque *d)
 {
 	t_dlist	*node;
 	void	*content;
+	t_dlist	*next_node;
 
+	next_node = d->head->next;
 	node = ft_dlist_pop_first(&d->head);
 	if (!node)
 	{
 		return (NULL);
 	}
 	content = node->content;
+	d->head = next_node;
 	free(node);
 	if (d->head == NULL)
 	{
