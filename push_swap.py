@@ -3,28 +3,28 @@ import sys
 import math
 
 def is_sorted(left, right):
-    if right:
-        return False
-    if len(l) <= 1:
-      return True
-    cur = left[0] - 1
-    for val in left:
-        if cur >= val:
-            return False
-        cur = val
+  if right:
+    return False
+  if len(l) <= 1:
     return True
+  cur = left[0] - 1
+  for val in left:
+    if cur >= val:
+      return False
+    cur = val
+  return True
 
 
 def pb(left, right, moves):
-    tmp = left.popleft()
-    right.appendleft(tmp)
-    moves.append("pb")
+  tmp = left.popleft()
+  right.appendleft(tmp)
+  moves.append("pb")
 
 
 def ra(left, right, moves):
-    tmp = left.popleft()
-    left.append(tmp)
-    moves.append("ra")
+  tmp = left.popleft()
+  left.append(tmp)
+  moves.append("ra")
 
 def rra(left, right, moves):
   tmp = left.pop()
@@ -32,9 +32,9 @@ def rra(left, right, moves):
   moves.append("rra")
 
 def pa(left, right, moves):
-    tmp = right.popleft()
-    left.appendleft(tmp)
-    moves.append("pa")
+  tmp = right.popleft()
+  left.appendleft(tmp)
+  moves.append("pa")
 
 def rb(left, right, moves):
   tmp = right.popleft()
