@@ -102,7 +102,7 @@ void	ft_dlist_remove_last(t_dlist **head, void (*del)(void *))
 	ft_dlist_destroy_node(last, del);
 	if (prev == NULL)
 	{
-		*head == NULL;
+		*head = NULL;
 		return ;
 	}
 	prev->next = NULL;
