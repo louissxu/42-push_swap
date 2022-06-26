@@ -50,8 +50,10 @@ def sa(left, right, moves):
   if len(left) <= 1:
     pass
   else:
-    tmp = left.popleft()
-    left.appendleft(tmp)
+    tmp_0 = left.popleft()
+    tmp_1 = left.popleft()
+    left.appendleft(tmp_0)
+    left.appendleft(tmp_1)
   moves.append("sa")
 
 def sort_3_elements(l, r):
@@ -155,10 +157,10 @@ def double_radix_sort(l, r):
   while radix < max_radix:
     # while any(map(lambda x: x // (2 ** radix) %2 == 0, l)):
     for i in range(len(l)):
-        if l[0] // (2**radix) % 2 == 0:
-            pb(l, r, m)
-        else:
-            ra(l, r, m)
+      if l[0] // (2**radix) % 2 == 0:
+          pb(l, r, m)
+      else:
+          ra(l, r, m)
 
     radix += 1
     if radix < max_radix:
