@@ -6,7 +6,13 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDES = includes
 LIBFT_INCLUDES = libft/includes
 
-SRCS_RAW = push_swap.c deque.c dlist.c
+SRCS_RAW = push_swap.c deque.c dlist.c debug.c \
+	ps_primitives.c \
+	ps_sort_2_elements.c \
+	ps_sort_3_elements.c \
+	ps_sort_4_elements.c \
+	ps_sort_5_elements.c \
+	ps_sort_radix.c
 SRC_DIR = src
 SRCS = $(addprefix $(SRC_DIR)/,$(SRCS_RAW))
 
