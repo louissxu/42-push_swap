@@ -52,7 +52,7 @@ def sa(left, right, moves):
   else:
     tmp = left.popleft()
     left.appendleft(tmp)
-    moves.append("sa")
+  moves.append("sa")
 
 def sort_3_elements(l, r):
   # Does the mathematical optimal sort of 3 elements
