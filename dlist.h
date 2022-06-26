@@ -1,4 +1,7 @@
-#include <stdio.h>
+#ifndef DLIST_H
+
+# include <stdio.h>
+# include <stdlib.h>
 
 typedef struct s_dlist {
 	void			*content;
@@ -17,3 +20,5 @@ void	ft_dlist_insert_end(t_dlist **head, t_dlist *new_node);
 t_dlist *ft_dlist_pop_first(t_dlist **head);
 t_dlist *ft_dlist_pop_last(t_dlist **head);
 size_t	ft_dlist_length(t_dlist *head);
+
+#endif

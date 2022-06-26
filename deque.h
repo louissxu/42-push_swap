@@ -1,5 +1,8 @@
-#include <stdio.h>
-#include "dlist.h"
+#ifndef DEQUE_H
+
+# include <stdio.h>
+# include <stdlib.h>
+# include "dlist.h"
 
 typedef struct s_deque {
 	t_dlist	*head;
@@ -13,3 +16,5 @@ void	ft_deque_appendleft(t_deque *d, void *content);
 void	*ft_deque_pop(t_deque *d);
 void	*ft_deque_popleft(t_deque *d);
 size_t	ft_deque_length(t_deque d);
+
+#endif
