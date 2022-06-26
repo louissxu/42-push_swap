@@ -1,5 +1,7 @@
 #ifndef PUSH_SWAP_H
 
+# define UNUSED(x) (void)(x)
+
 # include "deque.h"
 # include "libft.h"
 
@@ -12,6 +14,7 @@ void	ps_rrb(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sa(t_deque *l, t_deque *r, t_list **moves);
 
 void	debug_print_list(t_list *node);
+void	debug_print_list_of_moves(t_list *moves_node);
 void	debug_print_dlist(t_dlist *node);
 void	debug_print_deque(t_deque *d);
 

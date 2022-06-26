@@ -25,6 +25,8 @@ void	ps_ra(t_deque *l, t_deque *r, t_list **moves)
 	tmp = ft_deque_popleft(l);
 	ft_deque_append(l, tmp);
 	ft_lstadd_back(moves, ft_lstnew(ft_strdup("ra")));
+	UNUSED(r);
+	
 }
 
 void	ps_rra(t_deque *l, t_deque *r, t_list **moves)
@@ -34,6 +36,7 @@ void	ps_rra(t_deque *l, t_deque *r, t_list **moves)
 	tmp = ft_deque_pop(l);
 	ft_deque_appendleft(l, tmp);
 	ft_lstadd_back(moves, ft_lstnew(ft_strdup("rra")));
+	UNUSED(r);
 }
 
 void	ps_rb(t_deque *l, t_deque *r, t_list **moves)
@@ -43,6 +46,7 @@ void	ps_rb(t_deque *l, t_deque *r, t_list **moves)
 	tmp = ft_deque_popleft(r);
 	ft_deque_append(r, tmp);
 	ft_lstadd_back(moves, ft_lstnew(ft_strdup("rb")));
+	UNUSED(l);
 }
 
 void	ps_rrb(t_deque *l, t_deque *r, t_list **moves)
@@ -52,6 +56,7 @@ void	ps_rrb(t_deque *l, t_deque *r, t_list **moves)
 	tmp = ft_deque_pop(r);
 	ft_deque_appendleft(r, tmp);
 	ft_lstadd_back(moves, ft_lstnew(ft_strdup("rrb")));
+	UNUSED(l);
 }
 
 void	ps_sa(t_deque *l, t_deque *r, t_list **moves)
@@ -67,4 +72,5 @@ void	ps_sa(t_deque *l, t_deque *r, t_list **moves)
 		ft_deque_appendleft(l, tmp_1);
 	}
 	ft_lstadd_back(moves, ft_lstnew(ft_strdup("sa")));
+	UNUSED(r);
 }
