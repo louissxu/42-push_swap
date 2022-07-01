@@ -182,6 +182,50 @@ def double_radix_sort(l, r):
     radix += 1
   return m
 
+def double_radix_sort_improved(l, r):
+  # Improving double radix sort further.
+  # To save unnecessary rotate of r stack to get past the sorted but later block
+  # Instead sort the blocks with the higher bit sorted first, then the lower bit
+
+  radix = 0
+  m = []
+  max_radix = (math.log2(len(l)) + 1) // 1
+  while radix < max_radix:
+    if radix + 1 < max_radix:
+      # Do double sort
+      for i in range(len(l)):
+        if l[0] // (2 ** (radix + 1)) % 2 == 0:
+          pb(l, r, m)
+        else:
+          ra(l ,r, m)
+      r_1 = len(r)
+      for i in range(len(l)):
+        if l[0] // (2 ** (radix)) % 2 == 0:
+          pb(l, r, m)
+        else:
+          ra(l, r, m)
+      for i in range(len(r) - r_1):
+        pa(l, r, m)
+      for i in range(len(r)):
+        if r[0] // (2 ** radix) % 2 != 0:
+          pa(l, r, m)
+        else:
+          rb(l, r, m)
+      for i in range(len(r)):
+        pa(l, r, m)
+      radix += 2
+    else:
+      # Do single sort
+      for i in range(len(l)):
+        if l[0] // (2 ** radix) % 2 == 0:
+          pb(l, r, m)
+        else:
+          ra(l, r, m)
+      for i in range(len(r)):
+        pa(l, r, m)
+      radix += 1
+  return m
+
 def split_into_buckets(l, r, num_groups):
   # Splits left to right side in buckets. Splits it into blocks descending
   # Does so on single pass
@@ -454,7 +498,7 @@ def selection_sort_back_2(l, r):
 
 # if __name__ == "__main__":
 
-# test_100 = "97 92 84 98 19 43 50 75 59 37 90 39 79 44 49 83 45 89 65 53 47 38 71 42 8 7 5 91 82 48 96 6 77 24 31 36 18 33 81 28 32 23 85 25 2 88 11 55 16 93 64 20 95 72 30 46 26 57 4 73 60 70 78 22 29 80 86 94 14 35 63 34 56 58 15 21 67 52 10 12 66 76 62 9 99 17 74 69 54 41 3 51 61 87 1 100 27 13 40 68"
+test_100 = "97 92 84 98 19 43 50 75 59 37 90 39 79 44 49 83 45 89 65 53 47 38 71 42 8 7 5 91 82 48 96 6 77 24 31 36 18 33 81 28 32 23 85 25 2 88 11 55 16 93 64 20 95 72 30 46 26 57 4 73 60 70 78 22 29 80 86 94 14 35 63 34 56 58 15 21 67 52 10 12 66 76 62 9 99 17 74 69 54 41 3 51 61 87 1 100 27 13 40 68"
 # test_100_1 = "961 888 186 222 830 941 563 93 258 101 901 824 103 790 415 716 299 336 230 940 564 76 293 262 784 975 621 62 495 865 746 235 930 860 34 50 386 118 33 446 910 801 754 141 524 568 140 350 308 542 367 874 772 872 188 767 873 110 448 592 842 417 30 960 764 314 41 778 507 25 890 279 292 400 964 348 534 161 527 984 566 690 773 706 502 691 978 9 980 168 106 920 822 115 535 796 533 870 859 766"
 # test_100_2 = "916 523 953 801 841 565 797 314 784 531 787 211 754 581 434 818 933 1000 786 636 282 300 42 51 891 168 974 864 357 952 125 998 115 987 485 720 746 306 445 677 137 152 76 513 262 296 346 116 623 627 699 386 629 25 781 91 273 795 455 668 594 503 988 77 834 755 33 294 121 548 756 492 153 963 379 310 147 249 931 338 220 238 401 207 901 2 920 195 119 904 367 334 819 897 508 537 738 406 63 885"
 
@@ -465,11 +509,11 @@ def selection_sort_back_2(l, r):
 # test_5 = "1 4 2 3 0"
 
 # Debug with test strings
-# test = test_5
-# nums = list(map(int, test.split(" ")))
+test = test_100
+nums = list(map(int, test.split(" ")))
 
-# # Take arg strings
-nums = list(map(int, sys.argv[1:]))
+# # # Take arg strings
+# nums = list(map(int, sys.argv[1:]))
 
 
 sorted_nums = sorted(nums)
@@ -492,7 +536,7 @@ elif len(l) == 4:
 elif len(l) == 5:
   m.extend(sort_5_elements(l, r,))
 elif len(l) < 50:
-  m.extend(double_radix_sort(l, r))
+  m.extend(double_radix_sort_improved(l, r))
 elif len(l) < 150:
   # Solution to 100
   m.extend(split_into_buckets_double(l, r, 8))
@@ -504,7 +548,7 @@ elif len(l) < 600:
   m.extend(split_into_buckets_double_with_reverse_rotate(l, r, 32))
   m.extend(selection_sort_back_2(l, r))
 else:
-  m.extend(double_radix_sort(l, r))
+  m.extend(double_radix_sort_improved(l, r))
 
 # m = double_radix_sort(l, r)
 
@@ -512,3 +556,8 @@ else:
 
 for action in m:
   print(action)
+
+# Debugging
+print(len(m))
+
+print(is_sorted(l, r))
