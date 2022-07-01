@@ -227,7 +227,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		ps_sort_radix(&l, &r, &moves);
+		ps_sort_double_radix_sort_improved(&l, &r, &moves);
 	}
 	debug_print_list_of_moves(moves);
 	ft_printf("Number of moves: %i\n", ft_lstsize(moves));

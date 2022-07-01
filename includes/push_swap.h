@@ -24,11 +24,16 @@ void	ps_sort_2_elements(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sort_3_elements(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sort_4_elements(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sort_5_elements(t_deque *l, t_deque *r, t_list **moves);
-void	ps_sort_radix(t_deque *l, t_deque *r, t_list **moves);
+void	ps_sort_radix_sort(t_deque *l, t_deque *r, t_list **moves);
+void	ps_sort_double_radix_sort(t_deque *l, t_deque *r, t_list **moves);
+void	ps_sort_double_radix_sort_improved(t_deque *l, t_deque *r, t_list **moves);
 
 // Other functions - to rearrange and/or maybe rename
 t_deque	clone_deque(t_deque *d);
 t_deque	*normalise_in_place(t_deque *d);
+int	ft_pow(int x, int y);
+int	calculate_max_radix(int num);
+
 
 int	find_distance_from_val(t_deque *stack, int val);
 void	ps_pb_val(t_deque *l, t_deque *r, t_list **moves, int val);
