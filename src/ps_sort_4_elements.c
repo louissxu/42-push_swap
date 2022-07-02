@@ -1,5 +1,6 @@
 #include "push_swap.h"
 
+// Probably remove this. This is a duplicate
 int	find_distance_from_val(t_deque *stack, int val)
 {
 	int		distance;
@@ -27,6 +28,7 @@ int	find_distance_from_val(t_deque *stack, int val)
 	return (distance);
 }
 
+// Probably remove this. This is a duplicate
 void	ps_pb_val(t_deque *l, t_deque *r, t_list **moves, int val)
 {
 	int distance;
