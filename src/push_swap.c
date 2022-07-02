@@ -225,6 +225,14 @@ int main(int argc, char **argv)
 	{
 		ps_sort_5_elements(&l, &r, &moves);
 	}
+	else if (ft_deque_length(l) < 50)
+	{
+		ps_sort_double_radix_sort_improved(&l, &r, &moves);
+	}
+	else if (ft_deque_length(l) < 150)
+	{
+		ps_sort_100_elements(&l, &r, &moves);
+	}
 	else
 	{
 		ps_sort_double_radix_sort_improved(&l, &r, &moves);

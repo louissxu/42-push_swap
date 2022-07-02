@@ -27,6 +27,16 @@ void	ps_sort_5_elements(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sort_radix_sort(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sort_double_radix_sort(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sort_double_radix_sort_improved(t_deque *l, t_deque *r, t_list **moves);
+void	ps_sort_100_elements(t_deque *l, t_deque *r, t_list **moves);
+
+// PS derived
+void	ps_pa_value_optimal(t_deque *l, t_deque *r, t_list **moves, int value);
+
+// PS utilities
+int	ps_find_distance_to_value(t_deque *stack, int val);
+
+// FT utilities
+int	ft_abs(int val);
 
 // Other functions - to rearrange and/or maybe rename
 t_deque	clone_deque(t_deque *d);
