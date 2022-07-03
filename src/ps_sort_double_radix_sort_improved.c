@@ -80,6 +80,7 @@ void	ps_sort_double_radix_sort_improved(t_deque *l, t_deque *r, t_list **moves)
 				{
 					ps_ra(l, r, moves);
 				}
+				i--;
 			}
 			i = ft_deque_length(*r);
 			while (i > 0)
