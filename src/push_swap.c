@@ -208,35 +208,49 @@ int main(int argc, char **argv)
 	if (ft_deque_length(l) <= 1)
 	{
 		;
+		ft_printf("debug: sorting 1\n");
 	}
 	else if (ft_deque_length(l) == 2)
 	{
 		ps_sort_2_elements(&l, &r, &moves);
+		ft_printf("debug: sorting 2\n");
 	}
 	else if (ft_deque_length(l) == 3)
 	{
 		ps_sort_3_elements(&l, &r, &moves);
+		ft_printf("debug: sorting 3\n");
 	}
 	else if (ft_deque_length(l) == 4)
 	{
 		ps_sort_4_elements(&l, &r, &moves);
+		ft_printf("debug: sorting 4\n");
 	}
 	else if (ft_deque_length(l) == 5)
 	{
 		ps_sort_5_elements(&l, &r, &moves);
+		ft_printf("debug: sorting 5\n");
 	}
 	else if (ft_deque_length(l) < 50)
 	{
 		ps_sort_double_radix_sort_improved(&l, &r, &moves);
+		ft_printf("debug: sorting 50\n");
 	}
 	else if (ft_deque_length(l) < 150)
 	{
 		ps_sort_100_elements(&l, &r, &moves);
+		ft_printf("debug: sorting 150\n");
+	}
+	else if (ft_deque_length(l) < 600)
+	{
+		ps_sort_500_elements(&l, &r, &moves);
+		ft_printf("debug: sorting 600\n");
 	}
 	else
 	{
 		ps_sort_double_radix_sort_improved(&l, &r, &moves);
+		ft_printf("debug: sorting >600\n");
 	}
 	debug_print_list_of_moves(moves);
+	ft_printf("debug: length of l is: %i\n", (int)ft_deque_length(l));
 	ft_printf("Number of moves: %i\n", ft_lstsize(moves));
 }
