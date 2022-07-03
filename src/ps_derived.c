@@ -17,3 +17,11 @@ void	ps_pa_value_optimal(t_deque *l, t_deque *r, t_list **moves, int value)
 	}
 	ps_pa(l, r, moves);
 }
+
+void	ps_pa_all(t_deque *l, t_deque *r, t_list **moves)
+{
+	while (r->head)
+	{
+		ps_pa(l, r, moves);
+	}
+}

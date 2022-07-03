@@ -15,6 +15,7 @@ SRCS_RAW = push_swap.c deque.c dlist.c debug.c \
 	ps_sort_4_elements.c \
 	ps_sort_5_elements.c \
 	ps_sort_100_elements.c \
+	ps_sort_500_elements.c \
 	ps_sort_radix_sort.c \
 	ps_sort_double_radix_sort.c \
 	ps_sort_double_radix_sort_improved.c \
