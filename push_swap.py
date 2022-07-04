@@ -607,6 +607,36 @@ def selection_sort_back_3(l, r, num_groups):
   # print(debug_total_tally)
   return moves
 
+def remove_duplicates(m):
+  i = 0
+  change_made = True
+
+  pairs = {
+    "ra": "rra",
+    "rra": "ra",
+    "rb": "rrb",
+    "rrb": "rb",
+    "pa": "pb",
+    "pb": "pa",
+  }
+
+  while change_made:
+    if len(m) < 2:
+      break
+    i = 0
+    change_made = False
+    while (i + 1 < len(m)):
+      # if m[i] == "pb" and m[i + 1] == "pa":
+        # print(f"considering removal: {m[i]}     {m[i+1]}")
+      while m[i + 1] == pairs.get(m[i], ""):
+        # print(f"Removing - i: {i}, m[i]: {m[i]}, m[i+1]: {m[i+1]}")
+        m.pop(i)
+        m.pop(i)
+        change_made = True
+        if i > 0:
+          i -= 1
+      i += 1
+      # print(f"i: {i}    len(m): {len(m)}")        
 
 # max = len(l)
 # div = 2
@@ -691,8 +721,14 @@ else:
 
 #TOWER OF HANOI SORT
 
+remove_duplicates(m)
 for action in m:
   print(action)
+
+# for i, action in enumerate(m):
+#   # if action == "pb" and m[i+1] == "pa":
+#   if action == "pb":
+#     print(f"Matching dupes - i: {i}, action: {action}, m[i]: {m[i]}, m[i+1]: {m[i+1]}")
 
 # # Debugging
 # print(len(m))
