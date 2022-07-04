@@ -116,7 +116,7 @@ def push_forward_val(l, r, moves, val):
 def sort_4_elements(l, r):
   m = []
   push_forward_val(l, r, m, 0)
-  sort_3_elements(l, r, m, l)
+  m.extend(sort_3_elements(l, r))
   pa(l, r, m)
   return m
 
@@ -345,7 +345,7 @@ def split_into_buckets_double_with_reverse_rotate(l, r, num_groups):
   # Same as above, except it is willing to reverse move to search for the numbers
 
   num_elements = len(l)
-  group_size = num_elements / num_groups
+  group_size = num_elements // num_groups
 
   moves = []
 
@@ -376,7 +376,7 @@ def split_into_buckets_double_with_reverse_rotate(l, r, num_groups):
 
 def pre_split_into_buckets(l, r, num_pre_groups, num_groups):
   num_elements = len(l)
-  group_size = num_elements / num_groups
+  group_size = num_elements // num_groups
   groups_per_pre_group = num_groups // num_pre_groups
 
   moves = []
@@ -472,6 +472,142 @@ def selection_sort_back_2(l, r):
 
   return moves
 
+def selection_sort_back_3(l, r, num_groups):
+  # Does the same as regular selection sort, however:
+  #     Is willing to pull out the second highest and do a swap op instead
+  #     Is willing to pull out the lowest and bank it at the other end
+
+  debug_total_tally = 0
+
+  num_elements = len(r)
+  group_size = num_elements // num_groups
+  
+  moves = []
+
+  # print(num_groups)
+  # print(group_size)
+  low_bound = num_groups // 2 * group_size
+  # print(f"low bound is {low_bound}")
+  while low_bound < num_elements:
+    low_bound += group_size
+  low_bound -= group_size
+  low_target = low_bound
+  current_target = len(r) - 1
+  # print(f"low bound is {low_bound}")
+
+  low_tally = 0
+  while r:
+
+
+
+    next_target = current_target - 1
+    if next_target < 0:
+      next_target = 0
+    # if low_target >= next_target:
+    #   low_bound -= group_size
+    #   low_target = max(math.floor(low_bound), 0)
+    # print("\n")
+    # print(l)
+    # print(r)
+    # print(f"{current_target}, {next_target}, {low_target}, {low_bound}")
+    distance_target = find_distance_from(r, current_target)
+    if current_target == low_target:
+      dustance_next_target = 0
+    else:
+      distance_next_target = find_distance_from(r, next_target)
+    # print(distance_target)
+    # print(distance_next_target)
+
+    # print("stuck here")
+
+    # print(f"{current_target}, {next_target}, {low_target}, {low_bound}")
+    # print(f"{len(l)}, {len(r)}")
+    # print(r)
+    # input()
+    if abs(distance_target) < abs(distance_next_target) or current_target == next_target or low_target == next_target or current_target == low_target:
+      while (r[0] != current_target):
+        if r[0] == low_target:
+          pa(l, r, moves)
+          ra(l, r, moves)
+          low_target += 1
+          low_tally += 1
+          if distance_target > 0:
+            distance_target -= 1
+        if distance_target > 0:
+          rb(l, r, moves)
+          distance_target -= 1
+        if distance_target < 0:
+          rrb(l, r, moves)
+          distance_target += 1
+      pa(l, r, moves)
+      # print("pushing from 1")
+      current_target -= 1
+    else:
+      while (r[0] != next_target):
+        # print("stuck here 2")
+        # print(r[0])
+        # print(distance_next_target)
+        if r[0] == low_target:
+          pa(l, r, moves)
+          ra(l, r, moves)
+          low_target += 1
+          low_tally += 1
+          if distance_next_target > 0:
+            distance_next_target -= 1
+        if distance_next_target > 0:
+          rb(l, r, moves)
+          distance_next_target -= 1
+        if distance_next_target < 0:
+          rrb(l, r, moves)
+          distance_next_target += 1
+      pa(l, r, moves)
+      # print("pushing from 2")
+      distance_target = find_distance_from(r, current_target)
+      # print(f"{current_target}, {next_target}, {low_target}")
+      # print(f"{len(l)}, {len(r)}")
+      # print(r)
+      # print(distance_target)
+      while (r[0] != current_target):
+        if r[0] == low_target:
+          pa(l, r, moves)
+          ra(l, r, moves)
+          low_target += 1
+          low_tally += 1
+          if distance_target > 0:
+            distance_target -= 1
+        if distance_target > 0:
+          rb(l, r, moves)
+          distance_target -= 1
+        if distance_target < 0:
+          rrb(l, r, moves)
+          distance_target += 1
+        # print(f"{current_target}, {next_target}, {low_target}")
+        # print(f"{len(l)}, {len(r)}")
+        # print(r)
+        # print(distance_target)
+      pa(l, r, moves)
+      sa(l, r, moves)
+      # print("pushing from 3")
+      # print(f"current_target was {current_target}")
+      current_target -= 2
+      # print(f"current_target is {current_target}")
+
+    if current_target < low_target:
+      debug_total_tally += low_tally
+      while low_tally > 0:
+        rra(l, r, moves)
+        low_tally -= 1
+      current_target = min(current_target, low_bound - 1)
+      low_bound -= group_size
+      low_target = max(low_bound, 0)
+
+    # print("stuck here 3")
+    
+
+  # print(debug_total_tally)
+  return moves
+
+
 # max = len(l)
 # div = 2
 # while l:
@@ -498,7 +634,7 @@ def selection_sort_back_2(l, r):
 
 # if __name__ == "__main__":
 
-test_100 = "97 92 84 98 19 43 50 75 59 37 90 39 79 44 49 83 45 89 65 53 47 38 71 42 8 7 5 91 82 48 96 6 77 24 31 36 18 33 81 28 32 23 85 25 2 88 11 55 16 93 64 20 95 72 30 46 26 57 4 73 60 70 78 22 29 80 86 94 14 35 63 34 56 58 15 21 67 52 10 12 66 76 62 9 99 17 74 69 54 41 3 51 61 87 1 100 27 13 40 68"
+# test_100 = "97 92 84 98 19 43 50 75 59 37 90 39 79 44 49 83 45 89 65 53 47 38 71 42 8 7 5 91 82 48 96 6 77 24 31 36 18 33 81 28 32 23 85 25 2 88 11 55 16 93 64 20 95 72 30 46 26 57 4 73 60 70 78 22 29 80 86 94 14 35 63 34 56 58 15 21 67 52 10 12 66 76 62 9 99 17 74 69 54 41 3 51 61 87 1 100 27 13 40 68"
 # test_100_1 = "961 888 186 222 830 941 563 93 258 101 901 824 103 790 415 716 299 336 230 940 564 76 293 262 784 975 621 62 495 865 746 235 930 860 34 50 386 118 33 446 910 801 754 141 524 568 140 350 308 542 367 874 772 872 188 767 873 110 448 592 842 417 30 960 764 314 41 778 507 25 890 279 292 400 964 348 534 161 527 984 566 690 773 706 502 691 978 9 980 168 106 920 822 115 535 796 533 870 859 766"
 # test_100_2 = "916 523 953 801 841 565 797 314 784 531 787 211 754 581 434 818 933 1000 786 636 282 300 42 51 891 168 974 864 357 952 125 998 115 987 485 720 746 306 445 677 137 152 76 513 262 296 346 116 623 627 699 386 629 25 781 91 273 795 455 668 594 503 988 77 834 755 33 294 121 548 756 492 153 963 379 310 147 249 931 338 220 238 401 207 901 2 920 195 119 904 367 334 819 897 508 537 738 406 63 885"
 
@@ -508,12 +644,12 @@ test_100 = "97 92 84 98 19 43 50 75 59 37 90 39 79 44 49 83 45 89 65 53 47 38 71
 # test_3 = "0 2 1"
 # test_5 = "1 4 2 3 0"
 
-# Debug with test strings
-test = test_100
-nums = list(map(int, test.split(" ")))
+# # Debug with test strings
+# test = test_500_1
+# nums = list(map(int, test.split(" ")))
 
-# # # Take arg strings
-# nums = list(map(int, sys.argv[1:]))
+# # Take arg strings
+nums = list(map(int, sys.argv[1:]))
 
 
 sorted_nums = sorted(nums)
@@ -530,7 +666,7 @@ m = []
 if len(l) == 0:
   pass
 elif len(l) == 3:
-  sort_3_elements(l, r, m, l)
+  m.extend(sort_3_elements(l, r))
 elif len(l) == 4:
   m.extend(sort_4_elements(l, r))
 elif len(l) == 5:
@@ -547,6 +683,7 @@ elif len(l) < 600:
   m.extend(push_back_all(l, r))
   m.extend(split_into_buckets_double_with_reverse_rotate(l, r, 32))
   m.extend(selection_sort_back_2(l, r))
+  # m.extend(selection_sort_back_3(l, r, 32))
 else:
   m.extend(double_radix_sort_improved(l, r))
 
@@ -557,7 +694,10 @@ else:
 for action in m:
   print(action)
 
-# Debugging
-print(len(m))
+# # Debugging
+# print(len(m))
 
-print(is_sorted(l, r))
+# print(l)
+# print(r)
+
+# print(is_sorted(l, r))
