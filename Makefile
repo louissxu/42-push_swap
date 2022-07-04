@@ -30,6 +30,10 @@ OBJS = $(addprefix $(OBJ_DIR)/,$(OBJS_RAW))
 
 all: $(NAME)
 
+# # Compile override for using tester to call python solution
+# all:
+# 	gcc -Wall -Wextra -Werror test2.c -o push_swap
+
 $(NAME): $(OBJS) libft
 		$(CC) $(CFLAGS) -I $(INCLUDES) -I $(LIBFT_INCLUDES) -L libft $(OBJS) -lft -o $@
 
