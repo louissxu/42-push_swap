@@ -12,7 +12,8 @@ int main(int argc, char **argv)
 	// Ref: Invoking python from C
 	// https://stackoverflow.com/a/69813221/9160572
 	pyargv[0] = "/usr/bin/python3";
-	pyargv[1] = "/Users/louis/Desktop/42school/42-push_swap/push_swap.py";
+	// pyargv[1] = "/Users/louis/Desktop/42school/42-push_swap/push_swap.py";
+	pyargv[1] = "/Users/lxu/Desktop/42school/42-push_swap/push_swap.py";
 	int i = 1;
 	while (i < argc) {
 		pyargv[i + 1] = argv[i];
