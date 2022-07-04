@@ -594,6 +594,8 @@ def selection_sort_back_3(l, r, num_groups):
 
     if current_target < low_target:
       debug_total_tally += low_tally
+      # if low_tally > 1:
+      #   # print(f"tally is {low_tally}")
       while low_tally > 0:
         rra(l, r, moves)
         low_tally -= 1
@@ -709,11 +711,11 @@ elif len(l) < 150:
   m.extend(selection_sort_back_2(l, r))
 elif len(l) < 600:
   # Solution to 500
-  m.extend(pre_split_into_buckets(l, r, 4, 32))
+  m.extend(pre_split_into_buckets(l, r, 4, 20))
   m.extend(push_back_all(l, r))
-  m.extend(split_into_buckets_double_with_reverse_rotate(l, r, 32))
-  m.extend(selection_sort_back_2(l, r))
-  # m.extend(selection_sort_back_3(l, r, 32))
+  m.extend(split_into_buckets_double_with_reverse_rotate(l, r, 20))
+  # m.extend(selection_sort_back_2(l, r))
+  m.extend(selection_sort_back_3(l, r, 25))
 else:
   m.extend(double_radix_sort_improved(l, r))
 
@@ -721,7 +723,9 @@ else:
 
 #TOWER OF HANOI SORT
 
+# print(len(m))
 remove_duplicates(m)
+# print(len(m))
 for action in m:
   print(action)
 
