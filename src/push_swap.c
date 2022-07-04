@@ -86,9 +86,9 @@ void	list_swap_content(t_list *node_1, t_list *node_2)
 	node_2->content = temp_content;
 }
 
-long int	ft_intcmp(const	int *i1, int *i2)
+long	ft_intcmp(const	int *i1, int *i2)
 {
-	return (*i1 - *i2);
+	return ((long)*i1 - *i2);
 }
 
 /**
@@ -154,6 +154,7 @@ t_deque	*normalise_in_place(t_deque *d)
 		*(int *)(d_node->content) = i;
 		d_node = d_node->next;
 	}
+	ft_lstclear(&sorted_list_head, free);
 	return (d);
 }
 
@@ -172,6 +173,7 @@ int	check_if_deque_has_duplicates(t_deque *d)
 	}
 	while (node->next)
 	{
+		// ft_printf("checking for duplicates %i vs %i\n", *(int *)node->content, *(int *)node->next->content);
 		if (*(int *)(node->content) == *(int *)(node->next->content))
 		{
 			return (1);
@@ -199,58 +201,58 @@ int main(int argc, char **argv)
 		ft_deque_destroy_list(&l, free);
 		return (0);
 	}
-	debug_print_deque(&l);
+	// debug_print_deque(&l);
 	normalise_in_place(&l);
-	debug_print_deque(&l);
+	// debug_print_deque(&l);
 	r = ft_deque_new();
 	moves = NULL;
 
 	if (ft_deque_length(l) <= 1)
 	{
 		;
-		ft_printf("debug: sorting 1\n");
+		// ft_printf("debug: sorting 1\n");
 	}
 	else if (ft_deque_length(l) == 2)
 	{
 		ps_sort_2_elements(&l, &r, &moves);
-		ft_printf("debug: sorting 2\n");
+		// ft_printf("debug: sorting 2\n");
 	}
 	else if (ft_deque_length(l) == 3)
 	{
 		ps_sort_3_elements(&l, &r, &moves);
-		ft_printf("debug: sorting 3\n");
+		// ft_printf("debug: sorting 3\n");
 	}
 	else if (ft_deque_length(l) == 4)
 	{
 		ps_sort_4_elements(&l, &r, &moves);
-		ft_printf("debug: sorting 4\n");
+		// ft_printf("debug: sorting 4\n");
 	}
 	else if (ft_deque_length(l) == 5)
 	{
 		ps_sort_5_elements(&l, &r, &moves);
-		ft_printf("debug: sorting 5\n");
+		// ft_printf("debug: sorting 5\n");
 	}
 	else if (ft_deque_length(l) < 50)
 	{
 		ps_sort_double_radix_sort_improved(&l, &r, &moves);
-		ft_printf("debug: sorting 50\n");
+		// ft_printf("debug: sorting 50\n");
 	}
 	else if (ft_deque_length(l) < 150)
 	{
 		ps_sort_100_elements(&l, &r, &moves);
-		ft_printf("debug: sorting 150\n");
+		// ft_printf("debug: sorting 150\n");
 	}
 	else if (ft_deque_length(l) < 600)
 	{
 		ps_sort_500_elements(&l, &r, &moves);
-		ft_printf("debug: sorting 600\n");
+		// ft_printf("debug: sorting 600\n");
 	}
 	else
 	{
 		ps_sort_double_radix_sort_improved(&l, &r, &moves);
-		ft_printf("debug: sorting >600\n");
+		// ft_printf("debug: sorting >600\n");
 	}
 	debug_print_list_of_moves(moves);
-	ft_printf("debug: length of l is: %i\n", (int)ft_deque_length(l));
-	ft_printf("Number of moves: %i\n", ft_lstsize(moves));
+	// ft_printf("debug: length of l is: %i\n", (int)ft_deque_length(l));
+	// ft_printf("Number of moves: %i\n", ft_lstsize(moves));
 }

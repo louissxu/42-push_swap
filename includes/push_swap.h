@@ -18,7 +18,7 @@ void	debug_print_list_of_moves(t_list *moves_node);
 void	debug_print_dlist(t_dlist *node);
 void	debug_print_deque(t_deque *d);
 
-long int	ft_intcmp(const	int *i1, int *i2);
+long	ft_intcmp(const	int *i1, int *i2);
 
 void	ps_sort_2_elements(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sort_3_elements(t_deque *l, t_deque *r, t_list **moves);
@@ -40,8 +40,8 @@ void	ps_selection_sort_back_with_doubles(t_deque *l, t_deque *r, t_list **moves)
 // PS utilities
 int	ps_find_distance_to_value(t_deque *stack, int val);
 
-// FT utilities
-int	ft_abs(int val);
+// FT math utilities
+long	ft_math_abs(int val);
 
 // Other functions - to rearrange and/or maybe rename
 t_deque	clone_deque(t_deque *d);

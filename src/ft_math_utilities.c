@@ -1,11 +1,14 @@
 #include "push_swap.h"
 
 // Check how this handles INT_MIN
-int	ft_abs(int val)
+long	ft_math_abs(int val)
 {
-	if (val < 0)
+	long	l_val;
+
+	l_val = val;
+	if (l_val < 0)
 	{
-		return (val * -1);
+		return (l_val * -1);
 	}
-	return (val);
+	return (l_val);
 }

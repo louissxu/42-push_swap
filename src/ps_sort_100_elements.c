@@ -58,7 +58,7 @@ void	ps_selection_sort_back_with_doubles(t_deque *l, t_deque *r, t_list **moves)
 		}
 		distance_target = ps_find_distance_to_value(r, current_target);
 		distance_next_target = ps_find_distance_to_value(r, next_target);
-		if (ft_abs(distance_target) < ft_abs(distance_next_target) || current_target == next_target)
+		if (ft_math_abs(distance_target) < ft_math_abs(distance_next_target) || current_target == next_target)
 		{
 			ps_pa_value_optimal(l, r, moves, current_target);
 			current_target--;
