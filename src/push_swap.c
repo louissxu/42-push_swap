@@ -1,11 +1,60 @@
 #include "push_swap.h"
 
-t_deque	parse_input_args_to_deque(char **argv)
+bool	str_is_valid_integer(char *str, int *dest)
+{
+	int		i;
+	int		num_len;
+	long	val;
+	bool	is_negative;
+
+	i = 0;
+	num_len = 0;
+	val = 0;
+	is_negative = false;
+	if (str[i] == '-')
+	{
+		i++;
+		is_negative = true;
+		if (str[i] == '\0')
+		{
+			return false;
+		}
+	}
+	while (str[i] == '0')
+	{
+		i++;
+	}
+	while (str[i] && num_len < 10)
+	{
+		if (ft_isinstr(str[i], "0123456789") == 0)
+		{
+			return false;
+		}
+		val *= 10;
+		val += str[i] - '0';
+		i++;
+		num_len++;
+	}
+	if (is_negative == true)
+	{
+		val *= -1;
+	}
+	if (val > INT_MAX || val < INT_MIN || str[i] != '\0')
+	{
+		return false;
+	}
+	*dest = (int)val;
+	return true;
+}
+
+t_deque	parse_input_args_to_deque(char **argv, bool *err)
 {
 	char	**input_arg;
 	int		*num;
+	bool	no_err;
 	t_deque	d;
 
+	*err = false;
 	d = ft_deque_new();
 	input_arg = &argv[1];
 	while (*input_arg)
@@ -15,7 +64,15 @@ t_deque	parse_input_args_to_deque(char **argv)
 		{
 			break ;
 		}
-		*num = ft_atoi(*input_arg);
+		no_err = str_is_valid_integer(*input_arg, num);
+		if (no_err == false)
+		{
+			ft_deque_destroy_list(&d, free);
+			free(num);
+			*err = true;
+			return d;
+		}
+		// *num = ft_atoi(*input_arg);
 		ft_deque_append(&d, num);
 		input_arg++;
 	}
@@ -158,46 +215,130 @@ t_deque	*normalise_in_place(t_deque *d)
 	return (d);
 }
 
-int	check_if_deque_has_duplicates(t_deque *d)
-{
-	t_dlist *node;
+// int	check_if_deque_has_duplicates(t_deque *d)
+// {
+// 	t_dlist *node;
 
-	node = d->head;
-	if (!node)
+// 	node = d->head;
+// 	if (!node)
+// 	{
+// 		return (0);
+// 	}
+// 	if (!node->next)
+// 	{
+// 		return (0);
+// 	}
+// 	while (node->next)
+// 	{
+// 		// ft_printf("checking for duplicates %i vs %i\n", *(int *)node->content, *(int *)node->next->content);
+// 		if (*(int *)(node->content) == *(int *)(node->next->content))
+// 		{
+// 			return (1);
+// 		}
+// 		node = node->next;
+// 	}
+// 	return (0);
+// }
+
+bool	deque_has_duplicates(t_deque *d)
+{
+	t_list	*l;
+	t_list	*node;
+
+	l = deque_to_list(d);
+	list_sort_bubble_sort(l);
+
+	node = l;
+	if (node == NULL)
 	{
-		return (0);
+		return false;
 	}
-	if (!node->next)
+
+	if (node->next == NULL)
 	{
-		return (0);
+		return false;
 	}
-	while (node->next)
+	while (node && node->next)
 	{
-		// ft_printf("checking for duplicates %i vs %i\n", *(int *)node->content, *(int *)node->next->content);
-		if (*(int *)(node->content) == *(int *)(node->next->content))
+		if (*(int *)node->content == *(int *)node->next->content)
 		{
-			return (1);
+			ft_lstclear(&l, free);
+			return true;
 		}
 		node = node->next;
 	}
-	return (0);
+	ft_lstclear(&l, free);
+	return false;
 }
+
+bool	deque_is_sorted(t_deque *d)
+{
+	t_dlist	*node;
+
+	node = d->head;
+	if (node == NULL)
+	{
+		return true;
+	}
+	if (node->next == NULL)
+	{
+		return true;
+	}
+	while (node && node->next)
+	{
+		if (*(int *)node->content <= *(int *)node->next->content)
+		{
+			;
+		}
+		else
+		{
+			return false;
+		}
+		node = node->next;
+	}
+	return true;
+}
+
+// bool	all_args_valid(char **args)
+// {
+// 	while (*args)
+// 	{
+// 		if (str_is_valid_integer(*args) == false)
+// 		{
+// 			return false;
+// 		}
+// 		args++;
+// 	}
+// 	return true;
+// }
 
 int main(int argc, char **argv)
 {
 	t_deque l;
 	t_deque r;
 	t_list *moves;
+	bool	err;
 
 	if (argc == 1)
 	{
-		ft_printf("not enough args\n");
 		return (0);
 	}
-	l = parse_input_args_to_deque(argv);
-	if (check_if_deque_has_duplicates(&l) == 1)
+	err = false;
+	l = parse_input_args_to_deque(argv, &err);
+	if (err)
 	{
-		ft_printf("has duplicates\n");
+		ft_deque_destroy_list(&l, free);
+		write(2, "Error\n", 6);
+		return (0);
+	}
+	if (deque_has_duplicates(&l) == true)
+	{
+		write(2, "Error\n", 6);
+		ft_deque_destroy_list(&l, free);
+		return (0);
+	}
+	if (deque_is_sorted(&l) == true)
+	{
 		ft_deque_destroy_list(&l, free);
 		return (0);
 	}
@@ -252,7 +393,13 @@ int main(int argc, char **argv)
 		ps_sort_double_radix_sort_improved(&l, &r, &moves);
 		// ft_printf("debug: sorting >600\n");
 	}
-	debug_print_list_of_moves(moves);
+	// debug_print_list_of_moves(moves);
+	t_dlist	*moves_dlist;
+	moves_dlist = ps_remove_duplicates(moves);
+	debug_print_list_of_moves_dlist(moves_dlist);
+	ft_printf("list len %i    dups removed len %i\n", ft_lstsize(moves), ft_dlist_length(moves_dlist));
+	ft_lstclear(&moves, free);
+	ft_dlist_destroy_list(moves_dlist, free);
 	// ft_printf("debug: length of l is: %i\n", (int)ft_deque_length(l));
 	// ft_printf("Number of moves: %i\n", ft_lstsize(moves));
 }

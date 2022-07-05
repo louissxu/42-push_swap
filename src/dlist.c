@@ -198,6 +198,28 @@ t_dlist *ft_dlist_pop_last(t_dlist **head)
 	return node;
 }
 
+/*
+Pops the node with the given pointer. Assumes that the node is a valid pointer in the head list (otherwise bad things happen)
+*/
+t_dlist	*ft_dlist_pop_at_pointer(t_dlist **head, t_dlist *node)
+{
+	t_dlist	*popped_node;
+
+	if (node == *head)
+	{
+		popped_node = ft_dlist_pop_first(head);
+		return (popped_node);
+	}
+	if (node->next)
+	{
+		node->next->prev = node->prev;
+	}
+	node->prev->next = node->next;
+	node->prev = NULL;
+	node->next = NULL;
+	return (node);
+}
+
 size_t	ft_dlist_length(t_dlist *head)
 {
 	size_t	len;

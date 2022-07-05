@@ -19,6 +19,7 @@ void	ft_dlist_insert_start(t_dlist **head, t_dlist *new_node);
 void	ft_dlist_insert_end(t_dlist **head, t_dlist *new_node);
 t_dlist *ft_dlist_pop_first(t_dlist **head);
 t_dlist *ft_dlist_pop_last(t_dlist **head);
+t_dlist	*ft_dlist_pop_at_pointer(t_dlist **head, t_dlist *node);
 size_t	ft_dlist_length(t_dlist *head);
 
 #endif

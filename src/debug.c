@@ -24,6 +24,15 @@ void	debug_print_list_of_moves(t_list *moves_node)
 	}
 }
 
+void	debug_print_list_of_moves_dlist(t_dlist *d)
+{
+	while (d != NULL)
+	{
+		ft_printf("%s\n", d->content);
+		d = d->next;
+	}
+}
+
 void	debug_print_dlist(t_dlist *node)
 {
 	ft_printf("dlist([");

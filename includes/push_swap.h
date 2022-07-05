@@ -1,9 +1,13 @@
 #ifndef PUSH_SWAP_H
 
 # define UNUSED(x) (void)(x)
+# define bool int
+# define true 1
+# define false 0
 
 # include "deque.h"
 # include "libft.h"
+# include <limits.h>
 
 void	ps_pb(t_deque *l, t_deque *r, t_list **moves);
 void	ps_pa(t_deque *l, t_deque *r, t_list **moves);
@@ -48,6 +52,9 @@ t_deque	clone_deque(t_deque *d);
 t_deque	*normalise_in_place(t_deque *d);
 int	ft_pow(int x, int y);
 int	calculate_max_radix(int num);
+t_dlist	*ps_remove_duplicates(t_list *l);
+void	debug_print_list_of_moves_dlist(t_dlist *d);
+int	*clone_heap_integer(int *orig);
 
 
 int	find_distance_from_val(t_deque *stack, int val);
