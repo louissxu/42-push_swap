@@ -40,7 +40,7 @@ void	ps_sort_double_radix_sort_improved(t_deque *l, t_deque *r, t_list **moves)
 				}
 				i--;
 			}
-			i = ft_deque_length(*l) - r_first_buffer_length;
+			i = ft_deque_length(*r) - r_first_buffer_length;
 			while (i > 0)
 			{
 				ps_pa(l, r, moves);
