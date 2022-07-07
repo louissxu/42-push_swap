@@ -393,11 +393,19 @@ int main(int argc, char **argv)
 		ps_sort_double_radix_sort_improved(&l, &r, &moves);
 		// ft_printf("debug: sorting >600\n");
 	}
+	// else
+	// {
+	// 	ps_sort_double_radix_sort(&l, &r, &moves);
+	// }
 	// debug_print_list_of_moves(moves);
 	t_dlist	*moves_dlist;
 	moves_dlist = ps_remove_duplicates(moves);
+	moves_dlist = list_to_dlist(moves);
 	debug_print_list_of_moves_dlist(moves_dlist);
-	ft_printf("list len %i    dups removed len %i\n", ft_lstsize(moves), ft_dlist_length(moves_dlist));
+	// ft_printf("list len %i    dups removed len %i\n", ft_lstsize(moves), ft_dlist_length(moves_dlist));
+	// debug_print_deque(&l);
+	// debug_print_deque(&r);
+	// ft_printf("deque l is sorted: %i\n", deque_is_sorted(&l));
 	ft_lstclear(&moves, free);
 	ft_dlist_destroy_list(moves_dlist, free);
 	// ft_printf("debug: length of l is: %i\n", (int)ft_deque_length(l));
