@@ -19,6 +19,7 @@ SRCS_RAW = push_swap.c deque.c dlist.c debug.c \
 	ps_sort_radix_sort.c \
 	ps_sort_double_radix_sort.c \
 	ps_sort_double_radix_sort_improved.c \
+	ps_sort_double_radix_sort_improved_with_swaps.c \
 	ps_remove_duplicates.c \
 	ft_math_utilities.c
 

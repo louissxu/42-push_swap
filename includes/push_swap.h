@@ -33,6 +33,7 @@ void	ps_sort_500_elements(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sort_radix_sort(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sort_double_radix_sort(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sort_double_radix_sort_improved(t_deque *l, t_deque *r, t_list **moves);
+void	ps_sort_double_radix_sort_improved_with_swaps(t_deque *l, t_deque *r, t_list **moves);
 
 // PS derived
 void	ps_pa_value_optimal(t_deque *l, t_deque *r, t_list **moves, int value);
