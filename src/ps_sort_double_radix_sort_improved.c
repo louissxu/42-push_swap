@@ -26,7 +26,7 @@ void	ps_sort_double_radix_sort_improved(t_deque *l, t_deque *r, t_list **moves)
 				}
 				i--;
 			}
-			r_first_buffer_length = ft_deque_length(*l);
+			r_first_buffer_length = ft_deque_length(*r);
 			i = ft_deque_length(*l);
 			while (i > 0)
 			{
