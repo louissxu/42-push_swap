@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDES = includes
 LIBFT_INCLUDES = libft/includes
 
-SRCS_RAW = push_swap.c deque.c dlist.c debug.c \
+SRCS_RAW = deque.c dlist.c debug.c \
 	ps_primitives.c \
 	ps_derived.c \
 	ps_utilities.c \
@@ -21,7 +21,9 @@ SRCS_RAW = push_swap.c deque.c dlist.c debug.c \
 	ps_sort_double_radix_sort_improved.c \
 	ps_sort_double_radix_sort_improved_with_swaps.c \
 	ps_remove_duplicates.c \
-	ft_math_utilities.c
+	ft_math_utilities.c \
+	parse_args.c 
+
 
 SRC_DIR = src
 SRCS = $(addprefix $(SRC_DIR)/,$(SRCS_RAW))
@@ -30,14 +32,24 @@ OBJS_RAW = $(SRCS_RAW:.c=.o)
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/,$(OBJS_RAW))
 
+SRCS_PUSH_SWAP_RAW = push_swap.c
+SRCS_PUSH_SWAP = $(addprefix $(SRC_DIR)/,$(SRCS_PUSH_SWAP_RAW))
+OBJS_PUSH_SWAP_RAW = $(SRCS_PUSH_SWAP_RAW:.c=.o)
+OBJS_PUSH_SWAP = $(addprefix $(OBJ_DIR)/,$(OBJS_PUSH_SWAP_RAW))
+
+SRCS_CHECKER_RAW = checker.c
+SRCS_CHECKER = $(addprefix $(SRC_DIR)/,$(SRCS_CHECKER_RAW))
+OBJS_CHECKER_RAW = $(SRCS_CHECKER_RAW:.c=.o)
+OBJS_CHECKER = $(addprefix $(OBJ_DIR)/,$(OBJS_CHECKER_RAW)) 
+
 all: $(NAME)
 
 # # Compile override for using tester to call python solution
 # all:
 # 	gcc -Wall -Wextra -Werror test2.c -o push_swap
 
-$(NAME): $(OBJS) libft
-		$(CC) $(CFLAGS) -I $(INCLUDES) -I $(LIBFT_INCLUDES) -L libft $(OBJS) -lft -o $@
+$(NAME): $(OBJS) $(OBJS_PUSH_SWAP) libft
+		$(CC) $(CFLAGS) -I $(INCLUDES) -I $(LIBFT_INCLUDES) -L libft $(OBJS) $(OBJS_PUSH_SWAP) -lft -o $@
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 		@mkdir -p $(@D)
@@ -50,14 +62,17 @@ libft:
 
 clean:
 		$(MAKE) clean -C libft
-		rm -f $(OBJS)
+		rm -f $(OBJS) $(OBJS_PUSH_SWAP) $(OBJS_CHECKER)
 		rm -df obj
 
 fclean:
 		$(MAKE) fclean -C libft
-		rm -f $(OBJS) $(NAME)
+		rm -f $(OBJS) $(OBJS_PUSH_SWAP) $(OBJS_CHECKER) $(NAME) $(NAME_BONUS)
 		rm -df obj
 
 re: fclean all
 
-.PHONY: all libft clean fclean re
+bonus: $(OBJS) $(OBJS_CHECKER) libft
+	$(CC) $(CFLAGS) -I $(INCLUDES) -I $(LIBFT_INCLUDES) -L libft $(OBJS) $(OBJS_CHECKER) -lft -o checker
+
+.PHONY: all libft clean fclean re bonus

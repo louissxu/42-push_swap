@@ -16,6 +16,9 @@ void	ps_rra(t_deque *l, t_deque *r, t_list **moves);
 void	ps_rb(t_deque *l, t_deque *r, t_list **moves);
 void	ps_rrb(t_deque *l, t_deque *r, t_list **moves);
 void	ps_sa(t_deque *l, t_deque *r, t_list **moves);
+void	ps_sb(t_deque *l, t_deque *r, t_list **moves);
+void	ps_rr(t_deque *l, t_deque *r, t_list **moves);
+void	ps_rrr(t_deque *l, t_deque *r, t_list **moves);
 
 void	debug_print_list(t_list *node);
 void	debug_print_list_of_moves(t_list *moves_node);
@@ -62,5 +65,12 @@ t_dlist	*list_to_dlist(t_list *list_head);
 
 int	find_distance_from_val(t_deque *stack, int val);
 void	ps_pb_val(t_deque *l, t_deque *r, t_list **moves, int val);
+
+// Shared functions needed for checker
+t_deque	parse_input_args_to_deque(char **argv, bool *err);
+bool	deque_has_duplicates(t_deque *d);
+bool	deque_is_sorted(t_deque *d);
+t_list	*deque_to_list(t_deque *d);
+t_list	*list_sort_bubble_sort(t_list *l);
 
 #endif
