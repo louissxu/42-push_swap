@@ -225,11 +225,103 @@ void	ps_selection_sort_back_with_doubles_and_banking_low_val(t_deque *l, t_deque
 	}
 }
 
+t_deque	ft_deque_clone(t_deque d, void *(clone_element)(void *))
+{
+	t_deque	cloned_deque;
+	t_dlist *d_node;
+
+	cloned_deque = ft_deque_new();
+	d_node = d.head;
+	while (d_node)
+	{
+		ft_deque_append(&cloned_deque, clone_element(d_node->content));
+		d_node = d_node->next;
+	}
+	return cloned_deque;
+}
+
+size_t	ps_try_500_bracket_sort(t_deque *l, t_deque *r, t_list **moves)
+{
+	t_deque	new_l;
+	t_deque	new_r;
+	t_list	*new_moves;
+	t_dlist	*new_moves_dlist;
+	size_t	new_number_of_moves;
+
+	UNUSED(moves);
+	new_l = ft_deque_clone(*l, clone_heap_integer_void);
+	new_r = ft_deque_clone(*r, clone_heap_integer_void);
+	new_moves = NULL;
+	new_moves_dlist = NULL;
+
+	ps_pre_split_into_buckets(&new_l, &new_r, &new_moves, 4, 32);
+	ps_pa_all(&new_l, &new_r, &new_moves);
+	ps_split_into_buckets_double_with_reverse_rotate(&new_l, &new_r, &new_moves, 32);
+	ps_selection_sort_back_with_doubles_and_banking_low_val(&new_l, &new_r, &new_moves, 32);
+	new_moves_dlist = ps_remove_duplicates(new_moves);
+	new_number_of_moves = ft_dlist_length(new_moves_dlist);
+
+	ft_deque_destroy_list(&new_l, free);
+	ft_deque_destroy_list(&new_r, free);
+	ft_lstclear(&new_moves, free);
+	ft_dlist_destroy_list(new_moves_dlist, free);
+
+	return new_number_of_moves;
+}
+
+size_t	ps_try_500_radix_sort(t_deque *l, t_deque *r, t_list **moves)
+{
+	t_deque	new_l;
+	t_deque	new_r;
+	t_list	*new_moves;
+	t_dlist	*new_moves_dlist;
+	size_t	new_number_of_moves;
+
+	UNUSED(moves);
+	new_l = ft_deque_clone(*l, clone_heap_integer_void);
+	new_r = ft_deque_clone(*r, clone_heap_integer_void);
+	new_moves = NULL;
+	new_moves_dlist = NULL;
+
+	ps_sort_double_radix_sort_improved_with_swaps(&new_l, &new_r, &new_moves);
+	new_moves_dlist = ps_remove_duplicates(new_moves);
+	new_number_of_moves = ft_dlist_length(new_moves_dlist);
+
+	ft_deque_destroy_list(&new_l, free);
+	ft_deque_destroy_list(&new_r, free);
+	ft_lstclear(&new_moves, free);
+	ft_dlist_destroy_list(new_moves_dlist, free);
+
+	return new_number_of_moves;
+}
+
 void	ps_sort_500_elements(t_deque *l, t_deque *r, t_list **moves)
 {
-	ps_pre_split_into_buckets(l, r, moves, 4, 32);
-	ps_pa_all(l, r, moves);
-	ps_split_into_buckets_double_with_reverse_rotate(l, r, moves, 32);
-	// ps_selection_sort_back_with_doubles(l, r, moves);
-	ps_selection_sort_back_with_doubles_and_banking_low_val(l, r, moves, 32);
+	size_t	bracket_sort_count;
+	size_t	radix_sort_count;
+
+	bracket_sort_count = ps_try_500_bracket_sort(l, r, moves);
+	radix_sort_count = ps_try_500_radix_sort(l, r, moves);
+
+	if (1)
+	// if (bracket_sort_count < radix_sort_count)
+	{
+		ps_pre_split_into_buckets(l, r, moves, 4, 32);
+		ps_pa_all(l, r, moves);
+		ps_split_into_buckets_double_with_reverse_rotate(l, r, moves, 32);
+		// ps_selection_sort_back_with_doubles(l, r, moves);
+		ps_selection_sort_back_with_doubles_and_banking_low_val(l, r, moves, 32);
+	}
+	else
+	{
+		ps_sort_double_radix_sort_improved_with_swaps(l, r, moves);
+	}
 }
+
+	// first bucket	second bucket	min		ave		max
+	// 4				32				5050	5150	5250
+	// 4				28??			5000	5100	5200
+	// 4				36??			5050	5100	5150
+	// 4				16-40			others are bad
+	// 3				30				4975	5100	5150
+	// 2				20				4850	5050	5200

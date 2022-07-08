@@ -56,6 +56,7 @@ int	calculate_max_radix(int num);
 t_dlist	*ps_remove_duplicates(t_list *l);
 void	debug_print_list_of_moves_dlist(t_dlist *d);
 int	*clone_heap_integer(int *orig);
+void	*clone_heap_integer_void(void *orig);
 t_dlist	*list_to_dlist(t_list *list_head);
 
 

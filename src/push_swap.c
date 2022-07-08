@@ -88,6 +88,14 @@ int	*clone_heap_integer(int *orig)
 	return (clone);
 }
 
+void	*clone_heap_integer_void(void *orig)
+{
+	void *clone;
+
+	clone = clone_heap_integer(orig);
+	return clone;
+}
+
 t_list	*deque_to_list(t_deque *d)
 {
 	t_list *list_head;
@@ -375,7 +383,7 @@ int main(int argc, char **argv)
 	}
 	else if (ft_deque_length(l) < 50)
 	{
-		ps_sort_double_radix_sort_improved(&l, &r, &moves);
+		ps_sort_double_radix_sort_improved_with_swaps(&l, &r, &moves);
 		// ft_printf("debug: sorting 50\n");
 	}
 	else if (ft_deque_length(l) < 150)
@@ -390,7 +398,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		ps_sort_double_radix_sort_improved(&l, &r, &moves);
+		ps_sort_double_radix_sort_improved_with_swaps(&l, &r, &moves);
 		// ft_printf("debug: sorting >600\n");
 	}
 	// else
@@ -400,9 +408,10 @@ int main(int argc, char **argv)
 	// debug_print_list_of_moves(moves);
 	t_dlist	*moves_dlist;
 	moves_dlist = ps_remove_duplicates(moves);
-	moves_dlist = list_to_dlist(moves);
+	// moves_dlist = list_to_dlist(moves);
 	debug_print_list_of_moves_dlist(moves_dlist);
 	// ft_printf("list len %i    dups removed len %i\n", ft_lstsize(moves), ft_dlist_length(moves_dlist));
+	// ft_printf("len before: %i    after duplicate removal: %i\n", ft_lstsize(moves), ft_dlist_length(moves_dlist));
 	// debug_print_deque(&l);
 	// debug_print_deque(&r);
 	// ft_printf("deque l is sorted: %i\n", deque_is_sorted(&l));
