@@ -47,33 +47,56 @@ bool	str_is_valid_integer(char *str, int *dest)
 	return true;
 }
 
+void	clear_table(char **table)
+{
+	size_t	i;
+
+	i = 0;
+	while (table[i])
+	{
+		free(table[i]);
+		i++;
+	}
+	free(table);
+}
+
 t_deque	parse_input_args_to_deque(char **argv, bool *err)
 {
 	char	**input_arg;
 	int		*num;
 	bool	no_err;
 	t_deque	d;
+	char	**split_args;
+	size_t	i;
 
 	*err = false;
 	d = ft_deque_new();
 	input_arg = &argv[1];
 	while (*input_arg)
 	{
-		num = malloc(sizeof (*num) * 1);
-		if (!num)
+		split_args = ft_split(*input_arg, ' ');
+		i = 0;
+		while (split_args[i])
 		{
-			break ;
+			num = malloc(sizeof (*num) * 1);
+			if (!num)
+			{
+				break ;
+			}
+			no_err = str_is_valid_integer(split_args[i], num);
+			if (no_err == false)
+			{
+				ft_deque_destroy_list(&d, free);
+				free(num);
+				*err = true;
+				clear_table(split_args);
+				return d;
+			}
+			ft_deque_append(&d, num);
+			i++;
 		}
-		no_err = str_is_valid_integer(*input_arg, num);
-		if (no_err == false)
-		{
-			ft_deque_destroy_list(&d, free);
-			free(num);
-			*err = true;
-			return d;
-		}
+		clear_table(split_args);
 		// *num = ft_atoi(*input_arg);
-		ft_deque_append(&d, num);
 		input_arg++;
 	}
 	return d;
