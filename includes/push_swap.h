@@ -9,6 +9,12 @@
 # include "libft.h"
 # include <limits.h>
 
+typedef struct s_ps_data {
+	t_deque	l;
+	t_deque	r;
+	t_list	*m;
+}	t_ps_data;
+
 void	ps_pb(t_deque *l, t_deque *r, t_list **moves);
 void	ps_pa(t_deque *l, t_deque *r, t_list **moves);
 void	ps_ra(t_deque *l, t_deque *r, t_list **moves);
