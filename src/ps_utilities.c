@@ -11,7 +11,7 @@ int	ps_find_distance_to_value(t_deque *stack, int val)
 	{
 		if (*(int *)(elem->content) == val)
 		{
-			(break);
+			break ;
 		}
 		distance += 1;
 		elem = elem->next;
