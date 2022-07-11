@@ -1,9 +1,9 @@
 #include "deque.h"
 
-t_deque ft_deque_new()
+t_deque	ft_deque_new(void)
 {
 	t_deque	d;
-	
+
 	d.head = NULL;
 	d.tail = NULL;
 	return (d);
@@ -41,7 +41,8 @@ void	ft_deque_append(t_deque *d, void *content)
 
 void	ft_deque_appendleft(t_deque *d, void *content)
 {
-	t_dlist *node;
+	t_dlist	*node;
+
 	node = ft_dlist_new_node(content);
 	if (!node)
 	{
@@ -58,7 +59,7 @@ void	*ft_deque_pop(t_deque *d)
 {
 	t_dlist	*node;
 	void	*content;
-	t_dlist *prev_node;
+	t_dlist	*prev_node;
 
 	prev_node = d->tail->prev;
 	node = ft_dlist_pop_last(&d->tail);

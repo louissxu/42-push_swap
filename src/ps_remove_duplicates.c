@@ -5,7 +5,7 @@ t_dlist	*list_to_dlist(t_list *list_head)
 	t_dlist	*dlist_head;
 	t_list	*list_node;
 	int		*cloned_int;
-	t_dlist *new_node;
+	t_dlist	*new_node;
 
 	dlist_head = NULL;
 	list_node = list_head;
@@ -25,8 +25,7 @@ t_dlist	*list_to_dlist(t_list *list_head)
 		ft_dlist_insert_end(&dlist_head, new_node);
 		list_node = list_node->next;
 	}
-	return dlist_head;
-
+	return (dlist_head);
 }
 
 t_dlist	*ps_remove_duplicates(t_list *l)
@@ -36,8 +35,6 @@ t_dlist	*ps_remove_duplicates(t_list *l)
 	t_dlist	*prev_node;
 	t_dlist	*popped_node;
 
-
-	UNUSED (prev_node);
 	dlist_head = list_to_dlist(l);
 	node = dlist_head;
 	if (!node)

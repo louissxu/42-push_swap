@@ -17,7 +17,7 @@ bool	str_is_valid_integer(char *str, int *dest)
 		is_negative = true;
 		if (str[i] == '\0')
 		{
-			return false;
+			return (false);
 		}
 	}
 	while (str[i] == '0')
@@ -28,7 +28,7 @@ bool	str_is_valid_integer(char *str, int *dest)
 	{
 		if (ft_isinstr(str[i], "0123456789") == 0)
 		{
-			return false;
+			return (false);
 		}
 		val *= 10;
 		val += str[i] - '0';
@@ -41,10 +41,10 @@ bool	str_is_valid_integer(char *str, int *dest)
 	}
 	if (val > INT_MAX || val < INT_MIN || str[i] != '\0')
 	{
-		return false;
+		return (false);
 	}
 	*dest = (int)val;
-	return true;
+	return (true);
 }
 
 void	clear_table(char **table)
@@ -90,7 +90,7 @@ t_deque	parse_input_args_to_deque(char **argv, bool *err)
 				free(num);
 				*err = true;
 				clear_table(split_args);
-				return d;
+				return (d);
 			}
 			ft_deque_append(&d, num);
 			i++;
@@ -99,20 +99,19 @@ t_deque	parse_input_args_to_deque(char **argv, bool *err)
 		// *num = ft_atoi(*input_arg);
 		input_arg++;
 	}
-	return d;
+	return (d);
 }
 
 t_list	*deque_to_list(t_deque *d)
 {
-	t_list *list_head;
-	t_list *list_tail;
+	t_list 	*list_head;
+	t_list 	*list_tail;
 	t_dlist *deque_node_pointer;
 	void	*cloned_content;
 
 	list_head = NULL;
 	list_tail = NULL;
 	deque_node_pointer = d->head;
-
 	while (deque_node_pointer)
 	{
 		cloned_content = clone_heap_integer(deque_node_pointer->content);
@@ -133,28 +132,26 @@ bool	deque_has_duplicates(t_deque *d)
 
 	l = deque_to_list(d);
 	list_sort_bubble_sort(l);
-
 	node = l;
 	if (node == NULL)
 	{
-		return false;
+		return (false);
 	}
-
 	if (node->next == NULL)
 	{
-		return false;
+		return (false);
 	}
 	while (node && node->next)
 	{
 		if (*(int *)node->content == *(int *)node->next->content)
 		{
 			ft_lstclear(&l, free);
-			return true;
+			return (true);
 		}
 		node = node->next;
 	}
 	ft_lstclear(&l, free);
-	return false;
+	return (false);
 }
 
 bool	deque_is_sorted(t_deque *d)
@@ -164,11 +161,11 @@ bool	deque_is_sorted(t_deque *d)
 	node = d->head;
 	if (node == NULL)
 	{
-		return true;
+		return (true);
 	}
 	if (node->next == NULL)
 	{
-		return true;
+		return (true);
 	}
 	while (node && node->next)
 	{
