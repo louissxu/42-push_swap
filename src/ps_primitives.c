@@ -26,7 +26,6 @@ void	ps_ra(t_deque *l, t_deque *r, t_list **moves)
 	ft_deque_append(l, tmp);
 	ft_lstadd_back(moves, ft_lstnew(ft_strdup("ra")));
 	UNUSED(r);
-	
 }
 
 void	ps_rra(t_deque *l, t_deque *r, t_list **moves)

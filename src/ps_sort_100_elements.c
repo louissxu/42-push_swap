@@ -3,11 +3,9 @@
 void	ps_selection_sort_into_brackets_twin_sided(t_deque *l, t_deque *r, t_list **moves, int num_groups)
 {
 	int	group_size;
-	// int	high_high;
 	int	high_low;
 	int	low_high;
-	// int low_low;
-	int i;
+	int	i;
 
 	// Divide but round up
 	// Ref: https://stackoverflow.com/a/4846569/9160572

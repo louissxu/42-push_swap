@@ -10,17 +10,13 @@ void	ps_pre_split_into_buckets(t_deque *l, t_deque *r, t_list **moves, int num_p
 
 	group_size = (ft_deque_length(*l) + num_groups - 1) / num_groups;
 	groups_per_pre_group = (num_groups + num_pre_groups - 1) / num_pre_groups;
-
 	high_cut = ft_deque_length(*l) - (group_size * groups_per_pre_group / 2);
-	// low_cut = group_size * groups_per_pre_group / 2;
 	low_cut = high_cut;
 	while (low_cut > 0)
 	{
 		low_cut -= group_size * groups_per_pre_group / 2;
 	}
 	low_cut += group_size * groups_per_pre_group / 2;
-
-
 	while (l->head)
 	{
 		i = ft_deque_length(*l);
@@ -93,7 +89,6 @@ int	ps_is_forward_closer_to_value_range(t_deque *stack, int low, int high)
 		reverse = reverse->prev;
 	}
 	return (1);
-	
 }
 
 void	ps_split_into_buckets_double_with_reverse_rotate(t_deque *l, t_deque *r, t_list **moves, int num_groups)
@@ -105,7 +100,6 @@ void	ps_split_into_buckets_double_with_reverse_rotate(t_deque *l, t_deque *r, t_
 	group_size = (ft_deque_length(*l) + num_groups - 1) / num_groups;
 	high_high = (num_groups / 2 * group_size) + group_size;
 	low_low = (num_groups / 2 * group_size) - group_size;
-
 	while (l->head)
 	{
 		while (ps_deque_contains_value_in_range(l, low_low, high_high) == 1)
@@ -139,10 +133,11 @@ void	ps_split_into_buckets_double_with_reverse_rotate(t_deque *l, t_deque *r, t_
 void	ps_pa_val_optimal_with_banking(t_deque *l, t_deque *r, t_list **moves, int current_target, int *low_target)
 {
 	int	distance_target;
+
 	if (*(int *)r->head->content == current_target)
 	{
 		ps_pa(l, r, moves);
-		return;
+		return ;
 	}
 	distance_target = ps_find_distance_to_value(r, current_target);
 	while (*(int *)r->head->content != current_target)
@@ -181,7 +176,6 @@ void	ps_selection_sort_back_with_doubles_and_banking_low_val(t_deque *l, t_deque
 
 	group_size = (ft_deque_length(*r) + num_groups - 1) / num_groups;
 	bracket_low_bound = ft_deque_length(*r) - group_size;
-
 	current_target = ft_deque_length(*r) - 1;
 	low_target = bracket_low_bound;
 	while (r->head)
@@ -228,7 +222,7 @@ void	ps_selection_sort_back_with_doubles_and_banking_low_val(t_deque *l, t_deque
 t_deque	ft_deque_clone(t_deque d, void *(clone_element)(void *))
 {
 	t_deque	cloned_deque;
-	t_dlist *d_node;
+	t_dlist	*d_node;
 
 	cloned_deque = ft_deque_new();
 	d_node = d.head;
@@ -237,7 +231,7 @@ t_deque	ft_deque_clone(t_deque d, void *(clone_element)(void *))
 		ft_deque_append(&cloned_deque, clone_element(d_node->content));
 		d_node = d_node->next;
 	}
-	return cloned_deque;
+	return (cloned_deque);
 }
 
 size_t	ps_try_500_bracket_sort(t_deque *l, t_deque *r, t_list **moves)

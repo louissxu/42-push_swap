@@ -18,7 +18,7 @@ int	find_distance_from_val(t_deque *stack, int val)
 		stack_node = stack_node->next;
 		if (stack_node == NULL)
 		{
-			break;
+			break ;
 		}
 	}
 	if (ft_deque_length(*stack) - distance < (size_t)distance)
@@ -31,7 +31,7 @@ int	find_distance_from_val(t_deque *stack, int val)
 // Probably remove this. This is a duplicate
 void	ps_pb_val(t_deque *l, t_deque *r, t_list **moves, int val)
 {
-	int distance;
+	int	distance;
 
 	distance = find_distance_from_val(l, val);
 	while (distance > 0)

@@ -2,9 +2,9 @@
 
 void	ps_sort_double_radix_sort_improved(t_deque *l, t_deque *r, t_list **moves)
 {
-	int radix;
+	int	radix;
 	int	max_radix;
-	int i;
+	int	i;
 	int	r_first_buffer_length;
 
 	radix = 0;
@@ -16,7 +16,7 @@ void	ps_sort_double_radix_sort_improved(t_deque *l, t_deque *r, t_list **moves)
 			i = ft_deque_length(*l);
 			while (i > 0)
 			{
-				if (*(int *)(l->head->content) / ft_pow(2, radix + 1) % 2  == 0)
+				if (*(int *)(l->head->content) / ft_pow(2, radix + 1) % 2 == 0)
 				{
 					ps_pb(l, r, moves);
 				}
@@ -30,7 +30,7 @@ void	ps_sort_double_radix_sort_improved(t_deque *l, t_deque *r, t_list **moves)
 			i = ft_deque_length(*l);
 			while (i > 0)
 			{
-				if (*(int *)(l->head->content) / ft_pow(2, radix) % 2  == 0)
+				if (*(int *)(l->head->content) / ft_pow(2, radix) % 2 == 0)
 				{
 					ps_pb(l, r, moves);
 				}
@@ -72,7 +72,7 @@ void	ps_sort_double_radix_sort_improved(t_deque *l, t_deque *r, t_list **moves)
 			i = ft_deque_length(*l);
 			while (i > 0)
 			{
-				if (*(int *)(l->head->content) / ft_pow(2, radix) % 2  == 0)
+				if (*(int *)(l->head->content) / ft_pow(2, radix) % 2 == 0)
 				{
 					ps_pb(l, r, moves);
 				}

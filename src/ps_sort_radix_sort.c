@@ -3,6 +3,7 @@
 int	is_sorted(t_deque *stack)
 {
 	t_dlist	*node;
+
 	if (ft_deque_length(*stack) <= 1)
 	{
 		return (1);
@@ -47,7 +48,7 @@ int	ft_pow(int x, int y)
 void	ps_sort_radix_sort(t_deque *l, t_deque *r, t_list **moves)
 {
 	int	radix;
-	int i;
+	int	i;
 	int	max_i;
 
 	radix = 0;

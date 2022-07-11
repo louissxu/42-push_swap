@@ -1,11 +1,10 @@
 #include "push_swap.h"
 
-
 void	ps_pa_with_swap(t_deque *l, t_deque *r, t_list **moves)
 {
 	int	top_number;
 	int	next_number;
-	
+
 	ps_pa(l, r, moves);
 	if (ft_deque_length(*l) <= 1)
 	{
@@ -20,7 +19,6 @@ void	ps_pa_with_swap(t_deque *l, t_deque *r, t_list **moves)
 			ps_sa(l, r, moves);
 		}
 	}
-
 }
 
 void	ps_cycle_stack_and_swap(t_deque *l, t_deque *r, t_list **moves)
@@ -37,7 +35,7 @@ void	ps_cycle_stack_and_swap(t_deque *l, t_deque *r, t_list **moves)
 	while (i > 0)
 	{
 		top_number = *(int *)(l->head->content);
-		next_number= *(int *)(l->head->next->content);
+		next_number = *(int *)(l->head->next->content);
 		if (top_number / 2 == next_number / 2)
 		{
 			if (top_number % 2 > next_number % 2)
@@ -59,19 +57,15 @@ void	ps_cycle_stack_and_swap(t_deque *l, t_deque *r, t_list **moves)
 
 void	ps_sa_if_helpful(t_deque *l, t_deque *r, t_list **moves)
 {
-	int top_number;
-	int next_number;
-	// int	bottom_number;
+	int	top_number;
+	int	next_number;
 
 	if (ft_deque_length(*l) <= 1)
 	{
 		return ;
 	}
-
 	top_number = *(int *)(l->head->content);
 	next_number = *(int *)(l->head->next->content);
-	// bottom_number = *(int *)(l->tail->content);
-
 	if (top_number / 2 == next_number / 2)
 	{
 		if (top_number % 2 > next_number % 2)
@@ -79,15 +73,6 @@ void	ps_sa_if_helpful(t_deque *l, t_deque *r, t_list **moves)
 			ps_sa(l, r, moves);
 		}
 	}
-	// if (bottom_number / 2 == next_number / 2)
-	// {
-	// 	if (bottom_number % 2 > top_number % 2)
-	// 	{
-	// 		ps_rra(l, r, moves);
-	// 		ps_sa(l, r, moves);
-	// 		ps_ra(l, r, moves);
-	// 	}
-	// }
 }
 
 void	ps_sa_bottom_if_helpful(t_deque *l, t_deque *r, t_list **moves)
@@ -99,10 +84,8 @@ void	ps_sa_bottom_if_helpful(t_deque *l, t_deque *r, t_list **moves)
 	{
 		return ;
 	}
-
 	bottom_number = *(int *)(l->tail->content);
 	above_bottom_number = *(int *)(l->tail->prev->content);
-
 	if (bottom_number / 2 == above_bottom_number / 2)
 	{
 		if (above_bottom_number % 2 > bottom_number % 2)
@@ -118,9 +101,9 @@ void	ps_sa_bottom_if_helpful(t_deque *l, t_deque *r, t_list **moves)
 
 void	ps_sort_double_radix_sort_improved_with_swaps(t_deque *l, t_deque *r, t_list **moves)
 {
-	int radix;
+	int	radix;
 	int	max_radix;
-	int i;
+	int	i;
 	int	r_first_buffer_length;
 
 	radix = 1;
@@ -132,7 +115,7 @@ void	ps_sort_double_radix_sort_improved_with_swaps(t_deque *l, t_deque *r, t_lis
 			i = ft_deque_length(*l);
 			while (i > 0)
 			{
-				if (*(int *)(l->head->content) / ft_pow(2, radix + 1) % 2  == 0)
+				if (*(int *)(l->head->content) / ft_pow(2, radix + 1) % 2 == 0)
 				{
 					ps_pb(l, r, moves);
 				}
@@ -146,7 +129,7 @@ void	ps_sort_double_radix_sort_improved_with_swaps(t_deque *l, t_deque *r, t_lis
 			i = ft_deque_length(*l);
 			while (i > 0)
 			{
-				if (*(int *)(l->head->content) / ft_pow(2, radix) % 2  == 0)
+				if (*(int *)(l->head->content) / ft_pow(2, radix) % 2 == 0)
 				{
 					ps_pb(l, r, moves);
 				}
@@ -194,7 +177,7 @@ void	ps_sort_double_radix_sort_improved_with_swaps(t_deque *l, t_deque *r, t_lis
 			i = ft_deque_length(*l);
 			while (i > 0)
 			{
-				if (*(int *)(l->head->content) / ft_pow(2, radix) % 2  == 0)
+				if (*(int *)(l->head->content) / ft_pow(2, radix) % 2 == 0)
 				{
 					ps_sa_bottom_if_helpful(l, r, moves);
 					ps_pb(l, r, moves);

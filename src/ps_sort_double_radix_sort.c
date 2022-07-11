@@ -2,12 +2,12 @@
 
 int	calculate_max_radix(int num)
 {
-	int max_radix;
+	int	max_radix;
 
 	max_radix = 0;
 	if (num < 0)
 	{
-		return 0;
+		return (0);
 	}
 	while (num > ft_pow(2, max_radix))
 	{
@@ -18,9 +18,9 @@ int	calculate_max_radix(int num)
 
 void	ps_sort_double_radix_sort(t_deque *l, t_deque *r, t_list **moves)
 {
-	int radix;
+	int	radix;
 	int	max_radix;
-	int i;
+	int	i;
 	int	max_i;
 	int	r_first_buffer_length;
 
@@ -32,7 +32,7 @@ void	ps_sort_double_radix_sort(t_deque *l, t_deque *r, t_list **moves)
 		i = 0;
 		while (i < max_i)
 		{
-			if (*(int *)(l->head->content) / ft_pow(2, radix) % 2  == 0)
+			if (*(int *)(l->head->content) / ft_pow(2, radix) % 2 == 0)
 			{
 				ps_pb(l, r, moves);
 			}
@@ -50,7 +50,7 @@ void	ps_sort_double_radix_sort(t_deque *l, t_deque *r, t_list **moves)
 			i = 0;
 			while (i < max_i)
 			{
-				if (*(int *)(l->head->content) / ft_pow(2, radix) % 2  == 0)
+				if (*(int *)(l->head->content) / ft_pow(2, radix) % 2 == 0)
 				{
 					ps_pb(l, r, moves);
 				}

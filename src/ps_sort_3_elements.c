@@ -28,7 +28,6 @@ void	ps_sort_3_elements(t_deque *l, t_deque *r, t_list **moves)
 
 	l_clone = clone_deque(l);
 	normalise_in_place(&l_clone);
-
 	if (check_if_first_three_deque_nodes_match(&l_clone, 0, 1, 2) == 1)
 		;
 	else if (check_if_first_three_deque_nodes_match(&l_clone, 1, 0, 2) == 1)
