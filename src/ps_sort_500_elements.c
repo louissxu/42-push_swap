@@ -8,6 +8,7 @@ void	ps_pre_split_into_buckets(t_deque *l, t_deque *r, t_list **moves, int num_p
 	int	low_cut;
 	int	i;
 
+	// Clean up. this should be able to be done with math rather than walking up and down the block sizes
 	group_size = (ft_deque_length(*l) + num_groups - 1) / num_groups;
 	groups_per_pre_group = (num_groups + num_pre_groups - 1) / num_pre_groups;
 	high_cut = ft_deque_length(*l) - (group_size * groups_per_pre_group / 2);
@@ -29,6 +30,7 @@ void	ps_pre_split_into_buckets(t_deque *l, t_deque *r, t_list **moves, int num_p
 		i = ft_deque_length(*l);
 		while (i > 0)
 		{
+			// Check this value. Should it be <= or < and >= or >. I cant remember if it should include or not the edges
 			if (*(int *)(l->head->content) > low_cut && (*(int *)(l->head->content) <= high_cut))
 			{
 				ps_pb(l, r, moves);
