@@ -17,12 +17,19 @@ void	ps_pre_split_into_buckets(t_deque *l, t_deque *r, t_list **moves, int num_p
 		low_cut -= group_size * groups_per_pre_group / 2;
 	}
 	low_cut += group_size * groups_per_pre_group / 2;
+	while (low_cut < high_cut)
+	{
+		low_cut += group_size * groups_per_pre_group / 2;
+		high_cut -= group_size * groups_per_pre_group / 2;
+	}
+	low_cut -= group_size * groups_per_pre_group / 2;
+	high_cut += group_size * groups_per_pre_group / 2;
 	while (l->head)
 	{
 		i = ft_deque_length(*l);
 		while (i > 0)
 		{
-			if (*(int *)(l->head->content) <= low_cut || (*(int *)(l->head->content) >= high_cut))
+			if (*(int *)(l->head->content) > low_cut && (*(int *)(l->head->content) <= high_cut))
 			{
 				ps_pb(l, r, moves);
 			}
@@ -32,8 +39,8 @@ void	ps_pre_split_into_buckets(t_deque *l, t_deque *r, t_list **moves, int num_p
 			}
 			i--;
 		}
-		high_cut -= group_size * groups_per_pre_group / 2;
-		low_cut += group_size * groups_per_pre_group / 2;
+		high_cut += group_size * groups_per_pre_group / 2;
+		low_cut -= group_size * groups_per_pre_group / 2;
 	}
 }
 
