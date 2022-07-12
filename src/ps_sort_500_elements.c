@@ -1,6 +1,7 @@
 #include "push_swap.h"
 
-void	ps_pre_split_into_buckets(t_deque *l, t_deque *r, t_list **moves, int num_pre_groups, int num_groups)
+// void	ps_pre_split_into_buckets(t_deque *l, t_deque *r, t_list **moves, int num_pre_groups, int num_groups)
+void	ps_pre_split_into_buckets(t_ps_data *d, int num_pre_groups, int num_groups)
 {
 	int	group_size;
 	int	groups_per_pre_group;
@@ -9,9 +10,9 @@ void	ps_pre_split_into_buckets(t_deque *l, t_deque *r, t_list **moves, int num_p
 	int	i;
 
 	// Clean up. this should be able to be done with math rather than walking up and down the block sizes
-	group_size = (ft_deque_length(*l) + num_groups - 1) / num_groups;
+	group_size = (ft_deque_length(d->l) + num_groups - 1) / num_groups;
 	groups_per_pre_group = (num_groups + num_pre_groups - 1) / num_pre_groups;
-	high_cut = ft_deque_length(*l) - (group_size * groups_per_pre_group / 2);
+	high_cut = ft_deque_length(d->l) - (group_size * groups_per_pre_group / 2);
 	low_cut = high_cut;
 	while (low_cut > 0)
 	{
@@ -25,19 +26,19 @@ void	ps_pre_split_into_buckets(t_deque *l, t_deque *r, t_list **moves, int num_p
 	}
 	low_cut -= group_size * groups_per_pre_group / 2;
 	high_cut += group_size * groups_per_pre_group / 2;
-	while (l->head)
+	while (d->l.head)
 	{
-		i = ft_deque_length(*l);
+		i = ft_deque_length(d->l);
 		while (i > 0)
 		{
 			// Check this value. Should it be <= or < and >= or >. I cant remember if it should include or not the edges
-			if (*(int *)(l->head->content) > low_cut && (*(int *)(l->head->content) <= high_cut))
+			if (*(int *)(d->l.head->content) > low_cut && (*(int *)(d->l.head->content) <= high_cut))
 			{
-				ps_pb(l, r, moves);
+				ps_pb(&d->l, &d->r, &d->m);
 			}
 			else
 			{
-				ps_ra(l, r, moves);
+				ps_ra(&d->l, &d->r, &d->m);
 			}
 			i--;
 		}
@@ -100,37 +101,37 @@ int	ps_is_forward_closer_to_value_range(t_deque *stack, int low, int high)
 	return (1);
 }
 
-void	ps_split_into_buckets_double_with_reverse_rotate(t_deque *l, t_deque *r, t_list **moves, int num_groups)
+void	ps_split_into_buckets_double_with_reverse_rotate(t_ps_data *d, int num_groups)
 {
 	int	group_size;
 	int	high_high;
 	int	low_low;
 
-	group_size = (ft_deque_length(*l) + num_groups - 1) / num_groups;
+	group_size = (ft_deque_length(d->l) + num_groups - 1) / num_groups;
 	high_high = (num_groups / 2 * group_size) + group_size;
 	low_low = (num_groups / 2 * group_size) - group_size;
-	while (l->head)
+	while (d->l.head)
 	{
-		while (ps_deque_contains_value_in_range(l, low_low, high_high) == 1)
+		while (ps_deque_contains_value_in_range(&d->l, low_low, high_high) == 1)
 		{
-			if (high_high - group_size <= *(int *)(l->head->content) && *(int *)(l->head->content) <= high_high)
+			if (high_high - group_size <= *(int *)(d->l.head->content) && *(int *)(d->l.head->content) <= high_high)
 			{
-				ps_pb(l, r, moves);
+				ps_pb(&d->l, &d->r, &d->m);
 			}
-			else if (low_low <= *(int *)(l->head->content) && *(int *)(l->head->content) <= low_low + group_size)
+			else if (low_low <= *(int *)(d->l.head->content) && *(int *)(d->l.head->content) <= low_low + group_size)
 			{
-				ps_pb(l, r, moves);
-				ps_rb(l, r, moves);
+				ps_pb(&d->l, &d->r, &d->m);
+				ps_rb(&d->l, &d->r, &d->m);
 			}
 			else
 			{
-				if (ps_is_forward_closer_to_value_range(l, low_low, high_high))
+				if (ps_is_forward_closer_to_value_range(&d->l, low_low, high_high))
 				{
-					ps_ra(l, r, moves);
+					ps_ra(&d->l, &d->r, &d->m);
 				}
 				else
 				{
-					ps_rra(l, r, moves);
+					ps_rra(&d->l, &d->r, &d->m);
 				}
 			}
 		}
@@ -175,7 +176,7 @@ void	ps_pa_val_optimal_with_banking(t_deque *l, t_deque *r, t_list **moves, int 
 	ps_pa(l, r, moves);
 }
 
-void	ps_selection_sort_back_with_doubles_and_banking_low_val(t_deque *l, t_deque *r, t_list **moves, int num_groups)
+void	ps_selection_sort_back_with_doubles_and_banking_low_val(t_ps_data *d, int num_groups)
 {
 	int	group_size;
 	int	bracket_low_bound;
@@ -183,11 +184,11 @@ void	ps_selection_sort_back_with_doubles_and_banking_low_val(t_deque *l, t_deque
 	int	next_target;
 	int	low_target;
 
-	group_size = (ft_deque_length(*r) + num_groups - 1) / num_groups;
-	bracket_low_bound = ft_deque_length(*r) - group_size;
-	current_target = ft_deque_length(*r) - 1;
+	group_size = (ft_deque_length(d->r) + num_groups - 1) / num_groups;
+	bracket_low_bound = ft_deque_length(d->r) - group_size;
+	current_target = ft_deque_length(d->r) - 1;
 	low_target = bracket_low_bound;
-	while (r->head)
+	while (d->r.head)
 	{
 		next_target = current_target - 1;
 		if (next_target < 0)
@@ -198,23 +199,23 @@ void	ps_selection_sort_back_with_doubles_and_banking_low_val(t_deque *l, t_deque
 		// {
 		// 	bracket_low_bound = 0;
 		// }
-		if (ft_math_abs(ps_find_distance_to_value(r, current_target)) <= ft_math_abs(ps_find_distance_to_value(r, next_target)) || current_target == next_target || next_target < low_target)
+		if (ft_math_abs(ps_find_distance_to_value(&d->r, current_target)) <= ft_math_abs(ps_find_distance_to_value(&d->r, next_target)) || current_target == next_target || next_target < low_target)
 		{
-			ps_pa_val_optimal_with_banking(l, r, moves, current_target, &low_target);
+			ps_pa_val_optimal_with_banking(&d->l, &d->r, &d->m, current_target, &low_target);
 			current_target -= 1;
 		}
 		else
 		{
-			ps_pa_val_optimal_with_banking(l, r, moves, next_target, &low_target);
-			ps_pa_val_optimal_with_banking(l, r, moves, current_target, &low_target);
-			ps_sa(l, r, moves);
+			ps_pa_val_optimal_with_banking(&d->l, &d->r, &d->m, next_target, &low_target);
+			ps_pa_val_optimal_with_banking(&d->l, &d->r, &d->m, current_target, &low_target);
+			ps_sa(&d->l, &d->r, &d->m);
 			current_target -= 2;
 		}
 		if (low_target > current_target)
 		{
 			while (low_target > bracket_low_bound)
 			{
-				ps_rra(l, r, moves);
+				ps_rra(&d->l, &d->r, &d->m);
 				low_target -= 1;
 			}
 			current_target = bracket_low_bound - 1;
@@ -243,30 +244,28 @@ t_deque	ft_deque_clone(t_deque d, void *(clone_element)(void *))
 	return (cloned_deque);
 }
 
-size_t	ps_try_500_bracket_sort(t_deque *l, t_deque *r, t_list **moves)
+size_t	ps_try_500_bracket_sort(t_ps_data *d)
 {
-	t_deque	new_l;
-	t_deque	new_r;
-	t_list	*new_moves;
 	t_dlist	*new_moves_dlist;
 	size_t	new_number_of_moves;
 
-	UNUSED(moves);
-	new_l = ft_deque_clone(*l, clone_heap_integer_void);
-	new_r = ft_deque_clone(*r, clone_heap_integer_void);
-	new_moves = NULL;
+	t_ps_data	new_d;
+
+	new_d.l = ft_deque_clone(d->l, clone_heap_integer_void);
+	new_d.r = ft_deque_clone(d->r, clone_heap_integer_void);
+	new_d.m = NULL;
 	new_moves_dlist = NULL;
 
-	ps_pre_split_into_buckets(&new_l, &new_r, &new_moves, 4, 32);
-	ps_pa_all(&new_l, &new_r, &new_moves);
-	ps_split_into_buckets_double_with_reverse_rotate(&new_l, &new_r, &new_moves, 32);
-	ps_selection_sort_back_with_doubles_and_banking_low_val(&new_l, &new_r, &new_moves, 32);
-	new_moves_dlist = ps_remove_duplicates(new_moves);
+	ps_pre_split_into_buckets(&new_d, 4, 32);
+	ps_pa_all(&new_d.l, &new_d.r, &new_d.m);
+	ps_split_into_buckets_double_with_reverse_rotate(&new_d, 32);
+	ps_selection_sort_back_with_doubles_and_banking_low_val(&new_d, 32);
+	new_moves_dlist = ps_remove_duplicates(new_d.m);
 	new_number_of_moves = ft_dlist_length(new_moves_dlist);
 
-	ft_deque_destroy_list(&new_l, free);
-	ft_deque_destroy_list(&new_r, free);
-	ft_lstclear(&new_moves, free);
+	ft_deque_destroy_list(&new_d.l, free);
+	ft_deque_destroy_list(&new_d.r, free);
+	ft_lstclear(&new_d.m, free);
 	ft_dlist_destroy_list(new_moves_dlist, free);
 
 	return new_number_of_moves;
@@ -298,26 +297,27 @@ size_t	ps_try_500_radix_sort(t_deque *l, t_deque *r, t_list **moves)
 	return new_number_of_moves;
 }
 
-void	ps_sort_500_elements(t_deque *l, t_deque *r, t_list **moves)
+void	ps_sort_500_elements(t_ps_data *d)
 {
 	size_t	bracket_sort_count;
 	size_t	radix_sort_count;
 
-	bracket_sort_count = ps_try_500_bracket_sort(l, r, moves);
-	radix_sort_count = ps_try_500_radix_sort(l, r, moves);
+	bracket_sort_count = ps_try_500_bracket_sort(d);
+	radix_sort_count = ps_try_500_radix_sort(&d->l, &d->r, &d->m);
 
-	if (1)
-	// if (bracket_sort_count < radix_sort_count)
+	// if (1)
+	if (bracket_sort_count < radix_sort_count)
 	{
-		ps_pre_split_into_buckets(l, r, moves, 4, 32);
-		ps_pa_all(l, r, moves);
-		ps_split_into_buckets_double_with_reverse_rotate(l, r, moves, 32);
+		ps_pre_split_into_buckets(d, 4, 32);
+		// ps_pre_split_into_buckets(&d->l, &d->r, &d->m, 4, 32);
+		ps_pa_all(&d->l, &d->r, &d->m);
+		ps_split_into_buckets_double_with_reverse_rotate(d, 32);
 		// ps_selection_sort_back_with_doubles(l, r, moves);
-		ps_selection_sort_back_with_doubles_and_banking_low_val(l, r, moves, 32);
+		ps_selection_sort_back_with_doubles_and_banking_low_val(d, 32);
 	}
 	else
 	{
-		ps_sort_double_radix_sort_improved_with_swaps(l, r, moves);
+		ps_sort_double_radix_sort_improved_with_swaps(&d->l, &d->r, &d->m);
 	}
 }
 
