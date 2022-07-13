@@ -45,32 +45,33 @@ int	ft_pow(int x, int y)
 	return (result);
 }
 
-void	ps_sort_radix_sort(t_deque *l, t_deque *r, t_list **moves)
+// void	ps_sort_radix_sort(t_deque *l, t_deque *r, t_list **moves)
+void	ps_sort_radix_sort(t_ps_data *d)
 {
 	int	radix;
 	int	i;
 	int	max_i;
 
 	radix = 0;
-	while (is_sorted(l) == 0)
+	while (is_sorted(&d->l) == 0)
 	{
 		i = 0;
-		max_i = ft_deque_length(*l);
+		max_i = ft_deque_length(d->l);
 		while (i < max_i)
 		{
-			if (*(int *)(l->head->content) / ft_pow(2, radix) % 2 == 0)
+			if (*(int *)(d->l.head->content) / ft_pow(2, radix) % 2 == 0)
 			{
-				ps_pb(l, r, moves);
+				ps_pb(&d->l, &d->r, &d->m);
 			}
 			else
 			{
-				ps_ra(l, r, moves);
+				ps_ra(&d->l, &d->r, &d->m);
 			}
 			i++;
 		}
-		while (r->head)
+		while (d->r.head)
 		{
-			ps_pa(l, r, moves);
+			ps_pa(&d->l, &d->r, &d->m);
 		}
 		radix++;
 	}
