@@ -45,32 +45,32 @@ int	main(int argc, char **argv)
 	}
 	else if (ft_deque_length(data.l) == 2)
 	{
-		ps_sort_2_elements(&data.l, &data.r, &data.m);
+		ps_sort_2_elements(&data);
 		// ft_printf("debug: sorting 2\n");
 	}
 	else if (ft_deque_length(data.l) == 3)
 	{
-		ps_sort_3_elements(&data.l, &data.r, &data.m);
+		ps_sort_3_elements(&data);
 		// ft_printf("debug: sorting 3\n");
 	}
 	else if (ft_deque_length(data.l) == 4)
 	{
-		ps_sort_4_elements(&data.l, &data.r, &data.m);
+		ps_sort_4_elements(&data);
 		// ft_printf("debug: sorting 4\n");
 	}
 	else if (ft_deque_length(data.l) == 5)
 	{
-		ps_sort_5_elements(&data.l, &data.r, &data.m);
+		ps_sort_5_elements(&data);
 		// ft_printf("debug: sorting 5\n");
 	}
 	else if (ft_deque_length(data.l) < 50)
 	{
-		ps_sort_double_radix_sort_improved_with_swaps(&data.l, &data.r, &data.m);
+		ps_sort_double_radix_sort_improved_with_swaps(&data);
 		// ft_printf("debug: sorting 50\n");
 	}
 	else if (ft_deque_length(data.l) < 150)
 	{
-		ps_sort_100_elements(&data.l, &data.r, &data.m);
+		ps_sort_100_elements(&data);
 		// ft_printf("debug: sorting 150\n");
 	}
 	else if (ft_deque_length(data.l) < 600)
@@ -80,7 +80,7 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		ps_sort_double_radix_sort_improved_with_swaps(&data.l, &data.r, &data.m);
+		ps_sort_double_radix_sort_improved_with_swaps(&data);
 		// ft_printf("debug: sorting >600\n");
 	}
 	// else

@@ -45,7 +45,7 @@ int	ft_pow(int x, int y)
 	return (result);
 }
 
-// void	ps_sort_radix_sort(t_deque *l, t_deque *r, t_list **moves)
+// void	ps_sort_radix_sort(t_ps_data *d)
 void	ps_sort_radix_sort(t_ps_data *d)
 {
 	int	radix;
@@ -61,17 +61,17 @@ void	ps_sort_radix_sort(t_ps_data *d)
 		{
 			if (*(int *)(d->l.head->content) / ft_pow(2, radix) % 2 == 0)
 			{
-				ps_pb(&d->l, &d->r, &d->m);
+				ps_pb(d);
 			}
 			else
 			{
-				ps_ra(&d->l, &d->r, &d->m);
+				ps_ra(d);
 			}
 			i++;
 		}
 		while (d->r.head)
 		{
-			ps_pa(&d->l, &d->r, &d->m);
+			ps_pa(d);
 		}
 		radix++;
 	}

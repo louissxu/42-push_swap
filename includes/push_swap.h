@@ -15,16 +15,16 @@ typedef struct s_ps_data {
 	t_list	*m;
 }	t_ps_data;
 
-void	ps_pb(t_deque *l, t_deque *r, t_list **moves);
-void	ps_pa(t_deque *l, t_deque *r, t_list **moves);
-void	ps_ra(t_deque *l, t_deque *r, t_list **moves);
-void	ps_rra(t_deque *l, t_deque *r, t_list **moves);
-void	ps_rb(t_deque *l, t_deque *r, t_list **moves);
-void	ps_rrb(t_deque *l, t_deque *r, t_list **moves);
-void	ps_sa(t_deque *l, t_deque *r, t_list **moves);
-void	ps_sb(t_deque *l, t_deque *r, t_list **moves);
-void	ps_rr(t_deque *l, t_deque *r, t_list **moves);
-void	ps_rrr(t_deque *l, t_deque *r, t_list **moves);
+void	ps_pb(t_ps_data *d);
+void	ps_pa(t_ps_data *d);
+void	ps_ra(t_ps_data *d);
+void	ps_rra(t_ps_data *d);
+void	ps_rb(t_ps_data *d);
+void	ps_rrb(t_ps_data *d);
+void	ps_sa(t_ps_data *d);
+void	ps_sb(t_ps_data *d);
+void	ps_rr(t_ps_data *d);
+void	ps_rrr(t_ps_data *d);
 
 void	debug_print_list(t_list *node);
 void	debug_print_list_of_moves(t_list *moves_node);
@@ -33,23 +33,24 @@ void	debug_print_deque(t_deque *d);
 
 long	ft_intcmp(const	int *i1, int *i2);
 
-void	ps_sort_2_elements(t_deque *l, t_deque *r, t_list **moves);
-void	ps_sort_3_elements(t_deque *l, t_deque *r, t_list **moves);
-void	ps_sort_4_elements(t_deque *l, t_deque *r, t_list **moves);
-void	ps_sort_5_elements(t_deque *l, t_deque *r, t_list **moves);
-void	ps_sort_100_elements(t_deque *l, t_deque *r, t_list **moves);
+void	ps_sort_2_elements(t_ps_data *d);
+void	ps_sort_3_elements(t_ps_data *d);
+void	ps_sort_4_elements(t_ps_data *d);
+void	ps_sort_5_elements(t_ps_data *d);
+void	ps_sort_100_elements(t_ps_data *d);
 void	ps_sort_500_elements(t_ps_data *d);
 void	ps_sort_radix_sort(t_ps_data *d);
-void	ps_sort_double_radix_sort(t_deque *l, t_deque *r, t_list **moves);
-void	ps_sort_double_radix_sort_improved(t_deque *l, t_deque *r, t_list **moves);
-void	ps_sort_double_radix_sort_improved_with_swaps(t_deque *l, t_deque *r, t_list **moves);
+void	ps_sort_double_radix_sort(t_ps_data *d);
+void	ps_sort_double_radix_sort_improved(t_ps_data *d);
+void	ps_sort_double_radix_sort_improved_with_swaps(t_ps_data *d);
 
 // PS derived
-void	ps_pa_value_optimal(t_deque *l, t_deque *r, t_list **moves, int value);
-void	ps_pa_all(t_deque *l, t_deque *r, t_list **moves);
+void	ps_pa_value_optimal(t_ps_data *d, int value);
+void	ps_pa_all(t_ps_data *d);
+void	ps_pb_value_optimal(t_ps_data *d, int value);
 
 // PS advanced
-void	ps_selection_sort_back_with_doubles(t_deque *l, t_deque *r, t_list **moves);
+void	ps_selection_sort_back_with_doubles(t_ps_data *d);
 
 // PS utilities
 int	ps_find_distance_to_value(t_deque *stack, int val);
@@ -70,7 +71,7 @@ t_dlist	*list_to_dlist(t_list *list_head);
 
 
 int	find_distance_from_val(t_deque *stack, int val);
-void	ps_pb_val(t_deque *l, t_deque *r, t_list **moves, int val);
+void	ps_pb_val(t_ps_data *d, int val);
 
 // Shared functions needed for checker
 t_deque	parse_input_args_to_deque(char **argv, bool *err);

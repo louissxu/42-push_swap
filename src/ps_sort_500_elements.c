@@ -34,11 +34,11 @@ void	ps_pre_split_into_buckets(t_ps_data *d, int num_pre_groups, int num_groups)
 			// Check this value. Should it be <= or < and >= or >. I cant remember if it should include or not the edges
 			if (*(int *)(d->l.head->content) > low_cut && (*(int *)(d->l.head->content) <= high_cut))
 			{
-				ps_pb(&d->l, &d->r, &d->m);
+				ps_pb(d);
 			}
 			else
 			{
-				ps_ra(&d->l, &d->r, &d->m);
+				ps_ra(d);
 			}
 			i--;
 		}
@@ -116,22 +116,22 @@ void	ps_split_into_buckets_double_with_reverse_rotate(t_ps_data *d, int num_grou
 		{
 			if (high_high - group_size <= *(int *)(d->l.head->content) && *(int *)(d->l.head->content) <= high_high)
 			{
-				ps_pb(&d->l, &d->r, &d->m);
+				ps_pb(d);
 			}
 			else if (low_low <= *(int *)(d->l.head->content) && *(int *)(d->l.head->content) <= low_low + group_size)
 			{
-				ps_pb(&d->l, &d->r, &d->m);
-				ps_rb(&d->l, &d->r, &d->m);
+				ps_pb(d);
+				ps_rb(d);
 			}
 			else
 			{
 				if (ps_is_forward_closer_to_value_range(&d->l, low_low, high_high))
 				{
-					ps_ra(&d->l, &d->r, &d->m);
+					ps_ra(d);
 				}
 				else
 				{
-					ps_rra(&d->l, &d->r, &d->m);
+					ps_rra(d);
 				}
 			}
 		}
@@ -140,32 +140,32 @@ void	ps_split_into_buckets_double_with_reverse_rotate(t_ps_data *d, int num_grou
 	}
 }
 
-void	ps_pa_val_optimal_with_banking(t_deque *l, t_deque *r, t_list **moves, int current_target, int *low_target)
+void	ps_pa_val_optimal_with_banking(t_ps_data *d, int current_target, int *low_target)
 {
 	int	distance_target;
 
-	if (*(int *)r->head->content == current_target)
+	if (*(int *)d->r.head->content == current_target)
 	{
-		ps_pa(l, r, moves);
+		ps_pa(d);
 		return ;
 	}
-	distance_target = ps_find_distance_to_value(r, current_target);
-	while (*(int *)r->head->content != current_target)
+	distance_target = ps_find_distance_to_value(&d->r, current_target);
+	while (*(int *)d->r.head->content != current_target)
 	{
-		if (*(int *)r->head->content == *low_target && *low_target < current_target - 1)
+		if (*(int *)d->r.head->content == *low_target && *low_target < current_target - 1)
 		{
-			ps_pa(l, r, moves);
-			ps_ra(l, r, moves);
+			ps_pa(d);
+			ps_ra(d);
 			*low_target += 1;
 		}
 		else if (distance_target > 0)
 		{
-			ps_rb(l, r, moves);
+			ps_rb(d);
 			distance_target -= 1;
 		}
 		else if (distance_target < 0)
 		{
-			ps_rrb(l, r, moves);
+			ps_rrb(d);
 			distance_target += 1;
 		}
 		else
@@ -173,7 +173,7 @@ void	ps_pa_val_optimal_with_banking(t_deque *l, t_deque *r, t_list **moves, int 
 			;
 		}
 	}
-	ps_pa(l, r, moves);
+	ps_pa(d);
 }
 
 void	ps_selection_sort_back_with_doubles_and_banking_low_val(t_ps_data *d, int num_groups)
@@ -201,21 +201,21 @@ void	ps_selection_sort_back_with_doubles_and_banking_low_val(t_ps_data *d, int n
 		// }
 		if (ft_math_abs(ps_find_distance_to_value(&d->r, current_target)) <= ft_math_abs(ps_find_distance_to_value(&d->r, next_target)) || current_target == next_target || next_target < low_target)
 		{
-			ps_pa_val_optimal_with_banking(&d->l, &d->r, &d->m, current_target, &low_target);
+			ps_pa_val_optimal_with_banking(d, current_target, &low_target);
 			current_target -= 1;
 		}
 		else
 		{
-			ps_pa_val_optimal_with_banking(&d->l, &d->r, &d->m, next_target, &low_target);
-			ps_pa_val_optimal_with_banking(&d->l, &d->r, &d->m, current_target, &low_target);
-			ps_sa(&d->l, &d->r, &d->m);
+			ps_pa_val_optimal_with_banking(d, next_target, &low_target);
+			ps_pa_val_optimal_with_banking(d, current_target, &low_target);
+			ps_sa(d);
 			current_target -= 2;
 		}
 		if (low_target > current_target)
 		{
 			while (low_target > bracket_low_bound)
 			{
-				ps_rra(&d->l, &d->r, &d->m);
+				ps_rra(d);
 				low_target -= 1;
 			}
 			current_target = bracket_low_bound - 1;
@@ -257,7 +257,7 @@ size_t	ps_try_500_bracket_sort(t_ps_data *d)
 	new_moves_dlist = NULL;
 
 	ps_pre_split_into_buckets(&new_d, 4, 32);
-	ps_pa_all(&new_d.l, &new_d.r, &new_d.m);
+	ps_pa_all(&new_d);
 	ps_split_into_buckets_double_with_reverse_rotate(&new_d, 32);
 	ps_selection_sort_back_with_doubles_and_banking_low_val(&new_d, 32);
 	new_moves_dlist = ps_remove_duplicates(new_d.m);
@@ -271,27 +271,24 @@ size_t	ps_try_500_bracket_sort(t_ps_data *d)
 	return new_number_of_moves;
 }
 
-size_t	ps_try_500_radix_sort(t_deque *l, t_deque *r, t_list **moves)
+size_t	ps_try_500_radix_sort(t_ps_data *d)
 {
-	t_deque	new_l;
-	t_deque	new_r;
-	t_list	*new_moves;
-	t_dlist	*new_moves_dlist;
-	size_t	new_number_of_moves;
+	t_ps_data	new_d;
+	t_dlist		*new_moves_dlist;
+	size_t		new_number_of_moves;
 
-	UNUSED(moves);
-	new_l = ft_deque_clone(*l, clone_heap_integer_void);
-	new_r = ft_deque_clone(*r, clone_heap_integer_void);
-	new_moves = NULL;
+	new_d.l = ft_deque_clone(d->l, clone_heap_integer_void);
+	new_d.r = ft_deque_clone(d->r, clone_heap_integer_void);
+	new_d.m = NULL;
 	new_moves_dlist = NULL;
 
-	ps_sort_double_radix_sort_improved_with_swaps(&new_l, &new_r, &new_moves);
-	new_moves_dlist = ps_remove_duplicates(new_moves);
+	ps_sort_double_radix_sort_improved_with_swaps(&new_d);
+	new_moves_dlist = ps_remove_duplicates(new_d.m);
 	new_number_of_moves = ft_dlist_length(new_moves_dlist);
 
-	ft_deque_destroy_list(&new_l, free);
-	ft_deque_destroy_list(&new_r, free);
-	ft_lstclear(&new_moves, free);
+	ft_deque_destroy_list(&new_d.l, free);
+	ft_deque_destroy_list(&new_d.r, free);
+	ft_lstclear(&new_d.m, free);
 	ft_dlist_destroy_list(new_moves_dlist, free);
 
 	return new_number_of_moves;
@@ -303,21 +300,21 @@ void	ps_sort_500_elements(t_ps_data *d)
 	size_t	radix_sort_count;
 
 	bracket_sort_count = ps_try_500_bracket_sort(d);
-	radix_sort_count = ps_try_500_radix_sort(&d->l, &d->r, &d->m);
+	radix_sort_count = ps_try_500_radix_sort(d);
 
 	// if (1)
 	if (bracket_sort_count < radix_sort_count)
 	{
 		ps_pre_split_into_buckets(d, 4, 32);
 		// ps_pre_split_into_buckets(&d->l, &d->r, &d->m, 4, 32);
-		ps_pa_all(&d->l, &d->r, &d->m);
+		ps_pa_all(d);
 		ps_split_into_buckets_double_with_reverse_rotate(d, 32);
-		// ps_selection_sort_back_with_doubles(l, r, moves);
+		// ps_selection_sort_back_with_doubles(d);
 		ps_selection_sort_back_with_doubles_and_banking_low_val(d, 32);
 	}
 	else
 	{
-		ps_sort_double_radix_sort_improved_with_swaps(&d->l, &d->r, &d->m);
+		ps_sort_double_radix_sort_improved_with_swaps(d);
 	}
 }
 

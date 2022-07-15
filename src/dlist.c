@@ -23,7 +23,6 @@ void	ft_dlist_destroy_node(t_dlist *node, void (*del)(void *))
 	}
 	del(node->content);
 	free(node);
-	
 	return ;
 }
 
