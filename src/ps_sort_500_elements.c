@@ -1,6 +1,5 @@
 #include "push_swap.h"
 
-// void	ps_pre_split_into_buckets(t_deque *l, t_deque *r, t_list **moves, int num_pre_groups, int num_groups)
 void	ps_pre_split_into_buckets(t_ps_data *d, int num_pre_groups, int num_groups)
 {
 	int	group_size;
@@ -9,30 +8,19 @@ void	ps_pre_split_into_buckets(t_ps_data *d, int num_pre_groups, int num_groups)
 	int	low_cut;
 	int	i;
 
-	// Clean up. this should be able to be done with math rather than walking up and down the block sizes
 	group_size = (ft_deque_length(d->l) + num_groups - 1) / num_groups;
 	groups_per_pre_group = (num_groups + num_pre_groups - 1) / num_pre_groups;
-	high_cut = ft_deque_length(d->l) - (group_size * groups_per_pre_group / 2);
-	low_cut = high_cut;
-	while (low_cut > 0)
-	{
-		low_cut -= group_size * groups_per_pre_group / 2;
-	}
-	low_cut += group_size * groups_per_pre_group / 2;
-	while (low_cut < high_cut)
-	{
-		low_cut += group_size * groups_per_pre_group / 2;
-		high_cut -= group_size * groups_per_pre_group / 2;
-	}
-	low_cut -= group_size * groups_per_pre_group / 2;
-	high_cut += group_size * groups_per_pre_group / 2;
+	groups_per_pre_group = (groups_per_pre_group + 1) / 2 * 2;
+
+	low_cut = ft_deque_length(d->l) - (num_groups / 2 * group_size) - (groups_per_pre_group / 2 * group_size);
+	high_cut = low_cut + (group_size * groups_per_pre_group);
+
 	while (d->l.head)
 	{
 		i = ft_deque_length(d->l);
 		while (i > 0)
 		{
-			// Check this value. Should it be <= or < and >= or >. I cant remember if it should include or not the edges
-			if (*(int *)(d->l.head->content) > low_cut && (*(int *)(d->l.head->content) <= high_cut))
+			if (low_cut <= *(int *)(d->l.head->content) && (*(int *)(d->l.head->content) < high_cut))
 			{
 				ps_pb(d);
 			}
@@ -42,8 +30,8 @@ void	ps_pre_split_into_buckets(t_ps_data *d, int num_pre_groups, int num_groups)
 			}
 			i--;
 		}
-		high_cut += group_size * groups_per_pre_group / 2;
-		low_cut -= group_size * groups_per_pre_group / 2;
+		high_cut += groups_per_pre_group / 2 * group_size;
+		low_cut -= groups_per_pre_group / 2 * group_size;
 	}
 }
 
@@ -54,8 +42,9 @@ int	ps_deque_contains_value_in_range(t_deque *stack, int low, int high)
 	node = stack->head;
 	while (node)
 	{
-		if (low <= *(int *)(node->content) && *(int *)(node->content) <= high)
+		if (low <= *(int *)(node->content) && *(int *)(node->content) < high)
 		{
+			// ft_printf("the number is %i\n", *(int *)(node->content));
 			return (1);
 		}
 		else
@@ -71,7 +60,7 @@ int	ps_is_forward_closer_to_value_range(t_deque *stack, int low, int high)
 	t_dlist	*forward;
 	t_dlist	*reverse;
 
-	if (low <= *(int *)(stack->head->content) && *(int *)(stack->head->content) <= high)
+	if (low <= *(int *)(stack->head->content) && *(int *)(stack->head->content) < high)
 	{
 		return (1);
 	}
@@ -79,11 +68,11 @@ int	ps_is_forward_closer_to_value_range(t_deque *stack, int low, int high)
 	reverse = stack->tail;
 	while (forward && reverse)
 	{
-		if (low <= *(int *)(forward->content) && *(int *)(forward->content) <= high)
+		if (low <= *(int *)(forward->content) && *(int *)(forward->content) < high)
 		{
 			return (1);
 		}
-		if (low <= *(int *)(reverse->content) && *(int *)(reverse->content) <= high)
+		if (low <= *(int *)(reverse->content) && *(int *)(reverse->content) < high)
 		{
 			return (0);
 		}
@@ -108,17 +97,17 @@ void	ps_split_into_buckets_double_with_reverse_rotate(t_ps_data *d, int num_grou
 	int	low_low;
 
 	group_size = (ft_deque_length(d->l) + num_groups - 1) / num_groups;
-	high_high = (num_groups / 2 * group_size) + group_size;
-	low_low = (num_groups / 2 * group_size) - group_size;
+	high_high = ft_deque_length(d->l) - (num_groups / 2 * group_size) + group_size;
+	low_low = ft_deque_length(d->l) - (num_groups / 2 * group_size) - group_size;
 	while (d->l.head)
 	{
 		while (ps_deque_contains_value_in_range(&d->l, low_low, high_high) == 1)
 		{
-			if (high_high - group_size <= *(int *)(d->l.head->content) && *(int *)(d->l.head->content) <= high_high)
+			if (high_high - group_size <= *(int *)(d->l.head->content) && *(int *)(d->l.head->content) < high_high)
 			{
 				ps_pb(d);
 			}
-			else if (low_low <= *(int *)(d->l.head->content) && *(int *)(d->l.head->content) <= low_low + group_size)
+			else if (low_low <= *(int *)(d->l.head->content) && *(int *)(d->l.head->content) < low_low + group_size)
 			{
 				ps_pb(d);
 				ps_rb(d);
