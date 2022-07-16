@@ -28,6 +28,34 @@ t_dlist	*list_to_dlist(t_list *list_head)
 	return (dlist_head);
 }
 
+bool	node_is_redundant(t_dlist *node)
+{
+	if (!node)
+	{
+		return (false);
+	}
+	if (!node->next)
+	{
+		return (false);
+	}
+	if ((ft_strncmp(node->content, "pb", 3) == 0 && \
+			ft_strncmp(node->next->content, "pa", 3) == 0) || \
+		(ft_strncmp(node->content, "pa", 3) == 0 && \
+			ft_strncmp(node->next->content, "pb", 3) == 0) || \
+		(ft_strncmp(node->content, "ra", 3) == 0 && \
+			ft_strncmp(node->next->content, "rra", 4) == 0) || \
+		(ft_strncmp(node->content, "rra", 4) == 0 && \
+			ft_strncmp(node->next->content, "ra", 3) == 0) || \
+		(ft_strncmp(node->content, "rb", 3) == 0 && \
+			ft_strncmp(node->next->content, "rrb", 4) == 0) || \
+		(ft_strncmp(node->content, "rrb", 4) == 0 && \
+			ft_strncmp(node->next->content, "rb", 3) == 0))
+	{
+		return (true);
+	}
+	return (false);
+}
+
 t_dlist	*ps_remove_duplicates(t_list *l)
 {
 	t_dlist	*dlist_head;
@@ -47,12 +75,7 @@ t_dlist	*ps_remove_duplicates(t_list *l)
 	}
 	while (node->next)
 	{
-		if ((ft_strncmp(node->content, "pb", 3) == 0 && ft_strncmp(node->next->content, "pa", 3) == 0) || \
-			(ft_strncmp(node->content, "pa", 3) == 0 && ft_strncmp(node->next->content, "pb", 3) == 0) || \
-			(ft_strncmp(node->content, "ra", 3) == 0 && ft_strncmp(node->next->content, "rra", 4) == 0) || \
-			(ft_strncmp(node->content, "rra", 4) == 0 && ft_strncmp(node->next->content, "ra", 3) == 0) || \
-			(ft_strncmp(node->content, "rb", 3) == 0 && ft_strncmp(node->next->content, "rrb", 4) == 0) || \
-			(ft_strncmp(node->content, "rrb", 4) == 0 && ft_strncmp(node->next->content, "rb", 3) == 0))
+		if (node_is_redundant(node))
 		{
 			prev_node = node->prev;
 			popped_node = ft_dlist_pop_at_pointer(&dlist_head, node->next);
