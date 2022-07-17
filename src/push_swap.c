@@ -1,79 +1,79 @@
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	// t_deque	l;
 	// t_deque	r;
 	// t_list	*moves;
-	bool	err;
+	bool err;
 
-	t_ps_data	data;
+	t_ps_data data;
 
 	if (argc == 1)
 	{
 		return (0);
 	}
 	err = false;
-	data.l = parse_input_args_to_deque(argv, &err);
+	data.a = parse_input_args_to_deque(argv, &err);
 	if (err)
 	{
-		ft_deque_destroy_list(&data.l, free);
+		ft_deque_destroy_list(&data.a, free);
 		write(2, "Error\n", 6);
 		return (0);
 	}
-	if (deque_has_duplicates(&data.l) == true)
+	if (deque_has_duplicates(&data.a) == true)
 	{
 		write(2, "Error\n", 6);
-		ft_deque_destroy_list(&data.l, free);
+		ft_deque_destroy_list(&data.a, free);
 		return (0);
 	}
-	if (deque_is_sorted(&data.l) == true)
+	if (deque_is_sorted(&data.a) == true)
 	{
-		ft_deque_destroy_list(&data.l, free);
+		ft_deque_destroy_list(&data.a, free);
 		return (0);
 	}
 	// debug_print_deque(&l);
-	normalise_in_place(&data.l);
+	normalise_in_place(&data.a);
 	// debug_print_deque(&l);
-	data.r = ft_deque_new();
+	data.b = ft_deque_new();
 	data.m = NULL;
 
-	if (ft_deque_length(data.l) <= 1)
+	if (ft_deque_length(data.a) <= 1)
 	{
 		;
 		// ft_printf("debug: sorting 1\n");
 	}
-	else if (ft_deque_length(data.l) == 2)
+	else if (ft_deque_length(data.a) == 2)
 	{
 		ps_sort_2_elements(&data);
 		// ft_printf("debug: sorting 2\n");
 	}
-	else if (ft_deque_length(data.l) == 3)
+	else if (ft_deque_length(data.a) == 3)
 	{
 		ps_sort_3_elements(&data);
 		// ft_printf("debug: sorting 3\n");
 	}
-	else if (ft_deque_length(data.l) == 4)
+	else if (ft_deque_length(data.a) == 4)
 	{
 		ps_sort_4_elements(&data);
 		// ft_printf("debug: sorting 4\n");
 	}
-	else if (ft_deque_length(data.l) == 5)
+	else if (ft_deque_length(data.a) == 5)
 	{
 		ps_sort_5_elements(&data);
 		// ft_printf("debug: sorting 5\n");
 	}
-	else if (ft_deque_length(data.l) < 50)
+	else if (ft_deque_length(data.a) < 50)
 	{
 		ps_sort_double_radix_sort_improved_with_swaps(&data);
 		// ft_printf("debug: sorting 50\n");
 	}
-	else if (ft_deque_length(data.l) < 150)
+	else if (ft_deque_length(data.a) < 150)
 	{
 		ps_sort_100_elements(&data);
 		// ft_printf("debug: sorting 150\n");
 	}
-	else if (ft_deque_length(data.l) < 600)
+	else if (ft_deque_length(data.a) < 600)
 	{
 		ps_sort_500_elements(&data);
 		// ft_printf("debug: sorting 600\n");
@@ -88,7 +88,7 @@ int	main(int argc, char **argv)
 	// 	ps_sort_double_radix_sort(&l, &r, &moves);
 	// }
 	// debug_print_list_of_moves(moves);
-	t_dlist	*moves_dlist;
+	t_dlist *moves_dlist;
 	moves_dlist = ps_remove_duplicates(data.m);
 	// moves_dlist = list_to_dlist(moves);
 	debug_print_list_of_moves_dlist(moves_dlist);
@@ -102,6 +102,6 @@ int	main(int argc, char **argv)
 	// ft_printf("debug: length of l is: %i\n", (int)ft_deque_length(l));
 	// ft_printf("Number of moves: %i\n", ft_lstsize(moves));
 
-	ft_deque_destroy_list(&data.l, free);
-	ft_deque_destroy_list(&data.r, free);
+	ft_deque_destroy_list(&data.a, free);
+	ft_deque_destroy_list(&data.b, free);
 }

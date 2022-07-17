@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-static int	check_if_first_three_deque_nodes_match(t_deque *d, int e0, int e1, int e2)
+static int check_if_first_three_deque_nodes_match(t_deque *d, int e0, int e1, int e2)
 {
-	t_dlist	*node;
+	t_dlist *node;
 
 	node = d->head;
 	if (ft_intcmp(node->content, &e0) != 0)
@@ -22,11 +22,11 @@ static int	check_if_first_three_deque_nodes_match(t_deque *d, int e0, int e1, in
 	return (1);
 }
 
-void	ps_sort_3_elements(t_ps_data *d)
+void ps_sort_3_elements(t_ps_data *d)
 {
-	t_deque	l_clone;
+	t_deque l_clone;
 
-	l_clone = clone_deque(&d->l);
+	l_clone = clone_deque(&d->a);
 	normalise_in_place(&l_clone);
 	if (check_if_first_three_deque_nodes_match(&l_clone, 0, 1, 2) == 1)
 		;

@@ -10,8 +10,8 @@
 # include <limits.h>
 
 typedef struct s_ps_data {
-	t_deque	l;
-	t_deque	r;
+	t_deque	a;
+	t_deque	b;
 	t_list	*m;
 }	t_ps_data;
 

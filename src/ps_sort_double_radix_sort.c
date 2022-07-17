@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-int	calculate_max_radix(int num)
+int calculate_max_radix(int num)
 {
-	int	max_radix;
+	int max_radix;
 
 	max_radix = 0;
 	if (num < 0)
@@ -16,23 +16,23 @@ int	calculate_max_radix(int num)
 	return (max_radix);
 }
 
-void	ps_sort_double_radix_sort(t_ps_data *d)
+void ps_sort_double_radix_sort(t_ps_data *d)
 {
-	int	radix;
-	int	max_radix;
-	int	i;
-	int	max_i;
-	int	r_first_buffer_length;
+	int radix;
+	int max_radix;
+	int i;
+	int max_i;
+	int r_first_buffer_length;
 
 	radix = 0;
-	max_radix = calculate_max_radix(ft_deque_length(d->l));
+	max_radix = calculate_max_radix(ft_deque_length(d->a));
 	while (radix < max_radix)
 	{
-		max_i = ft_deque_length(d->l);
+		max_i = ft_deque_length(d->a);
 		i = 0;
 		while (i < max_i)
 		{
-			if (*(int *)(d->l.head->content) / ft_pow(2, radix) % 2 == 0)
+			if (*(int *)(d->a.head->content) / ft_pow(2, radix) % 2 == 0)
 			{
 				ps_pb(d);
 			}
@@ -45,12 +45,12 @@ void	ps_sort_double_radix_sort(t_ps_data *d)
 		radix++;
 		if (radix < max_radix)
 		{
-			r_first_buffer_length = ft_deque_length(d->r);
-			max_i = ft_deque_length(d->l);
+			r_first_buffer_length = ft_deque_length(d->b);
+			max_i = ft_deque_length(d->a);
 			i = 0;
 			while (i < max_i)
 			{
-				if (*(int *)(d->l.head->content) / ft_pow(2, radix) % 2 == 0)
+				if (*(int *)(d->a.head->content) / ft_pow(2, radix) % 2 == 0)
 				{
 					ps_pb(d);
 				}
@@ -61,7 +61,7 @@ void	ps_sort_double_radix_sort(t_ps_data *d)
 				i++;
 			}
 			i = 0;
-			max_i = ft_deque_length(d->r) - r_first_buffer_length;
+			max_i = ft_deque_length(d->b) - r_first_buffer_length;
 			while (i < max_i)
 			{
 				ps_rb(d);
@@ -70,7 +70,7 @@ void	ps_sort_double_radix_sort(t_ps_data *d)
 			i = 0;
 			while (i < r_first_buffer_length)
 			{
-				if (*(int *)(d->r.head->content) / ft_pow(2, radix) % 2 != 0)
+				if (*(int *)(d->b.head->content) / ft_pow(2, radix) % 2 != 0)
 				{
 					ps_pa(d);
 				}
@@ -82,7 +82,7 @@ void	ps_sort_double_radix_sort(t_ps_data *d)
 			}
 		}
 		i = 0;
-		max_i = ft_deque_length(d->r);
+		max_i = ft_deque_length(d->b);
 		while (i < max_i)
 		{
 			ps_pa(d);

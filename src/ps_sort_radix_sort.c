@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-int	is_sorted(t_deque *stack)
+int is_sorted(t_deque *stack)
 {
-	t_dlist	*node;
+	t_dlist *node;
 
 	if (ft_deque_length(*stack) <= 1)
 	{
@@ -20,9 +20,9 @@ int	is_sorted(t_deque *stack)
 	return (1);
 }
 
-int	ft_pow(int x, int y)
+int ft_pow(int x, int y)
 {
-	int	result;
+	int result;
 
 	if (x == 0 && y == 0)
 	{
@@ -46,20 +46,20 @@ int	ft_pow(int x, int y)
 }
 
 // void	ps_sort_radix_sort(t_ps_data *d)
-void	ps_sort_radix_sort(t_ps_data *d)
+void ps_sort_radix_sort(t_ps_data *d)
 {
-	int	radix;
-	int	i;
-	int	max_i;
+	int radix;
+	int i;
+	int max_i;
 
 	radix = 0;
-	while (is_sorted(&d->l) == 0)
+	while (is_sorted(&d->a) == 0)
 	{
 		i = 0;
-		max_i = ft_deque_length(d->l);
+		max_i = ft_deque_length(d->a);
 		while (i < max_i)
 		{
-			if (*(int *)(d->l.head->content) / ft_pow(2, radix) % 2 == 0)
+			if (*(int *)(d->a.head->content) / ft_pow(2, radix) % 2 == 0)
 			{
 				ps_pb(d);
 			}
@@ -69,7 +69,7 @@ void	ps_sort_radix_sort(t_ps_data *d)
 			}
 			i++;
 		}
-		while (d->r.head)
+		while (d->b.head)
 		{
 			ps_pa(d);
 		}

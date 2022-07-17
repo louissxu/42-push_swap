@@ -1,9 +1,9 @@
 #include "push_swap.h"
 
-t_dlist	*read_commands_from_stdin(void)
+t_dlist *read_commands_from_stdin(void)
 {
-	t_dlist	*commands;
-	char	*new_line;
+	t_dlist *commands;
+	char *new_line;
 
 	commands = NULL;
 	new_line = get_next_line(0);
@@ -15,9 +15,9 @@ t_dlist	*read_commands_from_stdin(void)
 	return (commands);
 }
 
-int	apply_commands_to_stacks(t_ps_data *d, t_dlist *commands_head)
+int apply_commands_to_stacks(t_ps_data *d, t_dlist *commands_head)
 {
-	t_dlist	*node;
+	t_dlist *node;
 
 	node = commands_head;
 	while (node)
@@ -71,16 +71,16 @@ int	apply_commands_to_stacks(t_ps_data *d, t_dlist *commands_head)
 	return (false);
 }
 
-void	clean_up(t_ps_data *d, t_dlist *commands)
+void clean_up(t_ps_data *d, t_dlist *commands)
 {
-	ft_deque_destroy_list(&d->l, free);
-	ft_deque_destroy_list(&d->r, free);
+	ft_deque_destroy_list(&d->a, free);
+	ft_deque_destroy_list(&d->b, free);
 	ft_lstclear(&d->m, free);
 	ft_dlist_destroy_list(commands, free);
-	return ;
+	return;
 }
 
-void	check_and_print_result(bool err, t_ps_data *d)
+void check_and_print_result(bool err, t_ps_data *d)
 {
 	if (err == true)
 	{
@@ -88,7 +88,7 @@ void	check_and_print_result(bool err, t_ps_data *d)
 	}
 	else
 	{
-		if (deque_is_sorted(&d->l) == 1 && ft_deque_length(d->r) == 0)
+		if (deque_is_sorted(&d->a) == 1 && ft_deque_length(d->b) == 0)
 		{
 			ft_printf("OK\n");
 		}
@@ -99,27 +99,27 @@ void	check_and_print_result(bool err, t_ps_data *d)
 	}
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_ps_data	d;
-	t_dlist		*commands;
-	bool		err;
+	t_ps_data d;
+	t_dlist *commands;
+	bool err;
 
 	if (argc == 1)
 	{
 		return (0);
 	}
 	err = false;
-	d.l = parse_input_args_to_deque(argv, &err);
+	d.a = parse_input_args_to_deque(argv, &err);
 	if (err)
 	{
-		ft_deque_destroy_list(&d.l, free);
+		ft_deque_destroy_list(&d.a, free);
 		write(2, "Error\n", 6);
 		return (0);
 	}
-	if (deque_has_duplicates(&d.l) == true)
+	if (deque_has_duplicates(&d.a) == true)
 	{
-		ft_deque_destroy_list(&d.l, free);
+		ft_deque_destroy_list(&d.a, free);
 		write(2, "Error\n", 6);
 		return (0);
 	}

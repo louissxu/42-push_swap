@@ -1,22 +1,22 @@
 #include "push_swap.h"
 
-void	ps_sort_double_radix_sort_improved(t_ps_data *d)
+void ps_sort_double_radix_sort_improved(t_ps_data *d)
 {
-	int	radix;
-	int	max_radix;
-	int	i;
-	int	r_first_buffer_length;
+	int radix;
+	int max_radix;
+	int i;
+	int r_first_buffer_length;
 
 	radix = 0;
-	max_radix = calculate_max_radix(ft_deque_length(d->l));
+	max_radix = calculate_max_radix(ft_deque_length(d->a));
 	while (radix < max_radix)
 	{
 		if (radix + 1 < max_radix)
 		{
-			i = ft_deque_length(d->l);
+			i = ft_deque_length(d->a);
 			while (i > 0)
 			{
-				if (*(int *)(d->l.head->content) / ft_pow(2, radix + 1) % 2 == 0)
+				if (*(int *)(d->a.head->content) / ft_pow(2, radix + 1) % 2 == 0)
 				{
 					ps_pb(d);
 				}
@@ -26,11 +26,11 @@ void	ps_sort_double_radix_sort_improved(t_ps_data *d)
 				}
 				i--;
 			}
-			r_first_buffer_length = ft_deque_length(d->r);
-			i = ft_deque_length(d->l);
+			r_first_buffer_length = ft_deque_length(d->b);
+			i = ft_deque_length(d->a);
 			while (i > 0)
 			{
-				if (*(int *)(d->l.head->content) / ft_pow(2, radix) % 2 == 0)
+				if (*(int *)(d->a.head->content) / ft_pow(2, radix) % 2 == 0)
 				{
 					ps_pb(d);
 				}
@@ -40,16 +40,16 @@ void	ps_sort_double_radix_sort_improved(t_ps_data *d)
 				}
 				i--;
 			}
-			i = ft_deque_length(d->r) - r_first_buffer_length;
+			i = ft_deque_length(d->b) - r_first_buffer_length;
 			while (i > 0)
 			{
 				ps_pa(d);
 				i--;
 			}
-			i = ft_deque_length(d->r);
+			i = ft_deque_length(d->b);
 			while (i > 0)
 			{
-				if (*(int *)(d->r.head->content) / ft_pow(2, radix) % 2 != 0)
+				if (*(int *)(d->b.head->content) / ft_pow(2, radix) % 2 != 0)
 				{
 					ps_pa(d);
 				}
@@ -59,7 +59,7 @@ void	ps_sort_double_radix_sort_improved(t_ps_data *d)
 				}
 				i--;
 			}
-			i = ft_deque_length(d->r);
+			i = ft_deque_length(d->b);
 			while (i > 0)
 			{
 				ps_pa(d);
@@ -69,10 +69,10 @@ void	ps_sort_double_radix_sort_improved(t_ps_data *d)
 		}
 		else
 		{
-			i = ft_deque_length(d->l);
+			i = ft_deque_length(d->a);
 			while (i > 0)
 			{
-				if (*(int *)(d->l.head->content) / ft_pow(2, radix) % 2 == 0)
+				if (*(int *)(d->a.head->content) / ft_pow(2, radix) % 2 == 0)
 				{
 					ps_pb(d);
 				}
@@ -82,7 +82,7 @@ void	ps_sort_double_radix_sort_improved(t_ps_data *d)
 				}
 				i--;
 			}
-			i = ft_deque_length(d->r);
+			i = ft_deque_length(d->b);
 			while (i > 0)
 			{
 				ps_pa(d);
