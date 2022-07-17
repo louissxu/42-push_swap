@@ -53,25 +53,23 @@ void	ps_pb_value_optimal(t_ps_data *d, int value);
 void	ps_selection_sort_back_with_doubles(t_ps_data *d);
 
 // PS utilities
-int	ps_find_distance_to_value(t_deque *stack, int val);
+int		ps_find_distance_to_value(t_deque *stack, int val);
 
 // FT math utilities
 long	ft_math_abs(int val);
 
+// Type conversions and clones
+t_dlist	*ft_list_to_dlist(t_list *list_head, void *(*clone)(void *));
+t_deque	ft_clone_deque(t_deque d, void *(*clone)(void *));
+int	*clone_heap_integer(int *orig);
+void	*clone_heap_integer_void(void *orig);
+
 // Other functions - to rearrange and/or maybe rename
-t_deque	clone_deque(t_deque *d);
 t_deque	*normalise_in_place(t_deque *d);
 int	ft_pow(int x, int y);
 int	calculate_max_radix(int num);
 t_dlist	*ps_remove_duplicates(t_list *l);
 void	debug_print_list_of_moves_dlist(t_dlist *d);
-int	*clone_heap_integer(int *orig);
-void	*clone_heap_integer_void(void *orig);
-t_dlist	*list_to_dlist(t_list *list_head);
-
-
-int	find_distance_from_val(t_deque *stack, int val);
-void	ps_pb_val(t_ps_data *d, int val);
 
 // Shared functions needed for checker
 t_deque	parse_input_args_to_deque(char **argv, bool *err);

@@ -1,33 +1,5 @@
 #include "push_swap.h"
 
-t_dlist	*list_to_dlist(t_list *list_head)
-{
-	t_dlist	*dlist_head;
-	t_list	*list_node;
-	int		*cloned_int;
-	t_dlist	*new_node;
-
-	dlist_head = NULL;
-	list_node = list_head;
-	while (list_node)
-	{
-		cloned_int = clone_heap_integer(list_node->content);
-		if (!cloned_int)
-		{
-			return (dlist_head);
-		}
-		new_node = ft_dlist_new_node(cloned_int);
-		if (!new_node)
-		{
-			free (cloned_int);
-			return (dlist_head);
-		}
-		ft_dlist_insert_end(&dlist_head, new_node);
-		list_node = list_node->next;
-	}
-	return (dlist_head);
-}
-
 bool	node_is_redundant(t_dlist *node)
 {
 	if (!node)
@@ -63,7 +35,7 @@ t_dlist	*ps_remove_duplicates(t_list *l)
 	t_dlist	*prev_node;
 	t_dlist	*popped_node;
 
-	dlist_head = list_to_dlist(l);
+	dlist_head = ft_list_to_dlist(l, clone_heap_integer_void);
 	node = dlist_head;
 	if (!node)
 	{

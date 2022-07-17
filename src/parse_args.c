@@ -245,39 +245,6 @@ t_list	*list_sort_bubble_sort(t_list *l)
 	return (l);
 }
 
-int	*clone_heap_integer(int *orig)
-{
-	int	*clone;
-
-	clone = malloc(sizeof (*clone) * 1);
-	*clone = *orig;
-	return (clone);
-}
-
-void	*clone_heap_integer_void(void *orig)
-{
-	void *clone;
-
-	clone = clone_heap_integer(orig);
-	return clone;
-}
-
-t_deque	clone_deque(t_deque *d)
-{
-	t_deque	clone;
-	t_dlist	*node;
-
-	clone = ft_deque_new();
-	node = d->head;
-
-	while (node)
-	{
-		ft_deque_append(&clone, clone_heap_integer(node->content));
-		node = node->next;
-	}
-	return clone;
-}
-
 t_deque	*normalise_in_place(t_deque *d)
 {
 	t_list	*sorted_list_head;

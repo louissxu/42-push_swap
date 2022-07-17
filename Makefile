@@ -6,7 +6,11 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDES = includes
 LIBFT_INCLUDES = libft/includes
 
-SRCS_RAW = deque.c dlist.c debug.c \
+SRCS_RAW = \
+	debug.c \
+	deque.c \
+	dlist.c \
+	conversions.c \
 	ps_primitives.c \
 	ps_derived.c \
 	ps_utilities.c \
