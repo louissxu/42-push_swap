@@ -102,35 +102,12 @@ t_deque	parse_input_args_to_deque(char **argv, bool *err)
 	return (d);
 }
 
-t_list	*deque_to_list(t_deque *d)
-{
-	t_list 	*list_head;
-	t_list 	*list_tail;
-	t_dlist *deque_node_pointer;
-	void	*cloned_content;
-
-	list_head = NULL;
-	list_tail = NULL;
-	deque_node_pointer = d->head;
-	while (deque_node_pointer)
-	{
-		cloned_content = clone_heap_integer(deque_node_pointer->content);
-		ft_lstadd_back(&list_tail, ft_lstnew(cloned_content));
-		deque_node_pointer = deque_node_pointer->next;
-		if (list_head == NULL)
-		{
-			list_head = list_tail;
-		}
-	}
-	return (list_head);
-}
-
 bool	deque_has_duplicates(t_deque *d)
 {
 	t_list	*l;
 	t_list	*node;
 
-	l = deque_to_list(d);
+	l = ft_deque_to_list(*d, clone_heap_integer_void, free);
 	list_sort_bubble_sort(l);
 	node = l;
 	if (node == NULL)
@@ -252,7 +229,7 @@ t_deque	*normalise_in_place(t_deque *d)
 	t_dlist	*d_node;
 	t_list	*sorted_list_node;
 
-	sorted_list_head = list_sort_bubble_sort(deque_to_list(d));
+	sorted_list_head = list_sort_bubble_sort(ft_deque_to_list(*d, clone_heap_integer_void, free));
 	d_node = d->head;
 	while (d_node != NULL)
 	{

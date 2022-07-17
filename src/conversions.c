@@ -72,3 +72,60 @@ t_deque	ft_clone_deque(t_deque d, void *(*clone)(void *))
 	}
 	return (new_deque);
 }
+
+t_list	*ft_deque_to_list(t_deque d, void *(*clone)(void *), void (*del)(void *))
+{
+	t_list	*new_list_head;
+	t_list	*new_list_tail;
+	t_list	*new_list_node;
+	t_dlist	*curr_node;
+	void	*cloned_content;
+
+	new_list_head = NULL;
+	new_list_tail = NULL;
+	curr_node = d.head;
+	while (curr_node)
+	{
+		cloned_content = clone(curr_node->content);
+		if (!cloned_content)
+		{
+			return (new_list_head);
+		}
+		new_list_node = ft_lstnew(cloned_content);
+		if (!new_list_node)
+		{
+			del(cloned_content);
+			return (new_list_head);
+		}
+		ft_lstadd_back(&new_list_tail, new_list_node);
+		if (new_list_head == NULL)
+		{
+			new_list_head = new_list_tail;
+		}
+		curr_node = curr_node->next;
+	}
+	return (new_list_head);
+}
+
+t_list	*deque_to_list(t_deque *d)
+{
+	t_list 	*list_head;
+	t_list 	*list_tail;
+	t_dlist *deque_node_pointer;
+	void	*cloned_content;
+
+	list_head = NULL;
+	list_tail = NULL;
+	deque_node_pointer = d->head;
+	while (deque_node_pointer)
+	{
+		cloned_content = clone_heap_integer(deque_node_pointer->content);
+		ft_lstadd_back(&list_tail, ft_lstnew(cloned_content));
+		deque_node_pointer = deque_node_pointer->next;
+		if (list_head == NULL)
+		{
+			list_head = list_tail;
+		}
+	}
+	return (list_head);
+}

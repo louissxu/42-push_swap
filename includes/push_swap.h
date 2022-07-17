@@ -60,6 +60,7 @@ long	ft_math_abs(int val);
 
 // Type conversions and clones
 t_dlist	*ft_list_to_dlist(t_list *list_head, void *(*clone)(void *));
+t_list	*ft_deque_to_list(t_deque d, void *(*clone)(void *), void (*del)(void *));
 t_deque	ft_clone_deque(t_deque d, void *(*clone)(void *));
 int	*clone_heap_integer(int *orig);
 void	*clone_heap_integer_void(void *orig);
@@ -75,7 +76,6 @@ void	debug_print_list_of_moves_dlist(t_dlist *d);
 t_deque	parse_input_args_to_deque(char **argv, bool *err);
 bool	deque_has_duplicates(t_deque *d);
 bool	deque_is_sorted(t_deque *d);
-t_list	*deque_to_list(t_deque *d);
 t_list	*list_sort_bubble_sort(t_list *l);
 
 #endif
