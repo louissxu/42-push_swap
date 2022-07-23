@@ -50,7 +50,7 @@ t_deque	ft_clone_deque(t_deque d, void *(*clone)(void *))
 	t_deque	new_deque;
 	t_dlist	*curr_node;
 	void	*cloned_content;
-	t_dlist	*new_node;
+	// t_dlist	*new_node;
 
 	new_deque = ft_deque_new();
 	curr_node = d.head;
@@ -61,13 +61,13 @@ t_deque	ft_clone_deque(t_deque d, void *(*clone)(void *))
 		{
 			return (new_deque);
 		}
-		new_node = ft_dlist_new_node(cloned_content);
-		if (!new_node)
-		{
-			free (cloned_content);
-			return (new_deque);
-		}
-		ft_deque_append(&new_deque, new_node);
+		// new_node = ft_dlist_new_node(cloned_content);
+		// if (!new_node)
+		// {
+		// 	free (cloned_content);
+		// 	return (new_deque);
+		// }
+		ft_deque_append(&new_deque, cloned_content);
 		curr_node = curr_node->next;
 	}
 	return (new_deque);
