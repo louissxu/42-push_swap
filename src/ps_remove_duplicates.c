@@ -47,6 +47,35 @@ bool	node_is_redundant(t_dlist *node)
 	return (false);
 }
 
+t_dlist *ps_remove_skipped(t_list *l, int stack_a_length)
+{
+	int	stack_b_length;
+	t_list *curr;
+
+	stack_b_length = 0;
+	curr = l;
+	while (curr) {
+		if (ft_strncmp(curr->content, "pb", 3) == 0)
+		{
+			if (stack_a_length == 0) {
+				// pop list element
+			} else {
+				stack_a_length--;
+				stack_b_length++;
+			}
+		}
+		else if (ft_strncmp(curr->content, "pa", 3) == 0)
+		{
+			if (stack_b_length == 0) {
+				// pop list element
+			} else {
+				stack_a_length++;
+				stack_b_length--;
+			}
+		}
+	}
+}
+
 t_dlist	*ps_remove_duplicates(t_list *l)
 {
 	t_dlist	*dlist_head;
