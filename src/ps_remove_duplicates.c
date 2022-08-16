@@ -1,5 +1,24 @@
 #include "push_swap.h"
 
+/**
+ * @brief Checks if node is redundant
+ * 
+ * Checks if a node is is redundant. A node is redundant when it does an action
+ * but the next action does the inverse of it. Therefore, after the two actions
+ * the state is the same and two moves were wasted.
+ *
+ * NB: This will behave incorrectly in the edge case where a pa (or pb) move is
+ * "skipped" due to an empty list. Consider - a: [], b: [1, 2], moves: [pb, pa]
+ * Correct state after the moves will be a: [1], b: [2]. But the moves will be
+ * considered redundant and both nodes removed by ps_remove_duplicates because
+ * it thinks pa will undo pb.
+ *
+ * Therefore, it expects skipped moves to be stripped out first.
+ *
+ * @param node A pointer to a dlist node containing a move string as content.
+ *     The node is expected to be a node within a list of moves. Ie the node
+ *     that it checks is the next node in the list.
+ */
 bool	node_is_redundant(t_dlist *node)
 {
 	if (!node)
