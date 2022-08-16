@@ -75,7 +75,7 @@ bool	deque_has_duplicates(t_deque *d);
 
 
 // FT math utilities
-long	ft_math_abs(int val);
+int	ft_math_abs(int val);
 
 // Type conversions and clones
 t_dlist	*ft_list_to_dlist(t_list *list_head, void *(*clone)(void *));
