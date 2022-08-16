@@ -4,7 +4,7 @@
 
 /**
  * @struct t_dlist
- * A double ended list
+ * A double ended list.
  *
  * A double ended list. A list with pointers to both the next and the previous
  * nodes. Therefore, the list can be traversed (and edited) from either end.

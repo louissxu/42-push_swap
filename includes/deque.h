@@ -5,7 +5,7 @@
 
 /**
  * @struct t_deque
- * A double ended queue
+ * A double ended queue.
  *
  * A double ended queue. Consists of a double ended list. Stores the pointers to
  * the head and tail of the deque for fast (constant time) access/modification
