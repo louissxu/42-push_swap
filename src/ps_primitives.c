@@ -10,10 +10,10 @@
  *
  * @param d The stacks to be manipulated and the list of moves to append to.
  */
-void ps_sa(t_ps_data *d)
+void	ps_sa(t_ps_data *d)
 {
-	void *tmp_0;
-	void *tmp_1;
+	void	*tmp_0;
+	void	*tmp_1;
 
 	if (ft_deque_length(d->a) >= 2)
 	{
@@ -35,10 +35,10 @@ void ps_sa(t_ps_data *d)
  *
  * @param d The stacks to be manipulated and the list of moves to append to.
  */
-void ps_sb(t_ps_data *d)
+void	ps_sb(t_ps_data *d)
 {
-	void *tmp_0;
-	void *tmp_1;
+	void	*tmp_0;
+	void	*tmp_1;
 
 	if (ft_deque_length(d->b) >= 2)
 	{
@@ -59,10 +59,10 @@ void ps_sb(t_ps_data *d)
  * 
  * @param d The stacks to be manipulated and the list of moves to append to.
  */
-void ps_ss(t_ps_data *d)
+void	ps_ss(t_ps_data *d)
 {
-	void *tmp_0;
-	void *tmp_1;
+	void	*tmp_0;
+	void	*tmp_1;
 
 	if (ft_deque_length(d->a) >= 2)
 	{
@@ -79,7 +79,6 @@ void ps_ss(t_ps_data *d)
 		ft_deque_appendleft(&d->b, tmp_1);
 	}
 	ft_lstadd_back(&d->m, ft_lstnew(ft_strdup("ss")));
-	
 }
 
 /**
@@ -92,9 +91,9 @@ void ps_ss(t_ps_data *d)
  *
  * @param d The stacks to be manipulated and the list of moves to append to.
  */
-void ps_pa(t_ps_data *d)
+void	ps_pa(t_ps_data *d)
 {
-	void *tmp;
+	void	*tmp;
 
 	tmp = ft_deque_popleft(&d->b);
 	ft_deque_appendleft(&d->a, tmp);
@@ -111,9 +110,9 @@ void ps_pa(t_ps_data *d)
  *
  * @param d The stacks to be manipulated and the list of moves to append to.
  */
-void ps_pb(t_ps_data *d)
+void	ps_pb(t_ps_data *d)
 {
-	void *tmp;
+	void	*tmp;
 
 	tmp = ft_deque_popleft(&d->a);
 	ft_deque_appendleft(&d->b, tmp);
@@ -149,9 +148,9 @@ void ps_ra(t_ps_data *d)
  *
  * @param d The stacks to be manipulated and the list of moves to append to.
  */
-void ps_rb(t_ps_data *d)
+void	ps_rb(t_ps_data *d)
 {
-	void *tmp;
+	void	*tmp;
 
 	tmp = ft_deque_popleft(&d->b);
 	ft_deque_append(&d->b, tmp);
@@ -167,9 +166,9 @@ void ps_rb(t_ps_data *d)
  *
  * @param d The stacks to be manipulated and the list of moves to append to.
  */
-void ps_rr(t_ps_data *d)
+void	ps_rr(t_ps_data *d)
 {
-	void *tmp;
+	void	*tmp;
 
 	tmp = ft_deque_popleft(&d->a);
 	ft_deque_append(&d->a, tmp);
@@ -188,9 +187,9 @@ void ps_rr(t_ps_data *d)
  *
  * @param d The stacks to be manipulated and the list of moves to append to.
  */
-void ps_rra(t_ps_data *d)
+void	ps_rra(t_ps_data *d)
 {
-	void *tmp;
+	void	*tmp;
 
 	tmp = ft_deque_pop(&d->a);
 	ft_deque_appendleft(&d->a, tmp);
@@ -207,9 +206,9 @@ void ps_rra(t_ps_data *d)
  *
  * @param d The stacks to be manipulated and the list of moves to append to.
  */
-void ps_rrb(t_ps_data *d)
+void	ps_rrb(t_ps_data *d)
 {
-	void *tmp;
+	void	*tmp;
 
 	tmp = ft_deque_pop(&d->b);
 	ft_deque_appendleft(&d->b, tmp);
@@ -225,9 +224,9 @@ void ps_rrb(t_ps_data *d)
  *
  * @param d The stacks to be manipulated and the list of moves to append to.
  */
-void ps_rrr(t_ps_data *d)
+void	ps_rrr(t_ps_data *d)
 {
-	void *tmp;
+	void	*tmp;
 
 	tmp = ft_deque_pop(&d->a);
 	ft_deque_appendleft(&d->a, tmp);
