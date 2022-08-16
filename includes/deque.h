@@ -12,9 +12,9 @@
  * to either end of the queue.
  *
  * @var t_deque::head
- *     Pointer to the head of the deque
+ *     Pointer to the head of the deque. NULL if the deque is empty.
  * @var t_deque::tail
- *     Pointer to the tail of the deque
+ *     Pointer to the tail of the deque. NULL if the deque is empty.
  */
 typedef struct s_deque {
 	t_dlist	*head;
