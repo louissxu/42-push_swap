@@ -12,9 +12,9 @@
  * @param d The stacks to perform the moves on and the moves list to append to.
  * @param value The value being searched for to be pushed across.
  */
-void ps_pa_value_optimal(t_ps_data *d, int value)
+void	ps_pa_value_optimal(t_ps_data *d, int value)
 {
-	int distance;
+	int	distance;
 
 	distance = ps_find_distance_to_value(&d->b, value);
 	while (distance > 0)
@@ -37,7 +37,7 @@ void ps_pa_value_optimal(t_ps_data *d, int value)
  *
  * @param d The stacks to perform the moves on and the moves list to append to.
  */
-void ps_pa_all(t_ps_data *d)
+void	ps_pa_all(t_ps_data *d)
 {
 	while (d->b.head)
 	{
@@ -54,9 +54,9 @@ void ps_pa_all(t_ps_data *d)
  * @param d The stacks to perform the moves on and the moves list to append to.
  * @param value The value being searche for to be pushed across.
  */
-void ps_pb_value_optimal(t_ps_data *d, int value)
+void	ps_pb_value_optimal(t_ps_data *d, int value)
 {
-	int distance;
+	int	distance;
 
 	distance = ps_find_distance_to_value(&d->a, value);
 	while (distance > 0)
