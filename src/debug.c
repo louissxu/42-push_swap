@@ -1,5 +1,13 @@
 #include "push_swap.h"
 
+/**
+ * @brief Print list to stdout
+ * 
+ * Prints a list's content to stdout. Debug function to interrogate the value of
+ * certain structs throughout development. Not used in final implementation.
+ *
+ * @param node The head pointer of the list to be printed
+ */
 void	debug_print_list(t_list *node)
 {
 	ft_printf("[");
