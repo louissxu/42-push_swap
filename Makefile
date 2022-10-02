@@ -1,7 +1,8 @@
 NAME = push_swap
 
-CC = gcc
+CC = emcc
 CFLAGS = -Wall -Wextra -Werror
+CFLAGS_FINAL_JS = --pre-js preJs.js -s WASM=0 -s ENVIRONMENT=web -s MODULARIZE=1 -s EXPORTED_FUNCTIONS=_main,_malloc,_free -s EXPORTED_RUNTIME_METHODS=cwrap,ccall,stringToUTF8,lengthBytesUTF8,setValue
 
 INCLUDES = includes
 LIBFT_INCLUDES = libft/includes
@@ -53,7 +54,7 @@ all: $(NAME)
 # 	gcc -Wall -Wextra -Werror test2.c -o push_swap
 
 $(NAME): $(OBJS) $(OBJS_PUSH_SWAP) libft
-		$(CC) $(CFLAGS) -I $(INCLUDES) -I $(LIBFT_INCLUDES) -L libft $(OBJS) $(OBJS_PUSH_SWAP) -lft -o $@
+		$(CC) $(CFLAGS) -I $(INCLUDES) -I $(LIBFT_INCLUDES) -L libft $(OBJS) $(OBJS_PUSH_SWAP) -lft -o $@.js $(CFLAGS_FINAL_JS)
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 		@mkdir -p $(@D)
