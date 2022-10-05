@@ -26,7 +26,7 @@ SRCS_RAW = \
 	ps_sort_double_radix_sort_improved_with_swaps.c \
 	ps_remove_duplicates.c \
 	ft_math_utilities.c \
-	parse_args.c 
+	parse_args.c
 
 
 SRC_DIR = src
@@ -54,6 +54,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(OBJS_PUSH_SWAP) libft
 		$(CC) $(CFLAGS) -I $(INCLUDES) -I $(LIBFT_INCLUDES) -L libft $(OBJS) $(OBJS_PUSH_SWAP) -lft -o $@
+
+checker: $(OBJS) $(OBJS_CHECKER) libft
+		$(CC) $(CFLAGS) -I $(INCLUDES) -I $(LIBFT_INCLUDES) -L libft $(OBJS) $(OBJS_CHECKER) -lft -o $@
 
 $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 		@mkdir -p $(@D)
