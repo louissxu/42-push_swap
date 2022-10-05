@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	// debug_print_deque(&l);
-	normalise_in_place(&data.a);
+	ps_normalise_in_place(&data.a);
 	// debug_print_deque(&l);
 	data.b = ft_deque_new();
 	data.m = NULL;

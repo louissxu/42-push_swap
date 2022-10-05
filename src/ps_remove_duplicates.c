@@ -47,6 +47,7 @@ bool	node_is_redundant(t_dlist *node)
 	return (false);
 }
 
+// Deprecated
 t_dlist *ps_remove_skipped(t_list *l, int stack_a_length)
 {
 	int	stack_b_length;
@@ -74,6 +75,7 @@ t_dlist *ps_remove_skipped(t_list *l, int stack_a_length)
 			}
 		}
 	}
+	return (NULL);
 }
 
 t_dlist	*ps_remove_duplicates(t_list *l)

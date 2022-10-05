@@ -68,10 +68,10 @@ void	ps_selection_sort_back_with_doubles(t_ps_data *d);
 
 // PS utilities
 int		ps_find_distance_to_value(t_deque *stack, int val);
-// long	ft_intcmp(const	int *i1, int *i2);
+long	ft_intcmp(const	int *i1, int *i2);
 // void	list_swap_content(t_list *node_1, t_list *node_2)
-// t_list	*list_sort_bubble_sort(t_list *l);
-t_deque	*normalise_in_place(t_deque *d);
+t_list	*list_sort_bubble_sort(t_list *l);
+t_deque	*ps_normalise_in_place(t_deque *d);
 bool	deque_has_duplicates(t_deque *d);
 
 

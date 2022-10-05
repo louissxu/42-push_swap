@@ -51,7 +51,7 @@ int	ps_find_distance_to_value(t_deque *stack, int val)
  * @param i2 Pointer to the second integer.
  * @returns long The difference between i2 and i2.
  */
-static long	ft_intcmp(const	int *i1, int *i2)
+long	ft_intcmp(const	int *i1, int *i2)
 {
 	return ((long)*i1 - *i2);
 }
@@ -84,7 +84,7 @@ static void	list_swap_content(t_list *node_1, t_list *node_2)
  * @return t_list* Returns the head of the list
  */
 
-static t_list	*list_sort_bubble_sort(t_list *l)
+t_list	*list_sort_bubble_sort(t_list *l)
 {
 	int	unsorted_element_count;
 	int swapped;
