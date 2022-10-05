@@ -132,7 +132,8 @@ t_deque	ft_clone_deque(t_deque d, void *(*clone)(void *))
  *     in case of error to clean up the content that was cloned but now hanging.
  * @return new_list_head The head of the new cloned list.
  */
-t_list	*ft_deque_to_list(t_deque d, void *(*clone)(void *), void (*del)(void *))
+t_list	*ft_deque_to_list(t_deque d, void *(*clone)(void *), \
+	void (*del)(void *))
 {
 	t_list	*new_list_head;
 	t_list	*new_list_tail;

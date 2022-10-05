@@ -31,15 +31,15 @@
  *     The node is expected to be a node within a list of moves. Ie the node
  *     that it checks is the next node in the list.
  */
-bool	node_is_redundant(t_dlist *node)
+BOOL	node_is_redundant(t_dlist *node)
 {
 	if (!node)
 	{
-		return (false);
+		return (FALSE);
 	}
 	if (!node->next)
 	{
-		return (false);
+		return (FALSE);
 	}
 	if ((ft_strncmp(node->content, "pb", 3) == 0 && \
 			ft_strncmp(node->next->content, "pa", 3) == 0) || \
@@ -54,9 +54,9 @@ bool	node_is_redundant(t_dlist *node)
 		(ft_strncmp(node->content, "rrb", 4) == 0 && \
 			ft_strncmp(node->next->content, "rb", 3) == 0))
 	{
-		return (true);
+		return (TRUE);
 	}
-	return (false);
+	return (FALSE);
 }
 
 // Deprecated

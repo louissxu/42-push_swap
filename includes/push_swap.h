@@ -1,9 +1,9 @@
 #ifndef PUSH_SWAP_H
 
 # define UNUSED(x) (void)(x)
-# define bool int
-# define true 1
-# define false 0
+# define BOOL int
+# define TRUE 1
+# define FALSE 0
 
 # include "deque.h"
 # include "libft.h"
@@ -72,27 +72,32 @@ long	ft_intcmp(const	int *i1, int *i2);
 // void	list_swap_content(t_list *node_1, t_list *node_2)
 t_list	*list_sort_bubble_sort(t_list *l);
 t_deque	*ps_normalise_in_place(t_deque *d);
-bool	deque_has_duplicates(t_deque *d);
+BOOL	deque_has_duplicates(t_deque *d);
 
 
 // FT math utilities
-int	ft_math_abs(int val);
+int		ft_math_abs(int val);
 
 // Type conversions and clones
 t_dlist	*ft_list_to_dlist(t_list *list_head, void *(*clone)(void *));
-t_list	*ft_deque_to_list(t_deque d, void *(*clone)(void *), void (*del)(void *));
+t_list	*ft_deque_to_list(t_deque d, void *(*clone)(void *), \
+	void (*del)(void *));
 t_deque	ft_clone_deque(t_deque d, void *(*clone)(void *));
-int	*clone_heap_integer(int *orig);
+int		*clone_heap_integer(int *orig);
 void	*clone_heap_integer_void(void *orig);
 
 // Other functions - to rearrange and/or maybe rename
-int	ft_pow(int x, int y);
-int	calculate_max_radix(int num);
+int		ft_pow(int x, int y);
+int		calculate_max_radix(int num);
 t_dlist	*ps_remove_duplicates(t_list *l);
 void	debug_print_list_of_moves_dlist(t_dlist *d);
 
 // Shared functions needed for checker
-t_deque	parse_input_args_to_deque(char **argv, bool *err);
-bool	deque_is_sorted(t_deque *d);
+t_deque	parse_input_args_to_deque(char **argv, BOOL *err);
+BOOL	deque_is_sorted(t_deque *d);
+
+// Checker functions
+int		apply_commands_to_stacks(t_ps_data *d, t_dlist *commands_head);
+int		apply_command_to_data(t_ps_data *d, t_dlist *node);
 
 #endif

@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	// t_deque	l;
 	// t_deque	r;
 	// t_list	*moves;
-	bool err;
+	BOOL err;
 
 	t_ps_data data;
 
@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 	{
 		return (0);
 	}
-	err = false;
+	err = FALSE;
 	data.a = parse_input_args_to_deque(argv, &err);
 	if (err)
 	{
@@ -33,13 +33,13 @@ int main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (0);
 	}
-	if (deque_has_duplicates(&data.a) == true)
+	if (deque_has_duplicates(&data.a) == TRUE)
 	{
 		write(2, "Error\n", 6);
 		ft_deque_destroy_list(&data.a, free);
 		return (0);
 	}
-	if (deque_is_sorted(&data.a) == true)
+	if (deque_is_sorted(&data.a) == TRUE)
 	{
 		ft_deque_destroy_list(&data.a, free);
 		return (0);

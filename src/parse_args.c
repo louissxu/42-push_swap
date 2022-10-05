@@ -12,24 +12,24 @@
 
 #include "push_swap.h"
 
-bool	str_is_valid_integer(char *str, int *dest)
+BOOL	str_is_valid_integer(char *str, int *dest)
 {
 	int		i;
 	int		num_len;
 	long	val;
-	bool	is_negative;
+	BOOL	is_negative;
 
 	i = 0;
 	num_len = 0;
 	val = 0;
-	is_negative = false;
+	is_negative = FALSE;
 	if (str[i] == '-')
 	{
 		i++;
-		is_negative = true;
+		is_negative = TRUE;
 		if (str[i] == '\0')
 		{
-			return (false);
+			return (FALSE);
 		}
 	}
 	while (str[i] == '0')
@@ -40,23 +40,23 @@ bool	str_is_valid_integer(char *str, int *dest)
 	{
 		if (ft_isinstr(str[i], "0123456789") == 0)
 		{
-			return (false);
+			return (FALSE);
 		}
 		val *= 10;
 		val += str[i] - '0';
 		i++;
 		num_len++;
 	}
-	if (is_negative == true)
+	if (is_negative == TRUE)
 	{
 		val *= -1;
 	}
 	if (val > INT_MAX || val < INT_MIN || str[i] != '\0')
 	{
-		return (false);
+		return (FALSE);
 	}
 	*dest = (int)val;
-	return (true);
+	return (TRUE);
 }
 
 void	clear_table(char **table)
@@ -72,16 +72,16 @@ void	clear_table(char **table)
 	free(table);
 }
 
-t_deque	parse_input_args_to_deque(char **argv, bool *err)
+t_deque	parse_input_args_to_deque(char **argv, BOOL *err)
 {
 	char	**input_arg;
 	int		*num;
-	bool	no_err;
+	BOOL	no_err;
 	t_deque	d;
 	char	**split_args;
 	size_t	i;
 
-	*err = false;
+	*err = FALSE;
 	d = ft_deque_new();
 	input_arg = &argv[1];
 	while (*input_arg)
@@ -96,11 +96,11 @@ t_deque	parse_input_args_to_deque(char **argv, bool *err)
 				break ;
 			}
 			no_err = str_is_valid_integer(split_args[i], num);
-			if (no_err == false)
+			if (no_err == FALSE)
 			{
 				ft_deque_destroy_list(&d, free);
 				free(num);
-				*err = true;
+				*err = TRUE;
 				clear_table(split_args);
 				return (d);
 			}
@@ -114,7 +114,7 @@ t_deque	parse_input_args_to_deque(char **argv, bool *err)
 	return (d);
 }
 
-bool	deque_has_duplicates(t_deque *d)
+BOOL	deque_has_duplicates(t_deque *d)
 {
 	t_list	*l;
 	t_list	*node;
@@ -124,37 +124,37 @@ bool	deque_has_duplicates(t_deque *d)
 	node = l;
 	if (node == NULL)
 	{
-		return (false);
+		return (FALSE);
 	}
 	if (node->next == NULL)
 	{
-		return (false);
+		return (FALSE);
 	}
 	while (node && node->next)
 	{
 		if (*(int *)node->content == *(int *)node->next->content)
 		{
 			ft_lstclear(&l, free);
-			return (true);
+			return (TRUE);
 		}
 		node = node->next;
 	}
 	ft_lstclear(&l, free);
-	return (false);
+	return (FALSE);
 }
 
-bool	deque_is_sorted(t_deque *d)
+BOOL	deque_is_sorted(t_deque *d)
 {
 	t_dlist	*node;
 
 	node = d->head;
 	if (node == NULL)
 	{
-		return (true);
+		return (TRUE);
 	}
 	if (node->next == NULL)
 	{
-		return (true);
+		return (TRUE);
 	}
 	while (node && node->next)
 	{
@@ -164,9 +164,9 @@ bool	deque_is_sorted(t_deque *d)
 		}
 		else
 		{
-			return false;
+			return FALSE;
 		}
 		node = node->next;
 	}
-	return true;
+	return TRUE;
 }

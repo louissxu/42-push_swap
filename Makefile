@@ -9,7 +9,10 @@ LIBFT_INCLUDES = libft/includes
 SRCS_RAW = \
 	debug.c \
 	deque.c \
+	deque1.c \
 	dlist.c \
+	dlist1.c \
+	dlist2.c \
 	conversions.c \
 	ps_primitives.c \
 	ps_derived.c \
@@ -41,7 +44,7 @@ SRCS_PUSH_SWAP = $(addprefix $(SRC_DIR)/,$(SRCS_PUSH_SWAP_RAW))
 OBJS_PUSH_SWAP_RAW = $(SRCS_PUSH_SWAP_RAW:.c=.o)
 OBJS_PUSH_SWAP = $(addprefix $(OBJ_DIR)/,$(OBJS_PUSH_SWAP_RAW))
 
-SRCS_CHECKER_RAW = checker.c
+SRCS_CHECKER_RAW = checker.c checker1.c
 SRCS_CHECKER = $(addprefix $(SRC_DIR)/,$(SRCS_CHECKER_RAW))
 OBJS_CHECKER_RAW = $(SRCS_CHECKER_RAW:.c=.o)
 OBJS_CHECKER = $(addprefix $(OBJ_DIR)/,$(OBJS_CHECKER_RAW)) 
