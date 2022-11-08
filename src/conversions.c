@@ -141,8 +141,7 @@ t_list	*ft_deque_to_list(t_deque d, void *(*clone)(void *), \
 	t_dlist	*curr_node;
 	void	*cloned_content;
 
-	new_list_head = NULL;
-	new_list_tail = NULL;
+	set_pointers_to_null(2, &new_list_head, &new_list_tail);
 	curr_node = d.head;
 	while (curr_node)
 	{

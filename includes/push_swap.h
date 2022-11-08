@@ -8,6 +8,7 @@
 # include "deque.h"
 # include "libft.h"
 # include <limits.h>
+# include <stdarg.h>
 
 /**
  * @struct t_ps_data
@@ -85,6 +86,8 @@ t_list	*ft_deque_to_list(t_deque d, void *(*clone)(void *), \
 t_deque	ft_clone_deque(t_deque d, void *(*clone)(void *));
 int		*clone_heap_integer(int *orig);
 void	*clone_heap_integer_void(void *orig);
+
+void	set_pointers_to_null(size_t count, ...);
 
 // Other functions - to rearrange and/or maybe rename
 int		ft_pow(int x, int y);

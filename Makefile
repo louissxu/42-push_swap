@@ -14,6 +14,7 @@ SRCS_RAW = \
 	dlist1.c \
 	dlist2.c \
 	conversions.c \
+	conversions1.c \
 	ps_primitives.c \
 	ps_derived.c \
 	ps_utilities.c \
