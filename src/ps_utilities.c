@@ -95,11 +95,10 @@ static void	list_swap_content(t_list *node_1, t_list *node_2)
  * @param l The head of the list to be sorted
  * @return t_list* Returns the head of the list
  */
-
 t_list	*list_sort_bubble_sort(t_list *l)
 {
-	int	unsorted_element_count;
-	int swapped;
+	int		unsorted_element_count;
+	int		swapped;
 	t_list	*node;
 	int		node_i;
 
@@ -124,6 +123,15 @@ t_list	*list_sort_bubble_sort(t_list *l)
 	return (l);
 }
 
+/**
+ * @brief Normalise the values in a deque
+ * 
+ * Takes the values in deque and normalises them (replaces their values) so that
+ * they are in the range: 0..(deque.length - 1)
+ * 
+ * @param d The deque to be normalised.
+ * @return The same pointer to the start of the deque.
+*/
 t_deque	*ps_normalise_in_place(t_deque *d)
 {
 	t_list	*sorted_list_head;
@@ -131,7 +139,8 @@ t_deque	*ps_normalise_in_place(t_deque *d)
 	t_dlist	*d_node;
 	t_list	*sorted_list_node;
 
-	sorted_list_head = list_sort_bubble_sort(ft_deque_to_list(*d, clone_heap_integer_void, free));
+	sorted_list_head = list_sort_bubble_sort(\
+		ft_deque_to_list(*d, clone_heap_integer_void, free));
 	d_node = d->head;
 	while (d_node != NULL)
 	{

@@ -12,8 +12,19 @@
 
 #include "dlist.h"
 
-// Pops the node with the given pointer. Assumes that the node is a valid
-// pointer in the head list (otherwise bad things happen)
+/**
+ * @brief Pops off an arbitrary node in a dlist
+ * 
+ * Pops off an arbitrary dlist node from a dlist. 
+ * 
+ * NB: It assumes that the node is a valid pointer in the list and does not
+ * check that this is the case. If the node is not in the dlist then bad things
+ * will happen.
+ * 
+ * @param head The head of the dlist where the node is being popped from.
+ * @param node The pointer of the node that is being popped off the list.
+ * @return The dlist node that was popped off.
+*/
 t_dlist	*ft_dlist_pop_at_pointer(t_dlist **head, t_dlist *node)
 {
 	t_dlist	*popped_node;
@@ -33,6 +44,14 @@ t_dlist	*ft_dlist_pop_at_pointer(t_dlist **head, t_dlist *node)
 	return (node);
 }
 
+/**
+ * @brief Calculate the length of a dlist
+ * 
+ * Walks through the dlist and returns the length of the dlist
+ * 
+ * @param head The head of the dlist.
+ * @return The length (number of nodes) in the dlist.
+*/
 size_t	ft_dlist_length(t_dlist *head)
 {
 	size_t	len;

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conversions.c                                      :+:      :+:    :+:   */
+/*   conversions1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lxu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,6 +12,15 @@
 
 #include "push_swap.h"
 
+/**
+ * @brief Set multiple pointers to NULL
+ * 
+ * Takes a number of pointers and the count of those pointers and sets them all
+ * to NULL.
+ * 
+ * @param count The number of pointers in the variadic list.
+ * @param ... Variadic list of the pointesr to be set to NULL.
+*/
 void	set_pointers_to_null(size_t count, ...)
 {
 	va_list	ptrs;

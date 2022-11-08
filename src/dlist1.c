@@ -12,6 +12,15 @@
 
 #include "dlist.h"
 
+/**
+ * @brief Remove the last node of a dlist
+ * 
+ * Walks to the end of a dlist and deletes the last node.
+ * 
+ * @see ft_dlist_remove_first()
+ * @param head Address of the pointer to the head of the dlist.
+ * @param del Delete function to clear the content of the node being deleted.
+*/
 void	ft_dlist_remove_last(t_dlist **head, void (*del)(void *))
 {
 	t_dlist	*last;
@@ -37,6 +46,15 @@ void	ft_dlist_remove_last(t_dlist **head, void (*del)(void *))
 	return ;
 }
 
+/**
+ * @brief Insert a node at the start of a dlist
+ * 
+ * Inserts a dlist node to the start of a dlist. Then updates the head pointer
+ * to point to the new head (the newly inserted node).
+ * 
+ * @param head Address of the pointer to the first node of the dlist.
+ * @param new_node Pointer to the new node to be inserted.
+*/
 void	ft_dlist_insert_start(t_dlist **head, t_dlist *new_node)
 {
 	if (!head | !new_node)
@@ -57,6 +75,16 @@ void	ft_dlist_insert_start(t_dlist **head, t_dlist *new_node)
 	return ;
 }
 
+/**
+ * @brief Insert a node at the end of a dlist
+ * 
+ * Inserts a dlist node to the end of a dlist. Then updates the head pointer if
+ * the head pointer needs to be updated (if the head pointer was previously
+ * NULL and the new node is now the only node).
+ * 
+ * @param head Address of the pointer to the first node of the dlist.
+ * @param new_ndoe Pointer to the new node to be inserted.
+*/
 void	ft_dlist_insert_end(t_dlist **head, t_dlist *new_node)
 {
 	t_dlist	*last;
@@ -79,6 +107,16 @@ void	ft_dlist_insert_end(t_dlist **head, t_dlist *new_node)
 	return ;
 }
 
+/**
+ * @brief Pop and return the first element of a dlist
+ * 
+ * Pops off the first element of a dlist and returns it. Modifies the head
+ * pointer to point to the new head node (the second node). Pointer is set to
+ * NULL if there are no remaining nodes in the dlist.
+ * 
+ * @param head Address of the pointer to the head of the dlist.
+ * @return dlist node that has been popped off.
+*/
 t_dlist	*ft_dlist_pop_first(t_dlist **head)
 {
 	t_dlist	*node;
@@ -101,6 +139,15 @@ t_dlist	*ft_dlist_pop_first(t_dlist **head)
 	return (node);
 }
 
+/**
+ * @brief Pop and return the last element of a dlist
+ * 
+ * Pops off the last element of a dlist and returns it. Modifies the head
+ * pointer of the dlist if it needs to be updated.
+ * 
+ * @param head Address of the pointer to the head of the dlist.
+ * @return dlist node that has been popped off.
+*/
 t_dlist *ft_dlist_pop_last(t_dlist **head)
 {
 	t_dlist	*node;
