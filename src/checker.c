@@ -62,9 +62,7 @@ int	main(int argc, char **argv)
 	BOOL		err;
 
 	if (argc == 1)
-	{
 		return (0);
-	}
 	err = FALSE;
 	d.a = parse_input_args_to_deque(argv, &err);
 	if (err)

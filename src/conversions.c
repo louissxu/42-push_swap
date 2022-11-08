@@ -147,9 +147,7 @@ t_list	*ft_deque_to_list(t_deque d, void *(*clone)(void *), \
 	{
 		cloned_content = clone(curr_node->content);
 		if (!cloned_content)
-		{
 			return (new_list_head);
-		}
 		new_list_node = ft_lstnew(cloned_content);
 		if (!new_list_node)
 		{
@@ -158,9 +156,7 @@ t_list	*ft_deque_to_list(t_deque d, void *(*clone)(void *), \
 		}
 		ft_lstadd_back(&new_list_tail, new_list_node);
 		if (new_list_head == NULL)
-		{
 			new_list_head = new_list_tail;
-		}
 		curr_node = curr_node->next;
 	}
 	return (new_list_head);
