@@ -12,6 +12,15 @@
 
 #include "push_swap.h"
 
+/**
+ * @brief Sorts a five element push swap puzzle
+ * 
+ * Pushes across the smallest two elements. The stack a is then sorted as if the
+ * stack has only three elements. Then the two elements are pushed back onto
+ * stack a.
+ * 
+ * @param d Pointer to a set of push swap data.
+*/
 void	ps_sort_5_elements(t_ps_data *d)
 {
 	ps_pb_value_optimal(d, 0);

@@ -12,34 +12,15 @@
 
 #include "push_swap.h"
 
-// // Probably remove this. This is a duplicate
-// int	find_distance_from_val(t_deque *stack, int val)
-// {
-// 	int		distance;
-// 	t_dlist	*stack_node;
-
-// 	distance = 0;
-// 	stack_node = stack->head;
-// 	if (stack_node == NULL)
-// 	{
-// 		return (0);
-// 	}
-// 	while (*(int *)(stack_node->content) != val)
-// 	{
-// 		distance++;
-// 		stack_node = stack_node->next;
-// 		if (stack_node == NULL)
-// 		{
-// 			break ;
-// 		}
-// 	}
-// 	if (ft_deque_length(*stack) - distance < (size_t)distance)
-// 	{
-// 		distance = distance - ft_deque_length(*stack);
-// 	}
-// 	return (distance);
-// }
-
+/**
+ * @brief Sorts a four element push swap puzzle
+ * 
+ * Pushes across the smallest element with the optimal number of moves. The list
+ * is then sorted as if the list is three elements. Then the smallest element is
+ * pushed back onto stack a.
+ * 
+ * @param d Pointer to a set of push swap data.
+*/
 void	ps_sort_4_elements(t_ps_data *d)
 {
 	ps_pb_value_optimal(d, 0);
