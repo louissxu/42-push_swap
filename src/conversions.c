@@ -33,7 +33,7 @@ int	*clone_heap_integer(int *orig)
 /**
  * @brief Clones a void pointer containing a integer.
  * 
- * Wraps clone_heap_integer so taht it accepts a void pointer as argument. Used
+ * Wraps clone_heap_integer so that it accepts a void pointer as argument. Used
  * where some functions expect a function with a (void *) function signature.
  *
  * @param orig The void pointer to the initial integer to clone.
