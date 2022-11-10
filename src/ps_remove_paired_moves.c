@@ -13,6 +13,58 @@
 #include "push_swap.h"
 
 /**
+ * @brief Internal checks for node_is_redundant function
+ * 
+ * Exists due to norm function line limit.
+ * 
+ * @see node_is_redundant()
+*/
+static BOOL	node_is_redundant_1(t_dlist *node)
+{
+	if ((ft_strncmp(node->content, "pb", 3) == 0 && \
+			ft_strncmp(node->next->content, "pa", 3) == 0) || \
+		(ft_strncmp(node->content, "pa", 3) == 0 && \
+			ft_strncmp(node->next->content, "pb", 3) == 0) || \
+		(ft_strncmp(node->content, "ra", 3) == 0 && \
+			ft_strncmp(node->next->content, "rra", 4) == 0) || \
+		(ft_strncmp(node->content, "rra", 4) == 0 && \
+			ft_strncmp(node->next->content, "ra", 3) == 0) || \
+		(ft_strncmp(node->content, "rb", 3) == 0 && \
+			ft_strncmp(node->next->content, "rrb", 4) == 0) || \
+		(ft_strncmp(node->content, "rrb", 4) == 0 && \
+			ft_strncmp(node->next->content, "rb", 3) == 0))
+	{
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+/**
+ * @brief Internal checks for node_is_redundant function
+ * 
+ * Exists due to norm function line limit.
+ * 
+ * @see node_is_redundant()
+*/
+static BOOL	node_is_redundant_2(t_dlist *node)
+{
+	if ((ft_strncmp(node->content, "sa", 3) == 0 && \
+			ft_strncmp(node->next->content, "sa", 3) == 0) || \
+		(ft_strncmp(node->content, "sb", 3) == 0 && \
+			ft_strncmp(node->next->content, "sb", 3) == 0) || \
+		(ft_strncmp(node->content, "ss", 3) == 0 && \
+			ft_strncmp(node->next->content, "ss", 3) == 0) || \
+		(ft_strncmp(node->content, "rr", 3) == 0 && \
+			ft_strncmp(node->next->content, "rrr", 4) == 0) || \
+		(ft_strncmp(node->content, "rrr", 4) == 0 && \
+			ft_strncmp(node->next->content, "rr", 3) == 0))
+	{
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+/**
  * @brief Checks if node is redundant
  * 
  * Checks if a node is is redundant. A node is redundant when it does an action
@@ -41,25 +93,25 @@ BOOL	node_is_redundant(t_dlist *node)
 	{
 		return (FALSE);
 	}
-	if ((ft_strncmp(node->content, "pb", 3) == 0 && \
-			ft_strncmp(node->next->content, "pa", 3) == 0) || \
-		(ft_strncmp(node->content, "pa", 3) == 0 && \
-			ft_strncmp(node->next->content, "pb", 3) == 0) || \
-		(ft_strncmp(node->content, "ra", 3) == 0 && \
-			ft_strncmp(node->next->content, "rra", 4) == 0) || \
-		(ft_strncmp(node->content, "rra", 4) == 0 && \
-			ft_strncmp(node->next->content, "ra", 3) == 0) || \
-		(ft_strncmp(node->content, "rb", 3) == 0 && \
-			ft_strncmp(node->next->content, "rrb", 4) == 0) || \
-		(ft_strncmp(node->content, "rrb", 4) == 0 && \
-			ft_strncmp(node->next->content, "rb", 3) == 0))
+	if (node_is_redundant_1(node) || node_is_redundant_2(node))
 	{
 		return (TRUE);
 	}
 	return (FALSE);
 }
 
-static void	pop_node_and_reset_pointer(t_dlist **node, t_dlist **dlist_head)
+/**
+ * @brief Subroutine to remove a node and reset the associated pointers
+ * 
+ * Subroutine of ps_remove_paired_moves. This removes the node and moves the
+ * pointers as necessary.
+ * 
+ * @see ps_remove_paired_moves()
+ * @param dlist_head The head of the dlist being modified.
+ * @param node A pointer to the node that is being popped. The pointer must
+ *   point to a node in the dlist being modified.
+*/
+static void	pop_node_and_reset_pointer(t_dlist **dlist_head, t_dlist **node)
 {
 	t_dlist	*prev_node;
 	t_dlist	*popped_node;
@@ -79,6 +131,17 @@ static void	pop_node_and_reset_pointer(t_dlist **node, t_dlist **dlist_head)
 	}
 }
 
+/**
+ * @brief Removes paired moves that are redundant
+ * 
+ * Checks if moves in a list of moves are redundant pairs. Moves are a redundant
+ * pair when a move has an subsequent move that would undo that action and
+ * therefore the pair of moves do nothing (eg pa/pb, or ra/rra, etc). This
+ * function walks through the list and removes these redundant pairs.
+ * 
+ * @param l A list of moves to be checked.
+ * @returns A dlist cloned with these same moves but with paired moves removed.
+*/
 t_dlist	*ps_remove_paired_moves(t_list *l)
 {
 	t_dlist	*dlist_head;
@@ -98,7 +161,7 @@ t_dlist	*ps_remove_paired_moves(t_list *l)
 	{
 		if (node_is_redundant(node))
 		{
-			pop_node_and_reset_pointer(&node, &dlist_head);
+			pop_node_and_reset_pointer(&dlist_head, &node);
 		}
 		else
 		{
