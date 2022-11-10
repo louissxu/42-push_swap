@@ -101,7 +101,7 @@ int main(int argc, char **argv)
 	// }
 	// debug_print_list_of_moves(moves);
 	t_dlist *moves_dlist;
-	moves_dlist = ps_remove_duplicates(data.m);
+	moves_dlist = ps_remove_paired_moves(data.m);
 	// moves_dlist = list_to_dlist(moves);
 	debug_print_list_of_moves_dlist(moves_dlist);
 	// ft_printf("list len %i    dups removed len %i\n", ft_lstsize(moves), ft_dlist_length(moves_dlist));

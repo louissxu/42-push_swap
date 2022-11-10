@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_remove_duplicates.c                             :+:      :+:    :+:   */
+/*   ps_remove_paired_moves.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lxu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -22,10 +22,10 @@
  * NB: This will behave incorrectly in the edge case where a pa (or pb) move is
  * "skipped" due to an empty list. Consider - a: [], b: [1, 2], moves: [pb, pa]
  * Correct state after the moves will be a: [1], b: [2]. But the moves will be
- * considered redundant and both nodes removed by ps_remove_duplicates because
+ * considered redundant and both nodes removed by ps_remove_paired_moves because
  * it thinks pa will undo pb.
  *
- * Therefore, it expects skipped moves to be stripped out first.
+ * Therefore, it requires skipped moves to be stripped out first.
  *
  * @param node A pointer to a dlist node containing a move string as content.
  *     The node is expected to be a node within a list of moves. Ie the node
@@ -79,7 +79,7 @@ static void	pop_node_and_reset_pointer(t_dlist **node, t_dlist **dlist_head)
 	}
 }
 
-t_dlist	*ps_remove_duplicates(t_list *l)
+t_dlist	*ps_remove_paired_moves(t_list *l)
 {
 	t_dlist	*dlist_head;
 	t_dlist	*node;

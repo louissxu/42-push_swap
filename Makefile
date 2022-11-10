@@ -30,7 +30,7 @@ SRCS_RAW = \
 	ps_sort_double_radix_sort.c \
 	ps_sort_double_radix_sort_improved.c \
 	ps_sort_double_radix_sort_improved_with_swaps.c \
-	ps_remove_duplicates.c \
+	ps_remove_paired_moves.c \
 	ps_remove_skipped.c \
 	ft_math_utilities.c \
 	parse_args.c

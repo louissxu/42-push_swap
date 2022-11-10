@@ -261,7 +261,7 @@ size_t ps_try_500_bracket_sort(t_ps_data *d)
 	ps_pa_all(&new_d);
 	ps_split_into_buckets_double_with_reverse_rotate(&new_d, 32);
 	ps_selection_sort_back_with_doubles_and_banking_low_val(&new_d, 32);
-	new_moves_dlist = ps_remove_duplicates(new_d.m);
+	new_moves_dlist = ps_remove_paired_moves(new_d.m);
 	new_number_of_moves = ft_dlist_length(new_moves_dlist);
 
 	ft_deque_destroy_list(&new_d.a, free);
@@ -284,7 +284,7 @@ size_t ps_try_500_radix_sort(t_ps_data *d)
 	new_moves_dlist = NULL;
 
 	ps_sort_double_radix_sort_improved_with_swaps(&new_d);
-	new_moves_dlist = ps_remove_duplicates(new_d.m);
+	new_moves_dlist = ps_remove_paired_moves(new_d.m);
 	new_number_of_moves = ft_dlist_length(new_moves_dlist);
 
 	ft_deque_destroy_list(&new_d.a, free);
