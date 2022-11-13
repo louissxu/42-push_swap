@@ -72,7 +72,7 @@ void	ps_print_list_of_moves_dlist(t_dlist *d);
 void	ps_print_moves(t_ps_data data);
 
 // PS advanced
-void	ps_selection_sort_back_with_doubles(t_ps_data *d);
+// void	ps_selection_sort_back_with_doubles(t_ps_data *d);
 
 // PS utilities
 int		ps_find_distance_to_value(t_deque *stack, int val);
