@@ -11,3 +11,17 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/**
+ * @brief Destroy ps_data struct
+ * 
+ * Destroys the the components within a ps_data struct.
+ * 
+ * @param data ps_data struct to be destroyed
+*/
+void	ps_data_destroy(t_ps_data data)
+{
+	ft_deque_destroy_list(&data.a, free);
+	ft_deque_destroy_list(&data.b, free);
+	ft_lstclear(&data.m, free);
+}

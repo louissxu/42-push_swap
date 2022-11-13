@@ -59,10 +59,17 @@ void	ps_sort_double_radix_sort(t_ps_data *d);
 void	ps_sort_double_radix_sort_improved(t_ps_data *d);
 void	ps_sort_double_radix_sort_improved_with_swaps(t_ps_data *d);
 
+// PS data
+void	ps_data_destroy(t_ps_data data);
+
 // PS derived
 void	ps_pa_value_optimal(t_ps_data *d, int value);
 void	ps_pa_all(t_ps_data *d);
 void	ps_pb_value_optimal(t_ps_data *d, int value);
+
+// PS print
+void	ps_print_list_of_moves_dlist(t_dlist *d);
+void	ps_print_moves(t_ps_data data);
 
 // PS advanced
 void	ps_selection_sort_back_with_doubles(t_ps_data *d);
@@ -93,7 +100,6 @@ void	set_pointers_to_null(size_t count, ...);
 int		ft_pow(int x, int y);
 int		calculate_max_radix(int num);
 t_dlist	*ps_remove_paired_moves(t_list *l);
-void	debug_print_list_of_moves_dlist(t_dlist *d);
 
 // Shared functions needed for checker
 t_deque	parse_input_args_to_deque(char **argv, BOOL *err);
