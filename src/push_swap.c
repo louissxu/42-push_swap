@@ -12,6 +12,17 @@
 
 #include "push_swap.h"
 
+/**
+ * @brief Print string, destroy data struct, and return a value
+ * 
+ * An internal function/collection of actions. Primarily exists to condense the
+ * main function to fit the norm limits.
+ * 
+ * @param output_str The output string to be printed to console.
+ * @param data The data struct to be destroyed.
+ * @param return_value The return value to be returned.
+ * @return Returns the return value that was passed in.
+*/
 static int	print_string_and_data_destroy_and_return(\
 	char *output_str, t_ps_data data, int return_val)
 {
@@ -20,6 +31,17 @@ static int	print_string_and_data_destroy_and_return(\
 	return (return_val);
 }
 
+/**
+ * @brief Runs sort function on data struct
+ * 
+ * Runs a sort function on a data struct. Runs corresponding most efficient
+ * option depending on the starting stack size.
+ * 
+ * Function sorts in-place and appends the moves onto the passed in data struct.
+ * 
+ * @param data The data struct containing the stack to be sorted and for the
+ *   moves to be recorded within.
+*/
 static void	run_corresponding_ps_sort(t_ps_data *data)
 {
 	if (ft_deque_length((*data).a) <= 1)
@@ -43,6 +65,18 @@ static void	run_corresponding_ps_sort(t_ps_data *data)
 	return ;
 }
 
+/**
+ * @brief Main function for the program
+ * 
+ * Parses args into the stack. Checks if the data is valid and returns an error
+ * if appropriate. Then if the data is valid, runs the corresponding sort
+ * function and prints the output to the console stdout.
+ * 
+ * @param argc The count of input args
+ * @param argv Vector of the arguments. The arguments are expected to contain
+ *   the numbers in the order of the starting state of stack a.
+ * @return Returns 0 if successfully exits.
+*/
 int	main(int argc, char **argv)
 {
 	BOOL		err;
@@ -55,11 +89,11 @@ int	main(int argc, char **argv)
 	data.b = ft_deque_new();
 	data.m = NULL;
 	if (err)
-		print_string_and_data_destroy_and_return("Error\n", data, 0);
+		return(print_string_and_data_destroy_and_return("Error\n", data, 0));
 	if (deque_has_duplicates(&data.a) == TRUE)
-		print_string_and_data_destroy_and_return("Error\n", data, 0);
+		return(print_string_and_data_destroy_and_return("Error\n", data, 0));
 	if (deque_is_sorted(&data.a) == TRUE)
-		print_string_and_data_destroy_and_return("", data, 0);
+		return(print_string_and_data_destroy_and_return("", data, 0));
 	ps_normalise_in_place(&data.a);
 	run_corresponding_ps_sort(&data);
 	ps_print_moves(data);
