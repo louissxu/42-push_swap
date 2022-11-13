@@ -23,10 +23,13 @@
  * @param return_value The return value to be returned.
  * @return Returns the return value that was passed in.
 */
-static int	print_string_and_data_destroy_and_return(\
-	char *output_str, t_ps_data data, int return_val)
+static int	print_error_and_data_destroy_and_return(\
+	BOOL print_err, t_ps_data data, int return_val)
 {
-	ft_printf("%s", output_str);
+	if (print_err)
+	{
+		write(2, "Error\n", 6);
+	}
 	ps_data_destroy(data);
 	return (return_val);
 }
@@ -89,11 +92,11 @@ int	main(int argc, char **argv)
 	data.b = ft_deque_new();
 	data.m = NULL;
 	if (err)
-		return (print_string_and_data_destroy_and_return("Error\n", data, 0));
+		return (print_error_and_data_destroy_and_return(TRUE, data, 0));
 	if (deque_has_duplicates(&data.a) == TRUE)
-		return (print_string_and_data_destroy_and_return("Error\n", data, 0));
+		return (print_error_and_data_destroy_and_return(TRUE, data, 0));
 	if (deque_is_sorted(&data.a) == TRUE)
-		return (print_string_and_data_destroy_and_return("", data, 0));
+		return (print_error_and_data_destroy_and_return(FALSE, data, 0));
 	ps_normalise_in_place(&data.a);
 	run_corresponding_ps_sort(&data);
 	ps_print_moves(data);
