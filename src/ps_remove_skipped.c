@@ -31,6 +31,11 @@
  * before ps_remove_redundant() is run. Running this function beforehand is one
  * way of achieving that.
  * 
+ * NB. This is not used in the current implementation of push_swap. It is known
+ * that the algorithms used will not produce these skipped redundant moves
+ * therefore time is not wasted to check if any skipped moves need to be
+ * removed.
+ * 
  * @param cmds The list of commands to be checked and duplicated across.
  * @param stack_a_length The starting length of stack a.
  * @return The head node of a dlist containing the commands with skipped
