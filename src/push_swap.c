@@ -89,11 +89,11 @@ int	main(int argc, char **argv)
 	data.b = ft_deque_new();
 	data.m = NULL;
 	if (err)
-		return(print_string_and_data_destroy_and_return("Error\n", data, 0));
+		return (print_string_and_data_destroy_and_return("Error\n", data, 0));
 	if (deque_has_duplicates(&data.a) == TRUE)
-		return(print_string_and_data_destroy_and_return("Error\n", data, 0));
+		return (print_string_and_data_destroy_and_return("Error\n", data, 0));
 	if (deque_is_sorted(&data.a) == TRUE)
-		return(print_string_and_data_destroy_and_return("", data, 0));
+		return (print_string_and_data_destroy_and_return("", data, 0));
 	ps_normalise_in_place(&data.a);
 	run_corresponding_ps_sort(&data);
 	ps_print_moves(data);
