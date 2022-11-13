@@ -18,7 +18,9 @@ SRCS_RAW = \
 	ps_primitives.c \
 	ps_primitives1.c \
 	ps_primitives2.c \
+	ps_data.c \
 	ps_derived.c \
+	ps_print.c \
 	ps_utilities.c \
 	ps_sort_2_elements.c \
 	ps_sort_3_elements.c \
