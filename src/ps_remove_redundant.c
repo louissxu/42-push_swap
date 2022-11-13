@@ -21,5 +21,5 @@
 */
 t_dlist	*ps_remove_redundant(t_ps_data data)
 {
-	return (NULL)
+	return (NULL);
 }
