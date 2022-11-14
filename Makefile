@@ -28,6 +28,8 @@ SRCS_RAW = \
 	ps_sort_5_elements.c \
 	ps_sort_100_elements.c \
 	ps_sort_500_elements.c \
+	ps_sort_500_elements1.c \
+	ps_sort_500_elements2.c \
 	ps_sort_radix_sort.c \
 	ps_sort_double_radix_sort.c \
 	ps_sort_double_radix_sort_improved.c \
