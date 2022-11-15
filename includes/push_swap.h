@@ -114,6 +114,20 @@ void	ps_selection_sort_back_with_doubles_and_banking_low_val_1(t_ps_data *d, int
 void	ps_selection_sort_back_with_doubles_and_banking_low_val_2(t_ps_data *d, int *low_target, int bracket_low_bound);
 void	ps_selection_sort_back_with_doubles_and_banking_low_val(t_ps_data *d, int num_groups);
 
+// Sort double radix sort improved with swaps
+void	ps_pa_with_swap(t_ps_data *d);
+void	ps_cycle_stack_and_swap(t_ps_data *d);
+void	ps_sa_if_helpful(t_ps_data *d);
+void	ps_sa_bottom_if_helpful(t_ps_data *d);
+void	ps_spin_and_pb_if_radix_is_value(t_ps_data *d, int radix_val);
+void	ps_spin_and_pb_if_radix_is_value_and_sa_bottom(t_ps_data *d, \
+	int radix_val);
+void	ps_pa_with_swap_for_count_of_values(t_ps_data *d, int count);
+void	ps_spin_and_pa_if_radix_is_not_value(t_ps_data *d, int radix_val);
+void	ps_pa_with_swap_all(t_ps_data *d);
+void	ps_spin_and_pb_if_radix_is_value_and_all_sa_bottom(t_ps_data *d, \
+	int radix_val);
+
 t_deque	ft_deque_clone(t_deque d, void *(clone_element)(void *));
 size_t	ps_try_500_bracket_sort(t_ps_data *d);
 size_t	ps_try_500_radix_sort(t_ps_data *d);
