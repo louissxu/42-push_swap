@@ -35,35 +35,40 @@ int	ft_math_abs(int val)
 /**
  * @brief Returns the power of an integer.
  * 
- * Takes two integers and returns the power of x to the y.
+ * Takes two integers and returns the power of the base to the exponent
+ * (base^exponent).
  * 
- * Uses serial multiplication. (Fix: Switch to exponentiation by squaring for a
- * faster algorithm)
+ * Uses iterative version of exponentiation by squaring.
+ * 
+ * NB: DOES NOT HANDLE NEGATIVE EXPONENTS. TO BE FIXED.
  * 
  * If the return value overflows (> INT_MAX) the behaviour is undefined. Likely
  * rolls over but this depends on the compiler's handling of integer overflow.
+ * 
+ * @param base The base of the power calculation.
+ * @param exponent The exponent of the power calculation.
+ * @returns base^exponent
 */
-int	ft_math_pow(int x, int y)
+int	ft_math_pow(int base, int exponent)
 {
 	int	result;
 
-	if (x == 0 && y == 0)
-	{
+	if (base == 0 && exponent == 0)
 		return (0);
-	}
-	if (y == 0)
-	{
-		return (1);
-	}
-	if (y < 0)
-	{
+	if (exponent == 0)
 		return (0);
-	}
-	result = x;
-	while (y > 1)
+	if (exponent < 0)
+		return (0);
+	result = 1;
+	while (exponent > 0)
 	{
-		result *= x;
-		y--;
+		while ((exponent & 1) == 0)
+		{
+			exponent /= 2;
+			base *= base;
+		}
+		exponent--;
+		result *= base;
 	}
 	return (result);
 }
