@@ -32,31 +32,6 @@ int is_sorted(t_deque *stack)
 	return (1);
 }
 
-int ft_pow(int x, int y)
-{
-	int result;
-
-	if (x == 0 && y == 0)
-	{
-		return (0);
-	}
-	if (y == 0)
-	{
-		return (1);
-	}
-	if (y < 0)
-	{
-		return (0);
-	}
-	result = x;
-	while (y > 1)
-	{
-		result *= x;
-		y--;
-	}
-	return (result);
-}
-
 // void	ps_sort_radix_sort(t_ps_data *d)
 void ps_sort_radix_sort(t_ps_data *d)
 {
@@ -71,7 +46,7 @@ void ps_sort_radix_sort(t_ps_data *d)
 		max_i = ft_deque_length(d->a);
 		while (i < max_i)
 		{
-			if (*(int *)(d->a.head->content) / ft_pow(2, radix) % 2 == 0)
+			if (*(int *)(d->a.head->content) / ft_math_pow(2, radix) % 2 == 0)
 			{
 				ps_pb(d);
 			}

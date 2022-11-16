@@ -113,7 +113,7 @@ void	ps_spin_and_pb_if_radix_is_value(t_ps_data *d, int radix_val)
 	i = ft_deque_length(d->a);
 	while (i > 0)
 	{
-		if (*(int *)(d->a.head->content) / ft_pow(2, radix_val) % 2 == 0)
+		if (*(int *)(d->a.head->content) / ft_math_pow(2, radix_val) % 2 == 0)
 		{
 			ps_pb(d);
 		}

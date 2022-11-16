@@ -98,7 +98,6 @@ void	*clone_heap_integer_void(void *orig);
 void	set_pointers_to_null(size_t count, ...);
 
 // Other functions - to rearrange and/or maybe rename
-int		ft_pow(int x, int y);
 int		calculate_max_radix(int num);
 t_dlist	*ps_remove_paired_moves(t_list *l);
 

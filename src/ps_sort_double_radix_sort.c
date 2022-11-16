@@ -21,7 +21,7 @@ int calculate_max_radix(int num)
 	{
 		return (0);
 	}
-	while (num > ft_pow(2, max_radix))
+	while (num > ft_math_pow(2, max_radix))
 	{
 		max_radix++;
 	}
@@ -44,7 +44,7 @@ void ps_sort_double_radix_sort(t_ps_data *d)
 		i = 0;
 		while (i < max_i)
 		{
-			if (*(int *)(d->a.head->content) / ft_pow(2, radix) % 2 == 0)
+			if (*(int *)(d->a.head->content) / ft_math_pow(2, radix) % 2 == 0)
 			{
 				ps_pb(d);
 			}
@@ -62,7 +62,7 @@ void ps_sort_double_radix_sort(t_ps_data *d)
 			i = 0;
 			while (i < max_i)
 			{
-				if (*(int *)(d->a.head->content) / ft_pow(2, radix) % 2 == 0)
+				if (*(int *)(d->a.head->content) / ft_math_pow(2, radix) % 2 == 0)
 				{
 					ps_pb(d);
 				}
@@ -82,7 +82,7 @@ void ps_sort_double_radix_sort(t_ps_data *d)
 			i = 0;
 			while (i < r_first_buffer_length)
 			{
-				if (*(int *)(d->b.head->content) / ft_pow(2, radix) % 2 != 0)
+				if (*(int *)(d->b.head->content) / ft_math_pow(2, radix) % 2 != 0)
 				{
 					ps_pa(d);
 				}

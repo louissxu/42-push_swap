@@ -28,7 +28,7 @@ void ps_sort_double_radix_sort_improved(t_ps_data *d)
 			i = ft_deque_length(d->a);
 			while (i > 0)
 			{
-				if (*(int *)(d->a.head->content) / ft_pow(2, radix + 1) % 2 == 0)
+				if (*(int *)(d->a.head->content) / ft_math_pow(2, radix + 1) % 2 == 0)
 				{
 					ps_pb(d);
 				}
@@ -42,7 +42,7 @@ void ps_sort_double_radix_sort_improved(t_ps_data *d)
 			i = ft_deque_length(d->a);
 			while (i > 0)
 			{
-				if (*(int *)(d->a.head->content) / ft_pow(2, radix) % 2 == 0)
+				if (*(int *)(d->a.head->content) / ft_math_pow(2, radix) % 2 == 0)
 				{
 					ps_pb(d);
 				}
@@ -61,7 +61,7 @@ void ps_sort_double_radix_sort_improved(t_ps_data *d)
 			i = ft_deque_length(d->b);
 			while (i > 0)
 			{
-				if (*(int *)(d->b.head->content) / ft_pow(2, radix) % 2 != 0)
+				if (*(int *)(d->b.head->content) / ft_math_pow(2, radix) % 2 != 0)
 				{
 					ps_pa(d);
 				}
@@ -84,7 +84,7 @@ void ps_sort_double_radix_sort_improved(t_ps_data *d)
 			i = ft_deque_length(d->a);
 			while (i > 0)
 			{
-				if (*(int *)(d->a.head->content) / ft_pow(2, radix) % 2 == 0)
+				if (*(int *)(d->a.head->content) / ft_math_pow(2, radix) % 2 == 0)
 				{
 					ps_pb(d);
 				}

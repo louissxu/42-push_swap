@@ -20,7 +20,7 @@ void	ps_spin_and_pb_if_radix_is_value_and_sa_bottom(t_ps_data *d, \
 	i = ft_deque_length(d->a);
 	while (i > 0)
 	{
-		if (*(int *)(d->a.head->content) / ft_pow(2, radix_val) % 2 == 0)
+		if (*(int *)(d->a.head->content) / ft_math_pow(2, radix_val) % 2 == 0)
 		{
 			ps_pb(d);
 		}
@@ -53,7 +53,7 @@ void	ps_spin_and_pa_if_radix_is_not_value(t_ps_data *d, int radix_val)
 	i = ft_deque_length(d->b);
 	while (i > 0)
 	{
-		if (*(int *)(d->b.head->content) / ft_pow(2, radix_val) % 2 != 0)
+		if (*(int *)(d->b.head->content) / ft_math_pow(2, radix_val) % 2 != 0)
 		{
 			ps_pa_with_swap(d);
 		}
@@ -85,7 +85,7 @@ void	ps_spin_and_pb_if_radix_is_value_and_all_sa_bottom(t_ps_data *d, \
 	i = ft_deque_length(d->a);
 	while (i > 0)
 	{
-		if (*(int *)(d->a.head->content) / ft_pow(2, radix_val) % 2 == 0)
+		if (*(int *)(d->a.head->content) / ft_math_pow(2, radix_val) % 2 == 0)
 		{
 			ps_sa_bottom_if_helpful(d);
 			ps_pb(d);
