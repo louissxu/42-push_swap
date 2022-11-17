@@ -45,6 +45,8 @@ int	ft_math_abs(int val)
  * If the return value overflows (> INT_MAX) the behaviour is undefined. Likely
  * rolls over but this depends on the compiler's handling of integer overflow.
  * 
+ * Ref: https://stackoverflow.com/a/23079728/9160572
+ * 
  * @param base The base of the power calculation.
  * @param exponent The exponent of the power calculation.
  * @returns base^exponent
