@@ -88,6 +88,22 @@ static void	check_and_print_result(BOOL err, t_ps_data *d)
 }
 
 /**
+ * @brief Set up starting ars of the checker program
+ * 
+ * Sets up some of the starting args. Primarily to save lines for norm limits.
+ * 
+ * @param err A pointer to the err variable to be set to starting values.
+ * @param d A pointer to the ps_data to be set to starting values.
+*/
+static void	set_up(BOOL *err, t_ps_data *d)
+{
+	*err = FALSE;
+	d->a = ft_deque_new();
+	d->b = ft_deque_new();
+	d->m = NULL;
+}
+
+/**
  * @brief Main function of the checker program
  * 
  * A program to check if a list of commands adequately sorts a given stack.
@@ -109,7 +125,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 		return (0);
-	err = FALSE;
+	set_up(&err, &d);
 	d.a = parse_input_args_to_deque(argv, &err);
 	if (err)
 	{
