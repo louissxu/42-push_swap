@@ -30,9 +30,6 @@ SRCS_RAW = \
 	ps_sort_500_elements.c \
 	ps_sort_500_elements1.c \
 	ps_sort_500_elements2.c \
-	ps_sort_radix_sort.c \
-	ps_sort_double_radix_sort.c \
-	ps_sort_double_radix_sort_improved.c \
 	ps_sort_double_radix_sort_improved_with_swaps.c \
 	ps_sort_double_radix_sort_improved_with_swaps1.c \
 	ps_sort_double_radix_sort_improved_with_swaps2.c \
@@ -41,6 +38,9 @@ SRCS_RAW = \
 	ft_math_utilities.c \
 	parse_args.c \
 	parse_args1.c
+# ps_sort_radix_sort.c \
+# ps_sort_double_radix_sort.c \
+# ps_sort_double_radix_sort_improved.c \
 
 
 SRC_DIR = src

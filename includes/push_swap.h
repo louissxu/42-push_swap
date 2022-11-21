@@ -98,7 +98,6 @@ void	*clone_heap_integer_void(void *orig);
 void	set_pointers_to_null(size_t count, ...);
 
 // Other functions - to rearrange and/or maybe rename
-int		calculate_max_radix(int num);
 t_dlist	*ps_remove_paired_moves(t_list *l);
 
 // Sort 500 elements
@@ -122,6 +121,7 @@ void	ps_selection_sort_back_with_doubles_and_banking_low_val(t_ps_data *d, \
 	int num_groups);
 
 // Sort double radix sort improved with swaps
+int		calculate_max_radix(int num);
 void	ps_pa_with_swap(t_ps_data *d);
 void	ps_cycle_stack_and_swap(t_ps_data *d);
 void	ps_sa_if_helpful(t_ps_data *d);

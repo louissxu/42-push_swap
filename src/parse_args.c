@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-BOOL	str_is_valid_integer1(char *str, int *i, BOOL *post_multiplier)
+static BOOL	str_is_valid_integer1(char *str, int *i, BOOL *post_multiplier)
 {
 	*i = 0;
 	*post_multiplier = 1;
@@ -72,7 +72,7 @@ void	clear_table(char **table)
 	free(table);
 }
 
-BOOL	split_and_poke_arg_into_deque(char *this_arg, t_deque *d)
+static BOOL	split_and_poke_arg_into_deque(char *this_arg, t_deque *d)
 {
 	char	**split_arg;
 	size_t	i;

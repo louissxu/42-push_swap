@@ -12,6 +12,22 @@
 
 #include "push_swap.h"
 
+int calculate_max_radix(int num)
+{
+	int max_radix;
+
+	max_radix = 0;
+	if (num < 0)
+	{
+		return (0);
+	}
+	while (num > ft_math_pow(2, max_radix))
+	{
+		max_radix++;
+	}
+	return (max_radix);
+}
+
 static void	ps_sort_radix_sort_one_radix(t_ps_data *d, int radix)
 {
 	ps_spin_and_pb_if_radix_is_value_and_all_sa_bottom(d, radix);
