@@ -44,7 +44,6 @@ void	ft_deque_destroy_list(t_deque *d, void (*del)(void *))
 	d->tail = NULL;
 }
 
-
 /**
  * @brief Append content to the end of a deque
  * 

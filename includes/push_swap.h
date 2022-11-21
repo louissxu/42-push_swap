@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h .                                      :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lxu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -58,7 +58,6 @@ void	debug_print_list_of_moves(t_list *moves_node);
 void	debug_print_dlist(t_dlist *node);
 void	debug_print_deque(t_deque *d);
 
-
 void	ps_sort_2_elements(t_ps_data *d);
 void	ps_sort_3_elements(t_ps_data *d);
 void	ps_sort_4_elements(t_ps_data *d);
@@ -93,7 +92,6 @@ t_list	*list_sort_bubble_sort(t_list *l);
 t_deque	*ps_normalise_in_place(t_deque *d);
 BOOL	deque_has_duplicates(t_deque *d);
 
-
 // FT math utilities
 int		ft_math_abs(int val);
 int		ft_math_pow(int base, int exponent);
@@ -115,13 +113,9 @@ t_dlist	*ps_remove_paired_moves(t_list *l);
 void	ps_pre_split_into_buckets(t_ps_data *d, int num_pre_grps, int num_grps);
 int		ps_deque_contains_value_in_range(t_deque *stack, int low, int high);
 int		ps_is_forward_closer_to_value_range(t_deque *stack, int low, int high);
-// static void	ps_push_bracketed(t_ps_data *d, int high_high, int low_low, \
-// 	grp_size);
 void	ps_split_into_buckets_double_with_reverse_rotate(t_ps_data *d, \
 	int num_groups);
 
-// static void	ps_pa_val_internal(t_ps_data *d, int *low_target, \
-// 	int current_target, int *distance_target);
 void	ps_pa_val_optimal_with_banking(t_ps_data *d, int current_target, \
 	int *low_target);
 void	ps_selection_sort_back_with_doubles_and_banking_low_val_1(\

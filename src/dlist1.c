@@ -148,7 +148,7 @@ t_dlist	*ft_dlist_pop_first(t_dlist **head)
  * @param head Address of the pointer to the head of the dlist.
  * @return dlist node that has been popped off.
 */
-t_dlist *ft_dlist_pop_last(t_dlist **head)
+t_dlist	*ft_dlist_pop_last(t_dlist **head)
 {
 	t_dlist	*node;
 

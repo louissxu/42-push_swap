@@ -100,4 +100,3 @@ void	ps_spin_and_pb_if_radix_is_value_and_all_sa_bottom(t_ps_data *d, \
 		i--;
 	}
 }
-

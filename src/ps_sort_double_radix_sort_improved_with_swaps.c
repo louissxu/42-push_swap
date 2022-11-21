@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-int calculate_max_radix(int num)
+int	calculate_max_radix(int num)
 {
-	int max_radix;
+	int	max_radix;
 
 	max_radix = 0;
 	if (num < 0)
