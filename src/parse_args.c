@@ -12,49 +12,49 @@
 
 #include "push_swap.h"
 
+BOOL	str_is_valid_integer1(char *str, int *i, BOOL *post_multiplier)
+{
+	*i = 0;
+	*post_multiplier = 1;
+	if (str[*i] == '-')
+	{
+		(*i)++;
+		*post_multiplier = -1;
+		if (str[*i] == '\0')
+		{
+			return (FALSE);
+		}
+	}
+	while (str[*i] == '0')
+	{
+		(*i)++;
+	}
+	return (TRUE);
+}
+
 BOOL	str_is_valid_integer(char *str, int *dest)
 {
 	int		i;
 	int		num_len;
 	long	val;
-	BOOL	is_negative;
+	int		post_multiplier;
 
-	i = 0;
 	num_len = 0;
 	val = 0;
-	is_negative = FALSE;
-	if (str[i] == '-')
-	{
-		i++;
-		is_negative = TRUE;
-		if (str[i] == '\0')
-		{
-			return (FALSE);
-		}
-	}
-	while (str[i] == '0')
-	{
-		i++;
-	}
+	if (str_is_valid_integer1(str, &i, &post_multiplier) == FALSE)
+		return (FALSE);
 	while (str[i] && num_len < 10)
 	{
 		if (ft_isinstr(str[i], "0123456789") == 0)
-		{
 			return (FALSE);
-		}
 		val *= 10;
 		val += str[i] - '0';
 		i++;
 		num_len++;
 	}
-	if (is_negative == TRUE)
-	{
-		val *= -1;
-	}
+	val = val * post_multiplier;
 	if (val > INT_MAX || val < INT_MIN || str[i] != '\0')
-	{
 		return (FALSE);
-	}
 	*dest = (int)val;
 	return (TRUE);
 }
@@ -119,60 +119,4 @@ t_deque	parse_input_args_to_deque(char **argv, BOOL *err)
 		input_arg++;
 	}
 	return (d);
-}
-
-BOOL	deque_has_duplicates(t_deque *d)
-{
-	t_list	*l;
-	t_list	*node;
-
-	l = ft_deque_to_list(*d, clone_heap_integer_void, free);
-	list_sort_bubble_sort(l);
-	node = l;
-	if (node == NULL)
-	{
-		return (FALSE);
-	}
-	if (node->next == NULL)
-	{
-		return (FALSE);
-	}
-	while (node && node->next)
-	{
-		if (*(int *)node->content == *(int *)node->next->content)
-		{
-			ft_lstclear(&l, free);
-			return (TRUE);
-		}
-		node = node->next;
-	}
-	ft_lstclear(&l, free);
-	return (FALSE);
-}
-
-BOOL	deque_is_sorted(t_deque *d)
-{
-	t_dlist	*node;
-
-	node = d->head;
-	if (node == NULL)
-	{
-		return (TRUE);
-	}
-	if (node->next == NULL)
-	{
-		return (TRUE);
-	}
-	while (node && node->next)
-	{
-		if (*(int *)node->content <= *(int *)node->next->content)
-		{
-		}
-		else
-		{
-			return (FALSE);
-		}
-		node = node->next;
-	}
-	return (TRUE);
 }

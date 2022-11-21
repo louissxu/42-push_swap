@@ -39,7 +39,8 @@ SRCS_RAW = \
 	ps_remove_paired_moves.c \
 	ps_remove_skipped.c \
 	ft_math_utilities.c \
-	parse_args.c
+	parse_args.c \
+	parse_args1.c
 
 
 SRC_DIR = src
