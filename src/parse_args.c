@@ -72,43 +72,50 @@ void	clear_table(char **table)
 	free(table);
 }
 
+BOOL	split_and_poke_arg_into_deque(char *this_arg, t_deque *d)
+{
+	char	**split_arg;
+	size_t	i;
+	int		*num;
+	BOOL	str_is_valid;
+
+	split_arg = ft_split(this_arg, ' ');
+	i = 0;
+	while (split_arg[i])
+	{
+		num = malloc(sizeof (*num) * 1);
+		if (!num)
+			break ;
+		str_is_valid = str_is_valid_integer(split_arg[i], num);
+		if (str_is_valid == FALSE)
+		{
+			ft_deque_destroy_list(d, free);
+			free(num);
+			clear_table(split_arg);
+			return (FALSE);
+		}
+		ft_deque_append(d, num);
+		i++;
+	}
+	clear_table(split_arg);
+	return (TRUE);
+}
+
 t_deque	parse_input_args_to_deque(char **argv, BOOL *err)
 {
 	char	**input_arg;
-	int		*num;
-	BOOL	no_err;
 	t_deque	d;
-	char	**split_args;
-	size_t	i;
 
 	*err = FALSE;
 	d = ft_deque_new();
 	input_arg = &argv[1];
 	while (*input_arg)
 	{
-		split_args = ft_split(*input_arg, ' ');
-		i = 0;
-		while (split_args[i])
+		*err = !split_and_poke_arg_into_deque(*input_arg, &d);
+		if (*err == TRUE)
 		{
-			num = malloc(sizeof (*num) * 1);
-			if (!num)
-			{
-				break ;
-			}
-			no_err = str_is_valid_integer(split_args[i], num);
-			if (no_err == FALSE)
-			{
-				ft_deque_destroy_list(&d, free);
-				free(num);
-				*err = TRUE;
-				clear_table(split_args);
-				return (d);
-			}
-			ft_deque_append(&d, num);
-			i++;
+			return (d);
 		}
-		clear_table(split_args);
-		// *num = ft_atoi(*input_arg);
 		input_arg++;
 	}
 	return (d);
@@ -160,13 +167,12 @@ BOOL	deque_is_sorted(t_deque *d)
 	{
 		if (*(int *)node->content <= *(int *)node->next->content)
 		{
-			;
 		}
 		else
 		{
-			return FALSE;
+			return (FALSE);
 		}
 		node = node->next;
 	}
-	return TRUE;
+	return (TRUE);
 }
