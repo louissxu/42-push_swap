@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef DEQUE_H
+# define DEQUE_H
 
 # include <stdlib.h>
 # include "dlist.h"
